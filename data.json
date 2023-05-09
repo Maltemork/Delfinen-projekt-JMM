@@ -4,6 +4,11 @@
       "activity": 1,
       "age": 24,
       "arrears": 0,
+      "competition": {
+        "lokation": "",
+        "meet": "",
+        "time": ""
+      },
       "discipline": {
         "backCrawl": {
           "date": [
