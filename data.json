@@ -1,0 +1,30 @@
+{
+  "members": {
+    "member1": {
+      "age": 0,
+      "activity": 0,
+      "type": "",
+      "subscription": 0,
+      "arrears": 0,
+      "group": 0,
+      "discipline": {
+        "butterfly": {
+          "time": [],
+          "date": []
+        },
+        "crawl": {
+          "time": [],
+          "date": []
+        },
+        "backCrawl": {
+          "time": [],
+          "date": []
+        },
+        "chest": {
+          "time": [],
+          "date": []
+        }
+      }
+    }
+  }
+}
