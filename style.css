@@ -1,4 +1,50 @@
 body {
+  font-family: Arial, Helvetica, sans-serif;
   background-color: rgb(0, 0, 41);
   color: white;
+}
+
+.header-container {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  position: fixed;
+  margin: auto;
+  width: 1fr;
+  top: 0;
+  left: 0;
+  right: 0;
+  align-content: center;
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+  gap: 10px;
+}
+
+.header-container :first-child {
+  display: inline-block;
+  padding-top: 20px;
+  align-content: center;
+  text-align: center;
+  width: 100%;
+  height: 2em;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  font-size: 200%;
+  background-color: rgb(62, 62, 62);
+  border: 2px solid gray;
+}
+
+.header-item {
+  display: inline-block;
+  text-align: center;
+  height: 2em;
+  padding-top: 13px;
+  border: 2px solid rgb(0, 32, 159);
+  background-color: rgb(57, 57, 186);
+  color: white;
+  width: 100%;
+}
+
+.header-item:hover {
+  background-color: rgb(67, 67, 225);
 }
