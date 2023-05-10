@@ -2,7 +2,8 @@
 
 window.addEventListener("load", start);
 
-const endpoint = "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint =
+  "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app/";
 
 const members = [];
 const users = [];
@@ -10,13 +11,17 @@ const users = [];
 async function start() {
   getData();
   console.log("App is running! 😊");
+
+  document
+    .querySelector("#create-member")
+    .addEventListener("click", createClicked);
 }
 
 // Get data from endpoint - gets both members and users
 async function getData() {
   console.log("Getting data!");
-  
-  const responseUsers = await fetch(`${endpoint}/users.json`)
+
+  const responseUsers = await fetch(`${endpoint}/users.json`);
   const dataUsers = await responseUsers.json();
 
   const responseMembers = await fetch(`${endpoint}/members.json`);
@@ -42,3 +47,22 @@ function prepareData(dataUsers, dataMembers) {
   }
 }
 
+function createClicked() {
+  console.log("New Member Clicked");
+  // document
+  //   .querySelector("#create-member")
+  //   .removeEventListener("click", createClicked);
+  document.querySelector("#create-dialog").showModal();
+  document
+    .querySelector("#submit-member-btn")
+    .addEventListener("submit", createMember);
+}
+
+function createMember(event) {
+  event.preventDefault();
+  document
+    .querySelector("#submit-member-btn")
+    .removeEventListener("submit", createMember);
+
+  function createMemberSend() {}
+}

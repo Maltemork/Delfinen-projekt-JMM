@@ -14,7 +14,41 @@
       <a class="header-item" href="#news">News</a>
       <a class="header-item" href="#about">About</a>
       <a class="header-item" href="#contact">Contact</a>
+      <button id="create-member">Nyt Medlem</button>
     </section>
+
+    <dialog id="create-dialog">
+      <form id="create-form">
+        <h2>Nyt Medlem</h2>
+        <!-- Name -->
+        <label for="name">Fulde Navn:</label> <br />
+        <input type="text" id="name" name="name" /> <br /><br />
+        <!-- Age -->
+        <label for="age">Alder:</label> <br />
+        <input type="number" id="age" name="age" /> <br /><br />
+        <!-- Group -->
+        <label for="group">Hold:</label> <br />
+        <input type="number" id="group" name="group" /> <br /><br />
+        <!-- Type -->
+        <label for="type1">Type:</label><br />
+        <input type="radio" id="type1" name="type" />
+        <label for="type1">Sportssvømmer</label><br />
+        <input type="radio" id="type2" name="type" />
+        <label for="type2">Konkurrencesvømmer</label><br /><br />
+        <!-- Activity -->
+        <label for="passive">Aktivitet:</label> <br />
+        <input type="radio" id="passive" name="activity" />
+        <label for="passive">Passiv</label><br />
+        <input type="radio" id="active" name="activity" />
+        <label for="active">Aktiv</label><br />
+        <!-- Show relevant subsciption -->
+        <p>Kontigent: <span id="show-subscription"></span></p>
+        <br />
+        <!-- Submit button -->
+        <input type="submit" id="submit-member-btn" value="Bekræft" />
+      </form>
+    </dialog>
+
     <script src="script.js"></script>
   </body>
 </html>
