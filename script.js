@@ -12,6 +12,7 @@ async function start() {
   console.log("App is running! 😊");
 }
 
+// Get data from endpoint - gets both members and users
 async function getData() {
   console.log("Getting data!");
   
@@ -24,6 +25,7 @@ async function getData() {
   prepareData(dataUsers, dataMembers);
 }
 
+// prepares the json data from getData and sends it to the global arrays.
 function prepareData(dataUsers, dataMembers) {
   // push every object in dataUsers into the global users array
   for (const key in dataUsers) {
