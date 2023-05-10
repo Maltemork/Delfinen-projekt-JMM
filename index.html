@@ -14,7 +14,7 @@
       <a class="header-item" href="#news">News</a>
       <a class="header-item" href="#about">About</a>
       <a class="header-item" href="#contact">Contact</a>
-      <button id="create-member">Nyt Medlem</button>
+      <button id="create-member-btn">Nyt Medlem</button>
     </section>
 
     <dialog id="create-dialog">
@@ -26,23 +26,39 @@
         <!-- Age -->
         <label for="age">Alder:</label> <br />
         <input type="number" id="age" name="age" /> <br /><br />
-        <!-- Group -->
-        <label for="group">Hold:</label> <br />
-        <input type="number" id="group" name="group" /> <br /><br />
         <!-- Type -->
         <label for="type1">Type:</label><br />
-        <input type="radio" id="type1" name="type" />
+        <input type="radio" id="type1" name="type" value="sport" />
         <label for="type1">Sportssvømmer</label><br />
-        <input type="radio" id="type2" name="type" />
+        <input type="radio" id="type2" name="type" value="comp" />
         <label for="type2">Konkurrencesvømmer</label><br /><br />
+        <!-- Active disciplines -->
+        <label for="backcrawl">Aktive Discipliner:</label> <br />
+        <input
+          type="checkbox"
+          name="discipline"
+          id="backcrawl"
+          value="backcrawl"
+        />
+        <label for="backcrawl">Back Crawl</label> <br />
+        <input
+          type="checkbox"
+          name="discipline"
+          id="butterfly"
+          value="butterfly"
+        />
+        <label for="butterfly">Butterfly</label> <br />
+        <input type="checkbox" name="discipline" id="chest" value="chest" />
+        <label for="chest">Chest</label> <br />
+        <input type="checkbox" name="discipline" id="crawl" value="crawl" />
+        <label for="crawl">Crawl</label> <br />
+        <br />
         <!-- Activity -->
         <label for="passive">Aktivitet:</label> <br />
-        <input type="radio" id="passive" name="activity" />
+        <input type="radio" id="passive" name="activity" value="passive" />
         <label for="passive">Passiv</label><br />
-        <input type="radio" id="active" name="activity" />
+        <input type="radio" id="active" name="activity" value="active" />
         <label for="active">Aktiv</label><br />
-        <!-- Show relevant subsciption -->
-        <p>Kontigent: <span id="show-subscription"></span></p>
         <br />
         <!-- Submit button -->
         <input type="submit" id="submit-member-btn" value="Bekræft" />
