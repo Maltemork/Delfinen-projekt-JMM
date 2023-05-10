@@ -21,7 +21,22 @@ async function getData() {
   const responseMembers = await fetch(`${endpoint}/members.json`);
   const dataMembers = await responseMembers.json();
 
-  users.push(dataUsers);
-  members.push(dataMembers);
+  prepareData(dataUsers, dataMembers);
+}
+
+function prepareData(dataUsers, dataMembers) {
+  // push every object in dataUsers into the global users array
+  for (const key in dataUsers) {
+    const data = dataUsers[key];
+    data.id = key;
+    users.push(data);
+  }
+
+  // push every object in dataMembers into the global members array
+  for (const key in dataMembers) {
+    const data = dataMembers[key];
+    data.id = key;
+    members.push(data);
+  }
 }
 
