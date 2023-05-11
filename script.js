@@ -129,6 +129,10 @@ function createClicked() {
   document
     .querySelector("#create-form")
     .addEventListener("submit", createMember);
+  document.querySelector("#close-create-btn").addEventListener("click", () => {
+    document.querySelector("#create-dialog").close();
+    document.querySelector("#create-form").reset();
+  });
 }
 
 function createMember(event) {
