@@ -170,6 +170,8 @@ function deleteClicked(member) {
 function createClicked() {
   console.log("New Member Clicked");
   document.querySelector("#create-dialog").showModal();
+  const createForm = document.querySelector("#create-form");
+  createForm.reset(); //Reset the form
   //Submit button
   document
     .querySelector("#create-form")
@@ -186,7 +188,6 @@ function createClicked() {
       .querySelector("#create-form")
       .removeEventListener("submit", createMember);
 
-    const createForm = document.querySelector("#create-form");
     //Create the member object
     const newMember = {
       activity: createForm.activity.value,
@@ -206,46 +207,18 @@ function createClicked() {
     };
 
     createdMemberSend(newMember);
-    document.querySelector("#create-form").reset(); //Reset the inputs in the form
     document.querySelector("#create-dialog").close(); //Close the dialog
 
-    //Makes sure the member get the correct subscription based on age or activity
-    function correctSubscription() {
-      let subscription = 0;
-      if (createForm.age.value < 18) {
-        subscription = 1000;
-      } else if (createForm.age.value <= 60) {
-        subscription = 1600;
-      } else {
-        subscription = 1200;
-      }
-      if (createForm.activity.value == "passive") {
-        subscription = 500;
-      }
-      return subscription;
-    }
-    //Makes sure the member gets in the correct group based on age and type
-    function correctGroup() {
-      let group = 0;
-      if (createForm.type.value == "comp") {
-        if (createForm.age.value < 18) {
-          group = 1;
-        } else {
-          group = 2;
-        }
-      }
-      return group;
-    }
     //Gives the competition object if the member is a competitor
-    function checkCompetition() {
+    function checkCompetition(type) {
       let comp = {};
-      if (createForm.type.value == "comp") {
+      if (type == "comp") {
         comp = { lokation: "", meet: "", time: "" };
       }
       return comp;
     }
     //Returns an object with the chosen disciplines checked from the checkboxes
-    function chosenDisciplines() {
+    function chosenDisciplines(type) {
       console.log("Chosen Disciplines");
       const disciplines = {};
 
@@ -373,7 +346,7 @@ function editMemberClicked(member) {
     }
   }
 }
-
+//Makes sure the member get the correct subscription based on age or activity
 function correctSubscription(age, activity) {
   let subscription = 0;
   if (age < 18) {
@@ -388,7 +361,7 @@ function correctSubscription(age, activity) {
   }
   return subscription;
 }
-
+//Makes sure the member gets in the correct group based on age and type
 function correctGroup(age, type) {
   if (type == "comp") {
     if (age < 18) {
