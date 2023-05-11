@@ -47,6 +47,7 @@ function prepareData(dataUsers, dataMembers) {
   }
 }
 
+/* ------ Create New Member ------- */
 function createClicked() {
   console.log("New Member Clicked");
   document.querySelector("#create-dialog").showModal();
