@@ -3,7 +3,7 @@
 window.addEventListener("load", start);
 
 const endpoint =
-  "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app/";
+  "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app";
 
 const members = [];
 const users = [];
@@ -121,7 +121,7 @@ function createClicked() {
       age: createForm.age.value,
       arrears: 0,
       competition: checkCompetition(createForm.type.value),
-      disciplines: chosenDisciplines(createForm.type.value, "create"),
+      disciplines: chosenDisciplines(createForm.type.value),
       email: createForm.email.value,
       group: correctGroup(createForm.age.value, createForm.type.value),
       name: createForm.name.value,
@@ -190,7 +190,7 @@ function editMemberClicked(member) {
       age: updateForm.age.value,
       arrears: member.arrears,
       competition: checkCompetition(updateForm.type.value),
-      disciplines: chosenDisciplines(updateForm.type.value, "update"),
+      disciplines: member.disciplines,
       email: updateForm.email.value,
       group: correctGroup(updateForm.age.value, updateForm.type.value),
       name: updateForm.name.value,
@@ -209,19 +209,20 @@ function editMemberClicked(member) {
       console.log(memberId);
       console.log(updatedMember);
 
-      // const jsonString = JSON.stringify(updatedMember);
+      const jsonString = JSON.stringify(updatedMember);
+      console.log(jsonString);
 
-      // const response = await fetch(`${endpoint}/members/${memberId}.json`, {
-      //   method: "PUT",
-      //   body: jsonString,
-      // });
+      const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+        method: "PUT",
+        body: jsonString,
+      });
 
-      // if (response.ok) {
-      //   console.log("Update successfull");
-      //   location.reload();
-      // } else {
-      //   console.log("Failed to update");
-      // }
+      if (response.ok) {
+        console.log("Update successfull");
+        location.reload();
+      } else {
+        console.log("Failed to update");
+      }
     }
   }
 }
@@ -261,13 +262,13 @@ function checkCompetition(type) {
   return comp;
 }
 
-function chosenDisciplines(type, action) {
+function chosenDisciplines(type) {
   console.log("Chosen Disciplines");
   const disciplines = {};
 
   if (type == "comp") {
     const inputs = document
-      .querySelector(`#${action}-form`)
+      .querySelector(`#create-form`)
       .querySelectorAll("input[type='checkbox']");
     const selected = [];
 
