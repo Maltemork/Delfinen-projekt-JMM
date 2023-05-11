@@ -193,8 +193,8 @@ function createClicked() {
       activity: createForm.activity.value,
       age: createForm.age.value,
       arrears: 0,
-      competition: checkCompetition(createForm.type.value),
-      disciplines: chosenDisciplines(createForm.type.value),
+      competition: checkCompetition(),
+      disciplines: chosenDisciplines(),
       email: createForm.email.value,
       group: correctGroup(createForm.age.value, createForm.type.value),
       name: createForm.name.value,
@@ -210,22 +210,20 @@ function createClicked() {
     document.querySelector("#create-dialog").close(); //Close the dialog
 
     //Gives the competition object if the member is a competitor
-    function checkCompetition(type) {
+    function checkCompetition() {
       let comp = {};
-      if (type == "comp") {
+      if (createForm.type.value == "comp") {
         comp = { lokation: "", meet: "", time: "" };
       }
       return comp;
     }
     //Returns an object with the chosen disciplines checked from the checkboxes
-    function chosenDisciplines(type) {
+    function chosenDisciplines() {
       console.log("Chosen Disciplines");
       const disciplines = {};
 
-      if (type == "comp") {
-        const inputs = document
-          .querySelector(`#create-form`)
-          .querySelectorAll("input[type='checkbox']");
+      if (createForm.type.value == "comp") {
+        const inputs = createForm.querySelectorAll("input[type='checkbox']");
         const selected = [];
 
         for (const input of inputs) {
