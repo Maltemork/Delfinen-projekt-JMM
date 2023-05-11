@@ -312,11 +312,11 @@ function editMemberClicked(member) {
       ),
       type: member.type,
     };
-
-    sendUpdatedMember(updatedMember);
+    sendUpdatedMember();
     dialog.close();
+
     //Send the updated object to database by put request
-    async function sendUpdatedMember(updatedMember) {
+    async function sendUpdatedMember() {
       console.log("Updating member");
       console.log(member.id);
       console.log(updatedMember);
