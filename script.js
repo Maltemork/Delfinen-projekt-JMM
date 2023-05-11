@@ -33,9 +33,6 @@ function checkDetailsOnLogin() {
     }
   }
 }
-  
-
-}
 
 // Get data from endpoint - gets both members and users
 async function getData() {
@@ -105,8 +102,9 @@ function formandMembersTable(member) {
     );
   }
   document.querySelector(`#edit-${member.id}`).addEventListener("click", editMemberPlaceholderFunction);
-}
+  }
   
   function editMemberPlaceholderFunction() {
   console.log(member)
+  }
 }
