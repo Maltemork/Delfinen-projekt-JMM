@@ -127,6 +127,7 @@ function formandMembersTable(member) {
       });
   }
 }
+/* ------ Delete member ------ */
 //When the delete button is clicked
 function deleteClicked(member) {
   console.log("Delete clicked");
