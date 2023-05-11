@@ -213,6 +213,7 @@ function createMember(event) {
 
     if (response.ok) {
       console.log("Member Creation Successful");
+      location.reload();
     } else {
       console.log("Error during posting");
     }
