@@ -135,7 +135,52 @@ function createClicked() {
 
     createdMemberSend(newMember);
 
+    function checkCompetition(type) {
+      let comp = {};
+      if (type == "comp") {
+        comp = { lokation: "", meet: "", time: "" };
+      }
+      return comp;
+    }
+
+    function chosenDisciplines(type) {
+      console.log("Chosen Disciplines");
+      const disciplines = {};
+
+      if (type == "comp") {
+        const inputs = document
+          .querySelector(`#create-form`)
+          .querySelectorAll("input[type='checkbox']");
+        const selected = [];
+
+        for (const input of inputs) {
+          if (input.checked) {
+            selected.push(input.value);
+          }
+        }
+
+        for (const discipline of selected) {
+          switch (discipline) {
+            case "backcrawl":
+              disciplines.backcrawl = { date: [""], time: [0] };
+              break;
+            case "butterfly":
+              disciplines.butterfly = { date: [""], time: [0] };
+              break;
+            case "chest":
+              disciplines.chest = { date: [""], time: [0] };
+              break;
+            case "crawl":
+              disciplines.crawl = { date: [""], time: [0] };
+              break;
+          }
+        }
+      }
+      return disciplines;
+    }
+
     document.querySelector("#create-dialog").close();
+
     async function createdMemberSend(newMember) {
       console.log("Posting member");
 
@@ -170,7 +215,6 @@ function editMemberClicked(member) {
   updateForm.email.value = member.email;
   updateForm.name.value = member.name;
   updateForm.phone.value = member.phone;
-  updateForm.type.value = member.type;
 
   const dialog = document.querySelector("#update-dialog");
   dialog.showModal();
@@ -189,30 +233,30 @@ function editMemberClicked(member) {
       activity: updateForm.activity.value,
       age: updateForm.age.value,
       arrears: member.arrears,
-      competition: checkCompetition(updateForm.type.value),
+      competition: member.competition,
       disciplines: member.disciplines,
       email: updateForm.email.value,
-      group: correctGroup(updateForm.age.value, updateForm.type.value),
+      group: correctGroup(updateForm.age.value, member.type),
       name: updateForm.name.value,
       phone: updateForm.phone.value,
       subscription: correctSubscription(
         updateForm.age.value,
         updateForm.activity.value
       ),
-      type: updateForm.type.value,
+      type: member.type,
     };
-    sendUpdatedMember(member.id, updatedMember);
+    sendUpdatedMember(updatedMember);
     dialog.close();
 
-    async function sendUpdatedMember(memberId, updatedMember) {
+    async function sendUpdatedMember(updatedMember) {
       console.log("Updating member");
-      console.log(memberId);
+      console.log(member.id);
       console.log(updatedMember);
 
       const jsonString = JSON.stringify(updatedMember);
       console.log(jsonString);
 
-      const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+      const response = await fetch(`${endpoint}/members/${member.id}.json`, {
         method: "PUT",
         body: jsonString,
       });
@@ -252,48 +296,4 @@ function correctGroup(age, type) {
     }
   }
   return group;
-}
-
-function checkCompetition(type) {
-  let comp = {};
-  if (type == "comp") {
-    comp = { lokation: "", meet: "", time: "" };
-  }
-  return comp;
-}
-
-function chosenDisciplines(type) {
-  console.log("Chosen Disciplines");
-  const disciplines = {};
-
-  if (type == "comp") {
-    const inputs = document
-      .querySelector(`#create-form`)
-      .querySelectorAll("input[type='checkbox']");
-    const selected = [];
-
-    for (const input of inputs) {
-      if (input.checked) {
-        selected.push(input.value);
-      }
-    }
-
-    for (const discipline of selected) {
-      switch (discipline) {
-        case "backcrawl":
-          disciplines.backcrawl = { date: [""], time: [0] };
-          break;
-        case "butterfly":
-          disciplines.butterfly = { date: [""], time: [0] };
-          break;
-        case "chest":
-          disciplines.chest = { date: [""], time: [0] };
-          break;
-        case "crawl":
-          disciplines.crawl = { date: [""], time: [0] };
-          break;
-      }
-    }
-  }
-  return disciplines;
 }
