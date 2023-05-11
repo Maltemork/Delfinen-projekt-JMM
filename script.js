@@ -274,7 +274,6 @@ function editMemberClicked(member) {
   //Auto fill update form
   const updateForm = document.querySelector("#update-form");
   updateForm.activity.value = member.activity;
-  updateForm.age.value = member.age;
   updateForm.email.value = member.email;
   updateForm.name.value = member.name;
   updateForm.phone.value = member.phone;
@@ -298,18 +297,15 @@ function editMemberClicked(member) {
 
     const updatedMember = {
       activity: updateForm.activity.value,
-      age: updateForm.age.value,
+      age: member.age,
       arrears: member.arrears,
       competition: member.competition,
       disciplines: member.disciplines,
       email: updateForm.email.value,
-      group: correctGroup(updateForm.age.value, member.type),
+      group: member.group,
       name: updateForm.name.value,
       phone: updateForm.phone.value,
-      subscription: correctSubscription(
-        updateForm.age.value,
-        updateForm.activity.value
-      ),
+      subscription: correctSubscription(member.age, updateForm.activity.value),
       type: member.type,
     };
     sendUpdatedMember();
