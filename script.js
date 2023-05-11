@@ -300,7 +300,9 @@ function editMemberClicked(member) {
     location.reload();
   });
   //Makes the updated object
-  function updateMember() {
+  function updateMember(event) {
+    event.preventDefault();
+
     console.log("Update member");
     document
       .querySelector("#update-form")
@@ -332,12 +334,13 @@ function editMemberClicked(member) {
       console.log(jsonString);
 
       const response = await fetch(`${endpoint}/members/${member.id}.json`, {
-        method: "PUT",
+        method: "PATCH",
         body: jsonString,
       });
 
       if (response.ok) {
         console.log("Update successfull");
+        location.reload();
       } else {
         console.log("Failed to update");
       }
