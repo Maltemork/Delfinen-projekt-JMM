@@ -90,7 +90,9 @@ function formandMembersTable(member) {
     }
     document
       .querySelector(`#edit-${member.id}`)
-      .addEventListener("click", editMemberPlaceholderFunction);
+      .addEventListener("click", () => {
+        editMemberClicked(member);
+      });
   }
 
   function editMemberPlaceholderFunction() {
@@ -217,5 +219,12 @@ function createMember(event) {
     } else {
       console.log("Error during posting");
     }
+  }
+}
+
+function editMemberClicked(member) {
+  console.log(`Editing ${member.name}`);
+  function updateMember() {
+    function sendUpdatedMember() {}
   }
 }
