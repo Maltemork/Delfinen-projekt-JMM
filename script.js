@@ -126,10 +126,6 @@ function formandMembersTable(member) {
         deleteClicked(member);
       });
   }
-
-  function editMemberPlaceholderFunction() {
-    console.log(member);
-  }
 }
 
 function deleteClicked(member) {
@@ -267,7 +263,7 @@ function createClicked() {
     }
   }
 }
-
+//When edit button is clicked
 function editMemberClicked(member) {
   console.log(`Editing ${member.name}`);
   document
@@ -275,7 +271,7 @@ function editMemberClicked(member) {
     .removeEventListener("click", () => {
       editMemberClicked(member);
     });
-
+  //Auto fill update form
   const updateForm = document.querySelector("#update-form");
   updateForm.activity.value = member.activity;
   updateForm.age.value = member.age;
@@ -290,6 +286,10 @@ function editMemberClicked(member) {
     .querySelector("#update-form")
     .addEventListener("submit", updateMember);
 
+  document.querySelector("#close-update-btn").addEventListener("click", () => {
+    location.reload();
+  });
+  //Makes the updated object
   function updateMember() {
     console.log("Update member");
     document
@@ -312,9 +312,10 @@ function editMemberClicked(member) {
       ),
       type: member.type,
     };
+
     sendUpdatedMember(updatedMember);
     dialog.close();
-
+    //Send the updated object to database by put request
     async function sendUpdatedMember(updatedMember) {
       console.log("Updating member");
       console.log(member.id);
