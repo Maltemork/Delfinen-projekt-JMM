@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Delfinen Projekt JMM</title>
+    <title>Delfinen login</title>
   </head>
   <body>
     <!-- Background video -->
@@ -14,20 +14,21 @@
     </video>
     <!--  -->
     <section class="login-container">
-      <h2>Sign in | Delfinen</h2>
-      <p>Contact the swimming hall manager if you do not already have an account.</p>
+      <h2>Log ind | Delfinen</h2>
+      <p>Kontakt formanden hvis du ønsker at blive medlem.</p>
       <br>
       <hr />
-      <form action="index.html" id="login-form">
-        <label for="username">Username:</label>
+      <form id="login-form">
+        <label for="username">Brugernavn:</label>
         <input type="text" name="username" id="login-username" />
-        <label for="password">Password:</label>
+        <label for="password">Kodeord:</label>
         <input type="password" name="password" id="login-password" />
+        <p id="wrong-password-text"></p>
         <br />
         <br />
-        <input type="submit" value="Enter" id="login-submit" />
+        <input type="button" value="Enter" id="login-submit" onclick="checkDetailsOnLogin()"/>
       </form>
-      <p id="signature">Project by J M & M</p>
+      <p id="signature">Projekt af J M & M</p>
     </section>
     <script src="script.js"></script>
   </body>
