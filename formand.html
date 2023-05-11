@@ -12,16 +12,25 @@
       <h1>FORMAND</h1>
     </section>
     <table id="formand-members-table">
-        <tr class="table-item">
-            <td>Aktiv</td>
-            <td>Navn</td>
-            <td>E-mail</td>
-            <td>Telefon</td>
-            <td>Alder</td>
-            <td>Type</td>
-            <td>Rediger</td>
-        </tr>
+      <tr class="table-item">
+        <td>Aktiv</td>
+        <td>Navn</td>
+        <td>E-mail</td>
+        <td>Telefon</td>
+        <td>Alder</td>
+        <td>Type</td>
+        <td>Rediger</td>
+        <td>Slet</td>
+      </tr>
     </table>
+
+    <!-- Delete dialog -->
+    <dialog id="delete-dialog">
+      <h3>Slet Medlem?</h3>
+      <button id="confirm-delete-btn">Bekræft</button>
+      <button id="cancel-delete-btn">Fortryd</button>
+    </dialog>
+
     <script src="script.js"></script>
   </body>
 </html>

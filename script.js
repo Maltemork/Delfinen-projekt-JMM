@@ -2,7 +2,8 @@
 
 window.addEventListener("load", start);
 
-const endpoint = "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app/";
+const endpoint =
+  "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app/";
 
 const members = [];
 const users = [];
@@ -15,15 +16,13 @@ async function start() {
 
 function checkDetailsOnLogin() {
   const username = document.querySelector("#login-username").value;
-  
-
 }
 
 // Get data from endpoint - gets both members and users
 async function getData() {
   console.log("Getting data!");
-  
-  const responseUsers = await fetch(`${endpoint}/users.json`)
+
+  const responseUsers = await fetch(`${endpoint}/users.json`);
   const dataUsers = await responseUsers.json();
 
   const responseMembers = await fetch(`${endpoint}/members.json`);
@@ -56,9 +55,9 @@ function formandMembersTable(member) {
   function insertMember(member) {
     const table = document.querySelector("#formand-members-table");
     if (member.activity === "active") {
-    table.insertAdjacentHTML(
-      "beforeend",
-      /*html*/ `
+      table.insertAdjacentHTML(
+        "beforeend",
+        /*html*/ `
           <tr id="table-${member.id}">
             <td>✔</td>
             <td>${member.name}</td>
@@ -67,13 +66,14 @@ function formandMembersTable(member) {
             <td>${member.age}</td>
             <td>${member.type}</td>
             <td><button id="edit-${member.id}">🖊</button></td>
+            <td><button id="delete-${member.id}">🗑</button></td>
           </tr>
           `
-    );
-  } else {
-    table.insertAdjacentHTML(
-      "beforeend",
-      /*html*/ `
+      );
+    } else {
+      table.insertAdjacentHTML(
+        "beforeend",
+        /*html*/ `
           <tr id="table-${member.id}" class="table-item">
             <td>✖</td>
             <td>${member.name}</td>
@@ -82,14 +82,54 @@ function formandMembersTable(member) {
             <td>${member.age}</td>
             <td>${member.type}</td>
             <td><button id="edit-${member.id}">🖊</button></td>
+            <td><button id="delete-${member.id}">🗑</button></td>
           </tr>
           `
-    );
+      );
+    }
+    document
+      .querySelector(`#edit-${member.id}`)
+      .addEventListener("click", editMemberPlaceholderFunction);
+    document
+      .querySelector(`#delete-${member.id}`)
+      .addEventListener("click", () => {
+        deleteClicked(member.id);
+      });
   }
-  document.querySelector(`#edit-${member.id}`).addEventListener("click", editMemberPlaceholderFunction);
-}
-  
+
   function editMemberPlaceholderFunction() {
-  console.log(member)
+    console.log(member);
+  }
 }
+
+function deleteClicked(memberId) {
+  console.log("Delete clicked");
+  document.querySelector("#delete-dialog").showModal();
+  document
+    .querySelector("#confirm-delete-btn")
+    .addEventListener("click", () => {
+      deleteMember(memberId);
+    });
+  document.querySelector("#cancel-delete-btn").addEventListener("click", () => {
+    document.querySelector("#delete-dialog").close();
+    document
+      .querySelector("#cancel-delete-btn")
+      .removeEventListener("click", () => {
+        document.querySelector("#delete-dialog").close();
+      });
+  });
+
+  async function deleteMember(memberId) {
+    console.log("Deleting member");
+    const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log("Deletion successful");
+      location.reload();
+      //Update what is shown?
+    } else {
+      console.log("Error in deleting: " + memberId);
+    }
+  }
 }
