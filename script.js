@@ -132,6 +132,11 @@ function deleteClicked(member) {
   console.log("Delete clicked");
   const dialog = document.querySelector("#delete-dialog");
   dialog.showModal();
+  dialog.addEventListener("cancel", event => {
+    /*Prevents the dialog closing when pressing escape 
+   to make sure it doesn't send multiple requests at the same time  */
+    event.preventDefault();
+  });
   //Ask for confirmation
   document.querySelector(
     "#delete-dialog h3"
@@ -144,12 +149,7 @@ function deleteClicked(member) {
     });
   //Cancel button
   document.querySelector("#cancel-delete-btn").addEventListener("click", () => {
-    dialog.close();
-    document
-      .querySelector("#cancel-delete-btn")
-      .removeEventListener("click", () => {
-        dialog.close();
-      });
+    location.reload();
   });
   //Delete member in the database by request
   async function deleteMember(memberId) {
