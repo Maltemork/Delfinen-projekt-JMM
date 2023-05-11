@@ -68,8 +68,9 @@ function createMember(event) {
     activity: createForm.activity.value,
     age: createForm.age.value,
     arrears: 0,
-    competition: { lokation: "", meet: "", time: "" },
+    competition: checkCompetition(),
     disciplines: chosenDisciplines(),
+    email: createForm.email.value,
     group: correctGroup(),
     name: createForm.name.value,
     subscription: correctSubscription(),
@@ -105,6 +106,14 @@ function createMember(event) {
       }
     }
     return group;
+  }
+
+  function checkCompetition() {
+    let comp = {};
+    if (createForm.type.value == "comp") {
+      comp = { lokation: "", meet: "", time: "" };
+    }
+    return comp;
   }
 
   function chosenDisciplines() {
