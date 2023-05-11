@@ -18,7 +18,32 @@ async function start() {
 }
 
 function checkDetailsOnLogin() {
-  const username = document.querySelector("#login-username").value;
+  const usernameValue = document.querySelector("#login-username").value;
+  const passwordValue = document.querySelector("#login-password").value;
+
+  for (let i = 0; i < users.length; i++) {
+    if (
+      users[i].username == usernameValue &&
+      users[i].password === passwordValue
+    ) {
+      window.location.href = `/${users[i].type}.html`;
+      start();
+      console.log(users[i]);
+    } else if (users.length - 1 === i) {
+      document
+        .querySelector(".login-container")
+        .classList.add("wrong-password");
+      document.querySelector("#wrong-password-text").textContent =
+        "Wrong password. Please try again.";
+      document
+        .querySelector(".login-container")
+        .addEventListener("animationend", () => {
+          document
+            .querySelector(".login-container")
+            .classList.remove("wrong-password");
+        });
+    }
+  }
 }
 
 // Get data from endpoint - gets both members and users
@@ -61,7 +86,7 @@ function formandMembersTable(member) {
       table.insertAdjacentHTML(
         "beforeend",
         /*html*/ `
-          <tr id="table-${member.id}">
+          <tr id="table-${member.id}" class="table-item">
             <td>✔</td>
             <td>${member.name}</td>
             <td>${member.email}</td>
