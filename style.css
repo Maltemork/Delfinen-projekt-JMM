@@ -4,29 +4,21 @@ body {
   color: white;
 }
 
-<<<<<<< Updated upstream
-=======
-
-
 table {
   background-color: rgb(96, 96, 96);
   color: white;
-  margin: 0px auto 0;
-  width: auto; 
-}
+
 
 .table-item td {
   padding-right: 6em;
   border: 1px solid black;
 }
-
-
->>>>>>> Stashed changes
+  
 .header-container {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  position: fixed;
+  position: relative;
   margin: auto;
   width: 1fr;
   top: 0;

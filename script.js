@@ -2,14 +2,19 @@
 
 window.addEventListener("load", start);
 
-function start() {
+const endpoint = "https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app/";
+
+const members = [];
+const users = [];
+
+async function start() {
+  await getData();
   console.log("App is running! 😊");
-<<<<<<< Updated upstream
-=======
   members.forEach(formandMembersTable);
 }
 
 function checkDetailsOnLogin() {
+
   const usernameValue = document.querySelector("#login-username").value;
   const passwordValue = document.querySelector("#login-password").value;
 
@@ -27,9 +32,10 @@ function checkDetailsOnLogin() {
       });
     }
   }
-    
 }
+  
 
+}
 
 // Get data from endpoint - gets both members and users
 async function getData() {
@@ -103,6 +109,4 @@ function formandMembersTable(member) {
   
   function editMemberPlaceholderFunction() {
   console.log(member)
-}
->>>>>>> Stashed changes
 }
