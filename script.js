@@ -12,14 +12,13 @@ async function start() {
   await getData();
   console.log("App is running! 😊");
   members.forEach(formandMembersTable);
+  document
+    .querySelector("#create-member-btn")
+    .addEventListener("click", createClicked);
 }
 
 function checkDetailsOnLogin() {
   const username = document.querySelector("#login-username").value;
-
-  document
-    .querySelector("#create-member-btn")
-    .addEventListener("click", createClicked);
 }
 
 // Get data from endpoint - gets both members and users
@@ -124,6 +123,7 @@ function createMember(event) {
     email: createForm.email.value,
     group: correctGroup(),
     name: createForm.name.value,
+    phone: createForm.phone.value,
     subscription: correctSubscription(),
     type: createForm.type.value,
   };
