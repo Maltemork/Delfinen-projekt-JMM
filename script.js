@@ -93,7 +93,7 @@ function formandMembersTable(member) {
     document
       .querySelector(`#delete-${member.id}`)
       .addEventListener("click", () => {
-        deleteClicked(member.id);
+        deleteClicked(member);
       });
   }
 
@@ -102,20 +102,24 @@ function formandMembersTable(member) {
   }
 }
 
-function deleteClicked(memberId) {
+function deleteClicked(member) {
   console.log("Delete clicked");
-  document.querySelector("#delete-dialog").showModal();
+  const dialog = document.querySelector("#delete-dialog");
+  dialog.showModal();
+  document.querySelector(
+    "#delete-dialog h3"
+  ).textContent = `Fjern ${member.name}?`;
   document
     .querySelector("#confirm-delete-btn")
     .addEventListener("click", () => {
-      deleteMember(memberId);
+      deleteMember(member.id);
     });
   document.querySelector("#cancel-delete-btn").addEventListener("click", () => {
-    document.querySelector("#delete-dialog").close();
+    dialog.close();
     document
       .querySelector("#cancel-delete-btn")
       .removeEventListener("click", () => {
-        document.querySelector("#delete-dialog").close();
+        dialog.close();
       });
   });
 
@@ -127,7 +131,6 @@ function deleteClicked(memberId) {
     if (response.ok) {
       console.log("Deletion successful");
       location.reload();
-      //Update what is shown?
     } else {
       console.log("Error in deleting: " + memberId);
     }
