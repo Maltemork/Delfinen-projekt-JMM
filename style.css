@@ -7,9 +7,12 @@ body {
 table {
   border: 1px solid white;
   margin: 0px auto 0;
-  width: 100em; 
+  width: auto; 
 }
 
+.table-item td {
+  padding-right: 20px;
+}
 
 
 .header-container {

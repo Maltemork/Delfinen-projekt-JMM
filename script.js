@@ -10,7 +10,7 @@ const users = [];
 async function start() {
   await getData();
   console.log("App is running! 😊");
-  formandMembersTable(members);
+  members.forEach(formandMembersTable);
 }
 
 function checkDetailsOnLogin() {
@@ -49,13 +49,12 @@ function prepareData(dataUsers, dataMembers) {
   }
 }
 
-function formandMembersTable() {
-  members.forEach(insertMember);
+function formandMembersTable(member) {
+  insertMember(member);
 
   // Insert member function
   function insertMember(member) {
     const table = document.querySelector("#formand-members-table");
-    console.log(member)
     if (member.activity === "active") {
     table.insertAdjacentHTML(
       "beforeend",
@@ -75,7 +74,7 @@ function formandMembersTable() {
     table.insertAdjacentHTML(
       "beforeend",
       /*html*/ `
-          <tr id="table-${member.id}">
+          <tr id="table-${member.id}" class="table-item">
             <td>✖</td>
             <td>${member.name}</td>
             <td>${member.email}</td>
@@ -86,7 +85,11 @@ function formandMembersTable() {
           </tr>
           `
     );
-  }}
+  }
+  document.querySelector(`#edit-${member.id}`).addEventListener("click", editMemberPlaceholderFunction);
+}
   
-  
+  function editMemberPlaceholderFunction() {
+  console.log(member)
+}
 }
