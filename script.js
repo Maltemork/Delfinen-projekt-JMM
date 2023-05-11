@@ -8,8 +8,15 @@ const members = [];
 const users = [];
 
 async function start() {
-  getData();
+  await getData();
   console.log("App is running! 😊");
+  formandMembersTable(members);
+}
+
+function checkDetailsOnLogin() {
+  const username = document.querySelector("#login-username").value;
+  
+
 }
 
 // Get data from endpoint - gets both members and users
@@ -42,3 +49,44 @@ function prepareData(dataUsers, dataMembers) {
   }
 }
 
+function formandMembersTable() {
+  members.forEach(insertMember);
+
+  // Insert member function
+  function insertMember(member) {
+    const table = document.querySelector("#formand-members-table");
+    console.log(member)
+    if (member.activity === "active") {
+    table.insertAdjacentHTML(
+      "beforeend",
+      /*html*/ `
+          <tr id="table-${member.id}">
+            <td>✔</td>
+            <td>${member.name}</td>
+            <td>${member.email}</td>
+            <td>${member.phone}</td>
+            <td>${member.age}</td>
+            <td>${member.type}</td>
+            <td><button id="edit-${member.id}">🖊</button></td>
+          </tr>
+          `
+    );
+  } else {
+    table.insertAdjacentHTML(
+      "beforeend",
+      /*html*/ `
+          <tr id="table-${member.id}">
+            <td>✖</td>
+            <td>${member.name}</td>
+            <td>${member.email}</td>
+            <td>${member.phone}</td>
+            <td>${member.age}</td>
+            <td>${member.type}</td>
+            <td><button id="edit-${member.id}">🖊</button></td>
+          </tr>
+          `
+    );
+  }}
+  
+  
+}
