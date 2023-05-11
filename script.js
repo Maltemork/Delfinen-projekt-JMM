@@ -18,7 +18,32 @@ async function start() {
 }
 
 function checkDetailsOnLogin() {
-  const username = document.querySelector("#login-username").value;
+  const usernameValue = document.querySelector("#login-username").value;
+  const passwordValue = document.querySelector("#login-password").value;
+
+  for (let i = 0; i < users.length; i++) {
+    if (
+      users[i].username == usernameValue &&
+      users[i].password === passwordValue
+    ) {
+      window.location.href = `/${users[i].type}.html`;
+      start();
+      console.log(users[i]);
+    } else if (users.length - 1 === i) {
+      document
+        .querySelector(".login-container")
+        .classList.add("wrong-password");
+      document.querySelector("#wrong-password-text").textContent =
+        "Wrong password. Please try again.";
+      document
+        .querySelector(".login-container")
+        .addEventListener("animationend", () => {
+          document
+            .querySelector(".login-container")
+            .classList.remove("wrong-password");
+        });
+    }
+  }
 }
 
 // Get data from endpoint - gets both members and users
@@ -61,7 +86,7 @@ function formandMembersTable(member) {
       table.insertAdjacentHTML(
         "beforeend",
         /*html*/ `
-          <tr id="table-${member.id}">
+          <tr id="table-${member.id}" class="table-item">
             <td>✔</td>
             <td>${member.name}</td>
             <td>${member.email}</td>
@@ -69,6 +94,7 @@ function formandMembersTable(member) {
             <td>${member.age}</td>
             <td>${member.type}</td>
             <td><button id="edit-${member.id}">🖊</button></td>
+            <td><button id="delete-${member.id}">🗑</button></td>
           </tr>
           `
       );
@@ -84,6 +110,7 @@ function formandMembersTable(member) {
             <td>${member.age}</td>
             <td>${member.type}</td>
             <td><button id="edit-${member.id}">🖊</button></td>
+            <td><button id="delete-${member.id}">🗑</button></td>
           </tr>
           `
       );
@@ -93,10 +120,50 @@ function formandMembersTable(member) {
       .addEventListener("click", () => {
         editMemberClicked(member);
       });
+    document
+      .querySelector(`#delete-${member.id}`)
+      .addEventListener("click", () => {
+        deleteClicked(member);
+      });
   }
 
   function editMemberPlaceholderFunction() {
     console.log(member);
+  }
+}
+
+function deleteClicked(member) {
+  console.log("Delete clicked");
+  const dialog = document.querySelector("#delete-dialog");
+  dialog.showModal();
+  document.querySelector(
+    "#delete-dialog h3"
+  ).textContent = `Fjern ${member.name}?`;
+  document
+    .querySelector("#confirm-delete-btn")
+    .addEventListener("click", () => {
+      deleteMember(member.id);
+    });
+  document.querySelector("#cancel-delete-btn").addEventListener("click", () => {
+    dialog.close();
+    document
+      .querySelector("#cancel-delete-btn")
+      .removeEventListener("click", () => {
+        dialog.close();
+      });
+  });
+
+  async function deleteMember(memberId) {
+    console.log("Deleting member");
+    const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log("Deletion successful");
+      location.reload();
+    } else {
+      console.log("Error in deleting: " + memberId);
+    }
   }
 }
 /* ------ Create New Member ------- */
