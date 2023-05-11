@@ -354,13 +354,12 @@ function correctSubscription(age, activity) {
 }
 
 function correctGroup(age, type) {
-  let group = 0;
   if (type == "comp") {
     if (age < 18) {
-      group = 1;
+      return 1;
     } else {
-      group = 2;
+      return 2;
     }
   }
-  return group;
+  return 0;
 }
