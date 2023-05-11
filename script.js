@@ -174,21 +174,21 @@ function createClicked() {
   document
     .querySelector("#create-form")
     .addEventListener("submit", createMember);
+  //close button
   document.querySelector("#close-create-btn").addEventListener("click", () => {
     document.querySelector("#create-dialog").close();
     document.querySelector("#create-form").reset();
   });
-}
-//When the submit button is clicked
-function createMember(event) {
-  event.preventDefault();
-  document
-    .querySelector("#create-form")
-    .removeEventListener("submit", createMember);
+  //When the submit button is clicked
+  function createMember(event) {
+    event.preventDefault();
+    document
+      .querySelector("#create-form")
+      .removeEventListener("submit", createMember);
 
-  const createForm = document.querySelector("#create-form");
-  //Create the member object
-  const newMember = {
+    const createForm = document.querySelector("#create-form");
+    //Create the member object
+    const newMember = {
       activity: createForm.activity.value,
       age: createForm.age.value,
       arrears: 0,
@@ -205,49 +205,49 @@ function createMember(event) {
       type: createForm.type.value,
     };
 
-  createdMemberSend(newMember);
-  document.querySelector("#create-form").reset(); //Reset the inputs in the form
-  document.querySelector("#create-dialog").close(); //Close the dialog
+    createdMemberSend(newMember);
+    document.querySelector("#create-form").reset(); //Reset the inputs in the form
+    document.querySelector("#create-dialog").close(); //Close the dialog
 
-  //Makes sure the member get the correct subscription based on age or activity
-  function correctSubscription() {
-    let subscription = 0;
-    if (createForm.age.value < 18) {
-      subscription = 1000;
-    } else if (createForm.age.value <= 60) {
-      subscription = 1600;
-    } else {
-      subscription = 1200;
-    }
-    if (createForm.activity.value == "passive") {
-      subscription = 500;
-    }
-    return subscription;
-  }
-  //Makes sure the member gets in the correct group based on age and type
-  function correctGroup() {
-    let group = 0;
-    if (createForm.type.value == "comp") {
+    //Makes sure the member get the correct subscription based on age or activity
+    function correctSubscription() {
+      let subscription = 0;
       if (createForm.age.value < 18) {
-        group = 1;
+        subscription = 1000;
+      } else if (createForm.age.value <= 60) {
+        subscription = 1600;
       } else {
-        group = 2;
+        subscription = 1200;
       }
+      if (createForm.activity.value == "passive") {
+        subscription = 500;
+      }
+      return subscription;
     }
-    return group;
-  }
-  //Gives the competition object if the member is a competitor
-  function checkCompetition() {
-    let comp = {};
-    if (createForm.type.value == "comp") {
-      comp = { lokation: "", meet: "", time: "" };
+    //Makes sure the member gets in the correct group based on age and type
+    function correctGroup() {
+      let group = 0;
+      if (createForm.type.value == "comp") {
+        if (createForm.age.value < 18) {
+          group = 1;
+        } else {
+          group = 2;
+        }
+      }
+      return group;
     }
-    return comp;
-  }
-  //Returns an object with the chosen disciplines checked from the checkboxes
-  function chosenDisciplines() {
-    console.log("Chosen Disciplines");
-    const disciplines = {};
+    //Gives the competition object if the member is a competitor
+    function checkCompetition() {
+      let comp = {};
+      if (createForm.type.value == "comp") {
+        comp = { lokation: "", meet: "", time: "" };
+      }
+      return comp;
+    }
+    //Returns an object with the chosen disciplines checked from the checkboxes
+    function chosenDisciplines() {
+      console.log("Chosen Disciplines");
+      const disciplines = {};
 
       if (type == "comp") {
         const inputs = document
@@ -282,7 +282,7 @@ function createMember(event) {
     }
 
     document.querySelector("#create-dialog").close();
-  //Send the object to database by request
+    //Send the object to database by request
     async function createdMemberSend(newMember) {
       console.log("Posting member");
 
@@ -302,6 +302,7 @@ function createMember(event) {
     }
   }
 }
+/* ------ Update member ------ */
 //When edit button is clicked
 function editMemberClicked(member) {
   console.log(`Editing ${member.name}`);
