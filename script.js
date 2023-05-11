@@ -331,7 +331,6 @@ function editMemberClicked(member) {
 
       if (response.ok) {
         console.log("Update successfull");
-        location.reload();
       } else {
         console.log("Failed to update");
       }
