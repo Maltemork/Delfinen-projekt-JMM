@@ -4,11 +4,22 @@ body {
   color: white;
 }
 
+table {
+  border: 1px solid white;
+  margin: 0px auto 0;
+  width: auto; 
+}
+
+.table-item td {
+  padding-right: 20px;
+}
+
+
 .header-container {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  position: fixed;
+  position: relative;
   margin: auto;
   width: 1fr;
   top: 0;
