@@ -94,6 +94,7 @@ function formandMembersTable(member) {
             <td>${member.age}</td>
             <td>${member.type}</td>
             <td><button id="edit-${member.id}">🖊</button></td>
+            <td><button id="delete-${member.id}">🗑</button></td>
           </tr>
           `
       );
@@ -109,6 +110,7 @@ function formandMembersTable(member) {
             <td>${member.age}</td>
             <td>${member.type}</td>
             <td><button id="edit-${member.id}">🖊</button></td>
+            <td><button id="delete-${member.id}">🗑</button></td>
           </tr>
           `
       );
@@ -116,16 +118,61 @@ function formandMembersTable(member) {
     document
       .querySelector(`#edit-${member.id}`)
       .addEventListener("click", editMemberPlaceholderFunction);
+    document
+      .querySelector(`#delete-${member.id}`)
+      .addEventListener("click", () => {
+        deleteClicked(member);
+      });
   }
 
   function editMemberPlaceholderFunction() {
     console.log(member);
   }
 }
+//When the delete button is clicked
+function deleteClicked(member) {
+  console.log("Delete clicked");
+  const dialog = document.querySelector("#delete-dialog");
+  dialog.showModal();
+  //Ask for confirmation
+  document.querySelector(
+    "#delete-dialog h3"
+  ).textContent = `Fjern ${member.name}?`;
+  //Confirm button
+  document
+    .querySelector("#confirm-delete-btn")
+    .addEventListener("click", () => {
+      deleteMember(member.id);
+    });
+  //Cancel button
+  document.querySelector("#cancel-delete-btn").addEventListener("click", () => {
+    dialog.close();
+    document
+      .querySelector("#cancel-delete-btn")
+      .removeEventListener("click", () => {
+        dialog.close();
+      });
+  });
+  //Delete member in the database by request
+  async function deleteMember(memberId) {
+    console.log("Deleting member");
+    const response = await fetch(`${endpoint}/members/${memberId}.json`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log("Deletion successful");
+      location.reload();
+    } else {
+      console.log("Error in deleting: " + memberId);
+    }
+  }
+}
 /* ------ Create New Member ------- */
+//When "new member" button is clicked
 function createClicked() {
   console.log("New Member Clicked");
   document.querySelector("#create-dialog").showModal();
+  //Submit button
   document
     .querySelector("#create-form")
     .addEventListener("submit", createMember);
@@ -134,7 +181,7 @@ function createClicked() {
     document.querySelector("#create-form").reset();
   });
 }
-
+//When the submit button is clicked
 function createMember(event) {
   event.preventDefault();
   document
@@ -142,7 +189,7 @@ function createMember(event) {
     .removeEventListener("submit", createMember);
 
   const createForm = document.querySelector("#create-form");
-
+  //Create the member object
   const newMember = {
     activity: createForm.activity.value,
     age: createForm.age.value,
@@ -158,9 +205,10 @@ function createMember(event) {
   };
 
   createdMemberSend(newMember);
-  document.querySelector("#create-form").reset();
-  document.querySelector("#create-dialog").close();
+  document.querySelector("#create-form").reset(); //Reset the inputs in the form
+  document.querySelector("#create-dialog").close(); //Close the dialog
 
+  //Makes sure the member get the correct subscription based on age or activity
   function correctSubscription() {
     let subscription = 0;
     if (createForm.age.value < 18) {
@@ -175,7 +223,7 @@ function createMember(event) {
     }
     return subscription;
   }
-
+  //Makes sure the member gets in the correct group based on age and type
   function correctGroup() {
     let group = 0;
     if (createForm.type.value == "comp") {
@@ -187,7 +235,7 @@ function createMember(event) {
     }
     return group;
   }
-
+  //Gives the competition object if the member is a competitor
   function checkCompetition() {
     let comp = {};
     if (createForm.type.value == "comp") {
@@ -195,7 +243,7 @@ function createMember(event) {
     }
     return comp;
   }
-
+  //Returns an object with the chosen disciplines checked from the checkboxes
   function chosenDisciplines() {
     console.log("Chosen Disciplines");
     const disciplines = {};
@@ -229,7 +277,7 @@ function createMember(event) {
     }
     return disciplines;
   }
-
+  //Send the object to database by request
   async function createdMemberSend(newMember) {
     console.log("Posting member");
 
