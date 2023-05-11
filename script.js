@@ -169,7 +169,13 @@ function deleteClicked(member) {
 //When "new member" button is clicked
 function createClicked() {
   console.log("New Member Clicked");
-  document.querySelector("#create-dialog").showModal();
+  const dialog = document.querySelector("#create-dialog");
+  dialog.showModal();
+  dialog.addEventListener("cancel", event => {
+    /*Prevents the dialog closing when pressing escape 
+   to make sure it doesn't send multiple requests at the same time  */
+    event.preventDefault();
+  });
   const createForm = document.querySelector("#create-form");
   createForm.reset(); //Reset the form
   //Submit button
@@ -178,8 +184,7 @@ function createClicked() {
     .addEventListener("submit", createMember);
   //close button
   document.querySelector("#close-create-btn").addEventListener("click", () => {
-    document.querySelector("#create-dialog").close();
-    document.querySelector("#create-form").reset();
+    location.reload();
   });
   //When the submit button is clicked
   function createMember(event) {
