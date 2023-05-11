@@ -292,6 +292,12 @@ function editMemberClicked(member) {
   const dialog = document.querySelector("#update-dialog");
   dialog.showModal();
 
+  dialog.addEventListener("cancel", event => {
+    /*Prevents the dialog closing when pressing escape 
+   to make sure it doesn't send multiple requests at the same time  */
+    event.preventDefault();
+  });
+
   document
     .querySelector("#update-form")
     .addEventListener("submit", updateMember);
