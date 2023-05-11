@@ -11,13 +11,13 @@ async function start() {
   await getData();
   console.log("App is running! 😊");
   members.forEach(formandMembersTable);
+  document.querySelector("#login-form").addEventListener("submit", () => {
+    preventDefault();
+  })
 }
 
-function checkDetailsOnLogin() {
-
-  const usernameValue = document.querySelector("#login-username").value;
-  const passwordValue = document.querySelector("#login-password").value;
-
+function checkDetailsOnLogin(event, usernameValue, passwordValue) {
+  event.preventDefault();
   for(let i = 0; i < users.length; i++){
     if (users[i].username == usernameValue && users[i].password === passwordValue) {
       window.location.href = `/${users[i].type}.html`
@@ -25,7 +25,10 @@ function checkDetailsOnLogin() {
       console.log(users[i]);
     } else if (users.length - 1 === i) {
       document.querySelector(".login-container").classList.add("wrong-password");
-      document.querySelector("#wrong-password-text").textContent = "Wrong password. Please try again.";
+      document.querySelector("#login-password").addEventListener("input", () => {
+        document.querySelector("#wrong-password-text").textContent = "";
+      });
+      document.querySelector("#wrong-password-text").textContent = "Forkert brugernavn eller kodeord... Prøv igen.";
       document.querySelector(".login-container").addEventListener("animationend", () => {
         document.querySelector(".login-container").classList.remove("wrong-password");
         

@@ -104,6 +104,11 @@ table {
   height: 2.5em;
 }
 
+.login-container p {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
 #login-submit {
   width: 60%;
   margin-left: auto;
