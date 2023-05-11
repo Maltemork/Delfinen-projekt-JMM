@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Delfinen Projekt JMM</title>
+  </head>
+  <body>
+    <!-- Background video -->
+    <video autoplay muted loop id="backgroundVideo">
+      <source src="background-video/background-video.mp4" type="video/mp4" />
+    </video>
+    <!--  -->
+    <section class="login-container">
+      <h2>Sign in | Delfinen</h2>
+      <p>Contact the swimming hall manager if you do not already have an account.</p>
+      <br>
+      <hr />
+      <form action="index.html" id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="login-username" />
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="login-password" />
+        <br />
+        <br />
+        <input type="submit" value="Enter" id="login-submit" />
+      </form>
+      <p id="signature">Project by J M & M</p>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,14 +1,25 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(0, 0, 41);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(38, 38, 85);
   color: white;
 }
+
+table {
+  border: 1px solid white;
+  margin: 0px auto 0;
+  width: auto; 
+}
+
+.table-item td {
+  padding-right: 20px;
+}
+
 
 .header-container {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  position: fixed;
+  position: relative;
   margin: auto;
   width: 1fr;
   top: 0;
@@ -48,3 +59,98 @@ body {
 .header-item:hover {
   background-color: rgb(67, 67, 225);
 }
+
+/* LOGIN SECTION */
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  color: rgb(62, 62, 62);
+  background: white;
+  border: 2px solid white;
+  margin: 240px auto 0;
+  height: 50%;
+  width: 25em;
+  padding: 10px;
+  border-radius: 0.5em;
+  overflow: auto;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.306);
+  animation-name: loadFadeIn;
+  animation-duration: 0.5s;
+}
+
+.login-container * {
+  position: relative;
+  margin: 5px;
+}
+
+.login-container h2 {
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  color: rgb(69, 98, 159);
+  font-size: 34px;
+}
+
+.login-container form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.login-container input {
+  padding-left: 10px;
+  border: 1px solid gray;
+  border-radius: 0.5em;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  height: 2.5em;
+}
+
+#login-submit {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgb(61, 61, 61);
+  height: 3em;
+  border-radius: 0.5em;
+  background-color: white;
+}
+
+.login-container :last-child {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login-container p {
+  text-align: left;
+  padding-left: 5px;
+  color: rgb(116, 116, 116);
+}
+
+#signature {
+  text-align: center;
+}
+
+/* background video section */
+#backgroundVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  filter: blur(4px);
+}
+
+@keyframes loadFadeIn {
+  from {
+    scale: 0.8;
+    opacity: 0%;
+  }
+  to {
+    scale: 1;
+    opacity: 100%;
+  }
+}
+
+/* LOGIN SECTION END */

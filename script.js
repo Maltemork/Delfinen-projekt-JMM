@@ -9,8 +9,13 @@ const members = [];
 const users = [];
 
 async function start() {
-  getData();
+  await getData();
   console.log("App is running! 😊");
+  members.forEach(formandMembersTable);
+}
+
+function checkDetailsOnLogin() {
+  const username = document.querySelector("#login-username").value;
 
   document
     .querySelector("#create-member-btn")
@@ -47,6 +52,52 @@ function prepareData(dataUsers, dataMembers) {
   }
 }
 
+function formandMembersTable(member) {
+  insertMember(member);
+
+  // Insert member function
+  function insertMember(member) {
+    const table = document.querySelector("#formand-members-table");
+    if (member.activity === "active") {
+      table.insertAdjacentHTML(
+        "beforeend",
+        /*html*/ `
+          <tr id="table-${member.id}">
+            <td>✔</td>
+            <td>${member.name}</td>
+            <td>${member.email}</td>
+            <td>${member.phone}</td>
+            <td>${member.age}</td>
+            <td>${member.type}</td>
+            <td><button id="edit-${member.id}">🖊</button></td>
+          </tr>
+          `
+      );
+    } else {
+      table.insertAdjacentHTML(
+        "beforeend",
+        /*html*/ `
+          <tr id="table-${member.id}" class="table-item">
+            <td>✖</td>
+            <td>${member.name}</td>
+            <td>${member.email}</td>
+            <td>${member.phone}</td>
+            <td>${member.age}</td>
+            <td>${member.type}</td>
+            <td><button id="edit-${member.id}">🖊</button></td>
+          </tr>
+          `
+      );
+    }
+    document
+      .querySelector(`#edit-${member.id}`)
+      .addEventListener("click", editMemberPlaceholderFunction);
+  }
+
+  function editMemberPlaceholderFunction() {
+    console.log(member);
+  }
+}
 /* ------ Create New Member ------- */
 function createClicked() {
   console.log("New Member Clicked");
