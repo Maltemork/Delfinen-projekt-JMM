@@ -38,7 +38,7 @@ function checkDetailsOnLogin(event, usernameValue, passwordValue) {
 }
   
 
-}
+
 
 // Get data from endpoint - gets both members and users
 async function getData() {
@@ -112,4 +112,4 @@ function formandMembersTable(member) {
   
   function editMemberPlaceholderFunction() {
   console.log(member)
-}
+}}
