@@ -15,6 +15,8 @@ async function start() {
   document
     .querySelector("#create-member-btn")
     .addEventListener("click", createClicked);
+  document.querySelector("#search-members").addEventListener("input", searchMembers);
+    
 }
 
 function checkDetailsOnLogin() {
@@ -384,4 +386,30 @@ function correctGroup(age, type) {
     }
   }
   return 0;
+}
+
+/* ----- Seach - Member -----*/
+function searchMembers() {
+  document.querySelector("#formand-members-table").innerHTML = `
+      <tr class="table-item">
+        <td>Aktiv</td>
+        <td>Navn</td>
+        <td>E-mail</td>
+        <td>Telefon</td>
+        <td>Alder</td>
+        <td>Type</td>
+        <td>Rediger</td>
+        <td>Slet</td>
+      </tr>
+  `;
+  const searchInput = document.querySelector("#search-members").value.toLowerCase();
+  //filter members based on search input, without being case sensitive.
+  const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(searchInput)
+  );
+  if (searchInput.length !== 0) {
+    filteredMembers.forEach(formandMembersTable);
+  } else {
+    members.forEach(formandMembersTable)
+  }
 }
