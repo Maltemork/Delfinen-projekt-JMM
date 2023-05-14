@@ -15,27 +15,27 @@ function kassererMembersTable(member) {
     "beforeend",
     /* html */ `
         <tr class="table-item">
-          <td>${isActiveHtml(member.activity)}</td>
+          <td>${isActiveHtml()}</td>
           <td>${member.name}</td>
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
           <td>${member.subscription} kr.</td>
-          <td>${hasPayedHtml(member.arrears)}</td>
+          <td>${hasPayedHtml()}</td>
         </tr>
       `
   );
 
-  function isActiveHtml(activity) {
-    if (activity == "active") {
+  function isActiveHtml() {
+    if (member.activity == "active") {
       return "✔";
     } else {
       return "✖";
     }
   }
 
-  function hasPayedHtml(arrears) {
-    if (arrears == 0) {
+  function hasPayedHtml() {
+    if (member.arrears == 0) {
       return "✔";
     } else {
       return "✖";
