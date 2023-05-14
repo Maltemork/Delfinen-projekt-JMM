@@ -25,20 +25,20 @@ function kassererMembersTable(member) {
         </tr>
       `
   );
-}
 
-function isActiveHtml(activity) {
-  if (activity == "active") {
-    return "✔";
-  } else {
-    return "✖";
+  function isActiveHtml(activity) {
+    if (activity == "active") {
+      return "✔";
+    } else {
+      return "✖";
+    }
   }
-}
 
-function hasPayedHtml(arrears) {
-  if (arrears == 0) {
-    return "✔";
-  } else {
-    return "✖";
+  function hasPayedHtml(arrears) {
+    if (arrears == 0) {
+      return "✔";
+    } else {
+      return "✖";
+    }
   }
 }
