@@ -158,4 +158,8 @@ table {
   100% {transform: translateX(0%);}
 }
 
+#wrong-password-text {
+  color: rgb(255, 21, 21);
+}
+
 /* LOGIN SECTION END */
