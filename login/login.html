@@ -18,15 +18,15 @@
       <p>Kontakt formanden hvis du ønsker at blive medlem.</p>
       <br />
       <hr />
-      <form id="login-form">
+      <form id="login-form" onsubmit="">
         <label for="username">Brugernavn:</label>
-        <input type="text" name="username" id="login-username" />
+        <input type="text" name="username" id="login-username" required/>
         <label for="password">Kodeord:</label>
-        <input type="password" name="password" id="login-password" />
+        <input type="password" name="password" id="login-password" required/>
         <p id="wrong-password-text"></p>
         <br />
         <br />
-        <input type="button" value="Enter" id="login-submit" />
+        <input type="submit" value="Log ind" id="login-submit" />
       </form>
       <p id="signature">Projekt af J M & M</p>
     </section>
