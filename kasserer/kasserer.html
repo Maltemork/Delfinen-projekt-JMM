@@ -11,15 +11,22 @@
     <section class="header-container">
       <h1>KASSERER</h1>
     </section>
-    <table id="formand-members-table">
+    <table id="kasserer-members-table">
       <tr class="table-item">
         <td>Aktiv</td>
         <td>Navn</td>
+        <td>Alder</td>
         <td>E-mail</td>
         <td>Telefon</td>
-        <td>Alder</td>
+        <td>Kontigent</td>
+        <td>
+          Betalt
+          <button id="arrears-members-btn">Restance</button>
+        </td>
       </tr>
     </table>
+
+    <dialog id="arrears-dialog"></dialog>
 
     <script src="kasserer-script.js" type="module"></script>
     <script src="/crud.js" type="module"></script>
