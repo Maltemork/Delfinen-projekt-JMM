@@ -11,6 +11,18 @@
     <section class="header-container">
       <h1>KASSERER</h1>
     </section>
+    <label for="sort">Sorter efter</label>
+    <select name="sort" id="sort-dropdown">
+      <option value="name-AZ" selected>Navn (A-Z)</option>
+      <option value="name-ZA">Navn (Z-A)</option>
+      <option value="age-HIGH">Alder (høj til lav)</option>
+      <option value="age-LOW">Alder (lav til høj)</option>
+      <option value="subscription-HIGH">Kontingent (høj til lav)</option>
+      <option value="subscription-LOW">Kontingent (lav til høj)</option>
+      <option value="active-YES">Aktiv (ja)</option>
+      <option value="active-NO">Aktiv (nej)</option>
+      <option value="paid-NO">Mangler Betaling</option>
+    </select>
     <table id="kasserer-members-table">
       <tr class="table-item">
         <td>Aktiv</td>

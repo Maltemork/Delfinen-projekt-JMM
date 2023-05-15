@@ -173,3 +173,9 @@ table {
 }
 
 /* LOGIN SECTION END */
+
+/* SORT SECTION */
+
+.selected-sort {
+  font-weight:bold;
+}
