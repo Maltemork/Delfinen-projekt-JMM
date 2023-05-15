@@ -7,9 +7,7 @@ window.addEventListener("load", start);
 async function start() {
   await getData();
   members.forEach(showKassererMembersTable);
-  document
-    .querySelector("#arrears-members-btn")
-    .addEventListener("click", arrearsBtnClicked);
+  
   sortKassererTable();
   document.querySelector("#sort-dropdown").addEventListener("change", sortKassererTable);
 }
@@ -99,7 +97,7 @@ function sortKassererTable () {
       <td>Alder</td>
       <td>E-mail</td>
       <td>Telefon</td>
-      <td>Kontigent</td>
+      <td>Kontingent</td>
       <td>
         Betalt
       <button id="arrears-members-btn">Restance</button>
@@ -194,5 +192,7 @@ function sortKassererTable () {
   }
 
 
-
+  document
+    .querySelector("#arrears-members-btn")
+    .addEventListener("click", arrearsBtnClicked);
 }
