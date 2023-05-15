@@ -51,8 +51,28 @@ function calculateAndDisplayTotal() {
     0
   );
 
-  // Hent reference til total-box-elementet
-  const totalBox = document.querySelector("#total-box");
-  // Sæt indholdet af boksen til at vise det samlede kontingentbeløb
-  totalBox.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
+  // Beregn det samlede ubetalte beløb ved at filtrere medlemmerne baseret på deres restance og summere beløbene
+  const totalArrears = members
+    .filter((member) => member.arrears > 0)
+    .reduce((total, member) => total + member.subscription, 0);
+
+  // Opret et nyt div-element til at vise kontingentoplysningerne
+  const totalContainer = document.createElement("div");
+  totalContainer.classList.add("total-container");
+
+  // Opret elementer til at vise det samlede kontingentbeløb og det ubetalte beløb
+  const totalSubscriptionElement = document.createElement("span");
+  totalSubscriptionElement.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
+
+  const totalArrearsElement = document.createElement("span");
+  totalArrearsElement.textContent = `Ubetalte beløb: ${totalArrears} kr.`;
+
+  // Tilføj elementerne til totalContainer
+  totalContainer.appendChild(totalSubscriptionElement);
+  totalContainer.appendChild(totalArrearsElement);
+
+  // Indsæt totalContainer før kasserer-members-table
+  document
+    .querySelector("#kasserer-members-table")
+    .insertAdjacentElement("beforebegin", totalContainer);
 }

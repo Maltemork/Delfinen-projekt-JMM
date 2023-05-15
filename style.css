@@ -14,7 +14,7 @@ table {
   padding-right: 6em;
   border: 1px solid black;
 }
-  
+
 .header-container {
   text-align: center;
   display: grid;
@@ -151,17 +151,26 @@ table {
 }
 
 @keyframes wrongPasswordAnimation {
-  0% {transform: translateX(0%);} 
-  25% {transform: translateX(1%);}
-  50% {transform: translateX(0%);}
-  75% {transform: translateX(-1%);}
-  100% {transform: translateX(0%);}
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(1%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  75% {
+    transform: translateX(-1%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 /* LOGIN SECTION END */
 
-
-.total-box {
+.total-container {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
@@ -174,6 +183,10 @@ table {
   transition: transform 0.3s;
 }
 
-.total-box:hover {
+.total-container span + span {
+  margin-top: 100px;
+}
+
+.total-container:hover {
   transform: scale(1.05);
 }
