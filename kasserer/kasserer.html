@@ -4,25 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="kasserer.css" />
     <title>Kasserer</title>
   </head>
   <body>
-    <section class="header-container">
-      <h1>KASSERER</h1>
+    <!-- Background video -->
+    <video autoplay muted loop id="backgroundVideo">
+      <source src="/background-video/background-video.mp4" type="video/mp4" />
+    </video>
+    <!--  -->
+    <div id="page-container">
+    <section class="header-container" id="main-header">
+      <h1 id="header-title">Delfinen | Kasserer</h1>
+      <hr id="header-hr">
+      <div id="header-double-holder">
+        <label for="sort">Sorter Efter:</label>
+        <select name="sort" id="sort-dropdown">
+          <option value="name-AZ" selected>Navn (A-Z)</option>
+          <option value="name-ZA">Navn (Z-A)</option>
+          <option value="age-HIGH">Alder (høj til lav)</option>
+          <option value="age-LOW">Alder (lav til høj)</option>
+          <option value="subscription-HIGH">Kontingent (høj til lav)</option>
+          <option value="subscription-LOW">Kontingent (lav til høj)</option>
+          <option value="active-YES">Aktiv (✔)</option>
+          <option value="active-NO">Aktiv (✖)</option>
+          <option value="paid-NO">Mangler Betaling</option>
+        </select>
+        <button id="arrears-members-btn">Restance</button>
+      </div>
+      <button id="go-to-login">Gå til login</button>
     </section>
-    <label for="sort">Sorter efter</label>
-    <select name="sort" id="sort-dropdown">
-      <option value="name-AZ" selected>Navn (A-Z)</option>
-      <option value="name-ZA">Navn (Z-A)</option>
-      <option value="age-HIGH">Alder (høj til lav)</option>
-      <option value="age-LOW">Alder (lav til høj)</option>
-      <option value="subscription-HIGH">Kontingent (høj til lav)</option>
-      <option value="subscription-LOW">Kontingent (lav til høj)</option>
-      <option value="active-YES">Aktiv (ja)</option>
-      <option value="active-NO">Aktiv (nej)</option>
-      <option value="paid-NO">Mangler Betaling</option>
-    </select>
+    <section id="table-section">
     <table id="kasserer-members-table">
       <tr class="table-item">
         <td>Aktiv</td>
@@ -33,14 +45,16 @@
         <td>Kontigent</td>
         <td>
           Betalt
-          <button id="arrears-members-btn">Restance</button>
         </td>
       </tr>
     </table>
+    </section>
+    <p id="signature">Projekt af J M & M</p>
 
     <dialog id="arrears-dialog"></dialog>
 
     <script src="kasserer-script.js" type="module"></script>
     <script src="/crud.js" type="module"></script>
+    </div>
   </body>
 </html>

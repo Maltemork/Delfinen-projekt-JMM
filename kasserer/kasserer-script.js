@@ -10,6 +10,10 @@ async function start() {
   
   sortKassererTable();
   document.querySelector("#sort-dropdown").addEventListener("change", sortKassererTable);
+  document.querySelector("#go-to-login").addEventListener("click", () => 
+  {
+    window.location.href = "../login/login.html"
+  });
 }
 
 function showKassererMembersTable(member) {
@@ -100,7 +104,6 @@ function sortKassererTable () {
       <td>Kontingent</td>
       <td>
         Betalt
-      <button id="arrears-members-btn">Restance</button>
       </td>
   </tr>`;
 
