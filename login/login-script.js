@@ -25,7 +25,7 @@ function checkDetailsOnLogin(event) {
     ) { 
       window.location.href = `/${users[i].type}/${users[i].type}.html`;
       console.log(users[i]);
-    } else if (users.length - 1 === i) {
+    } else if (users.length === i) {
       document
         .querySelector(".login-container")
         .classList.add("wrong-password");
