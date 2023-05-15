@@ -7,6 +7,7 @@ window.addEventListener("load", start);
 async function start() {
   await getData();
   members.forEach(kassererMembersTable);
+  calculateAndDisplayTotal();
 }
 
 function kassererMembersTable(member) {
@@ -41,4 +42,17 @@ function kassererMembersTable(member) {
       return "✖";
     }
   }
+}
+
+function calculateAndDisplayTotal() {
+  // Beregn det samlede kontingent ved hjælp af reduce()-metoden
+  const totalSubscription = members.reduce(
+    (total, member) => total + member.subscription,
+    0
+  );
+
+  // Hent reference til total-box-elementet
+  const totalBox = document.querySelector("#total-box");
+  // Sæt indholdet af boksen til at vise det samlede kontingentbeløb
+  totalBox.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
 }
