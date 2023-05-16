@@ -1,133 +1,115 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(38, 38, 85);
-  color: white;
+  color: rgb(0, 0, 0);
 }
-
+/* Table styling */
 table {
-  background-color: rgb(96, 96, 96);
-  color: white;
+  border-radius: 5px;
   margin: 0 auto 0;
+  width: 100%;
 }
 
 .table-item td {
-  padding-right: 6em;
-  border: 1px solid black;
+  padding-right: 20px;
 }
 
+.table-item button {
+  margin-right: 0;
+  align-self: left;
+  color: rgb(0, 0, 0);
+  background: rgb(199, 199, 199);
+  border: 1px solid rgb(132, 132, 132);
+}
+
+.table-item button :hover {
+  background: rgb(113, 113, 113);
+}
+
+#table-section {
+  margin: 20px 20px 20px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 1em;
+}
+/* Page container styling */
+
+#page-container {
+  display: inline-block;
+  align-self: center;
+  margin-left: 10%;
+  width: 80%;
+  background: white;
+  padding: 10px;
+  border-radius: 1em;
+  border: 2px solid gray;
+}
+
+/* HEADER SECTION */
+
 .header-container {
-  text-align: center;
+  text-align: left;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   position: relative;
-  margin: auto;
-  width: 1fr;
+  margin: 0 0 0 0;
   top: 0;
   left: 0;
   right: 0;
-  align-content: center;
-  align-items: center;
   padding: 10px 10px 10px 10px;
   gap: 10px;
 }
 
-.header-container :first-child {
-  display: inline-block;
-  padding-top: 20px;
-  align-content: center;
-  text-align: center;
-  width: 100%;
-  height: 2em;
+#header-title {
   grid-column-start: 1;
-  grid-column-end: 5;
-  font-size: 200%;
-  background-color: rgb(62, 62, 62);
-  border: 2px solid gray;
+  grid-column-end: 4;
+  text-align: left;
+  font-size: 3em;
+  color: rgb(69, 98, 159);
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
 }
 
-.header-item {
-  display: inline-block;
-  text-align: center;
-  height: 2em;
-  padding-top: 13px;
-  border: 2px solid rgb(0, 32, 159);
-  background-color: rgb(57, 57, 186);
-  color: white;
+#header-hr {
+  grid-column-start: 1;
+  grid-column-end: 4;
   width: 100%;
 }
 
-.header-item:hover {
-  background-color: rgb(67, 67, 225);
-}
-
-/* LOGIN SECTION */
-.login-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  position: relative;
-  color: rgb(62, 62, 62);
-  background: white;
-  border: 2px solid white;
-  margin: 240px auto 0;
-  height: 50%;
-  width: 25em;
-  padding: 10px;
-  border-radius: 0.5em;
-  overflow: auto;
-  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.306);
-}
-
-.login-container * {
-  position: relative;
-  margin: 5px;
-}
-
-.login-container h2 {
-  text-align: left;
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-bottom: 20px;
-  color: rgb(69, 98, 159);
-  font-size: 34px;
-}
-
-.login-container form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.login-container input {
-  padding-left: 10px;
-  border: 1px solid gray;
-  border-radius: 0.5em;
+#header-double-holder {
+  padding-left: 0;
   grid-column-start: 1;
   grid-column-end: 3;
-  height: 2.5em;
+  position: relative;
 }
 
-#login-submit {
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid rgb(61, 61, 61);
+#sort-dropdown {
+  width: 10em;
+}
+
+.header-container button:hover {
+  background: rgb(81, 81, 81);
+  color: white;
+}
+
+.header-container button,
+select {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   height: 3em;
-  border-radius: 0.5em;
-  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background: white;
 }
 
-.login-container :last-child {
-  margin-top: 20px;
-  margin-bottom: 20px;
+.header-container button {
+  position: relative;
+  width: 10em;
 }
 
-.login-container p {
-  text-align: left;
-  padding-left: 5px;
-  color: rgb(116, 116, 116);
-}
+/* SORT SECTION */
 
-#signature {
-  text-align: center;
+.selected-sort {
+  font-weight: bold;
 }
 
 /* background video section */

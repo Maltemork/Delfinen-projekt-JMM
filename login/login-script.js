@@ -22,10 +22,12 @@ function checkDetailsOnLogin(event) {
     if (
       users[i].username == usernameValue &&
       users[i].password === passwordValue
+      
     ) { 
       window.location.href = `/${users[i].type}/${users[i].type}.html`;
       console.log(users[i]);
-    } else if (users.length - 1 === i) {
+      break;
+    } else if (users.length -1 === i) {
       document
         .querySelector(".login-container")
         .classList.add("wrong-password");
