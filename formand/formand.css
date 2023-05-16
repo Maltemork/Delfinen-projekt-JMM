@@ -1,0 +1,191 @@
+body {
+    color: rgb(0, 0, 0);
+  }
+  /* Table styling */
+  table {
+    border-radius: 5px;
+    margin: 0 auto 0;
+    width: 100%;
+  }
+  
+  .table-item td {
+    padding-right: 20px;
+  }
+  
+  .table-item button {
+    margin-right: 0;
+    align-self: left;
+    color: rgb(0, 0, 0);
+    background: rgb(199, 199, 199);
+    border: 1px solid rgb(132, 132, 132);
+  }
+  
+  .table-item button:hover {
+    color: white;
+    background: rgb(68, 68, 68);
+  }
+  
+  #table-section {
+    margin: 20px 20px 20px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 1em;
+  }
+  /* Page container styling */
+  
+  #page-container {
+    display: inline-block;
+    align-self: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    background: white;
+    padding: 10px;
+    border-radius: 1em;
+    border: 2px solid gray;
+    position: relative;
+    overflow: auto;
+    min-height: 50em;
+  }
+  
+  /* HEADER SECTION */
+  
+  .header-container {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: relative;
+    margin: 0 0 0 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 10px 10px 10px;
+    gap: 10px;
+  }
+  
+  #header-title {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    text-align: left;
+    font-size: 3em;
+    color: rgb(69, 98, 159);
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  
+  #header-hr {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+  }
+  
+  #header-double-holder {
+    padding-left: 0;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    position:relative;
+    
+  }
+  
+  .header-item {
+    display: inline-block;
+    text-align: center;
+    height: 2em;
+    border: 2px solid rgb(0, 32, 159);
+    background-color: rgb(57, 57, 186);
+    color: white;
+    width: 100%;
+  }
+  
+  .header-container button:hover {
+    background: rgb(81, 81, 81);
+    color: white;
+  }
+  
+  .header-container button, select {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 3em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: white;
+  }
+  
+  .header-container select {
+    width: 10em;
+  }
+  
+  .header-container button {
+    position: relative;
+    width: 10em;
+  }
+
+  #go-to-login {
+    text-align: center;
+    align-self: right;
+    margin-left: 500px;
+  }
+  
+  /* SORT SECTION */
+  
+  .selected-sort {
+    font-weight:bold;
+  }
+  
+   /* background video section */
+   #backgroundVideo {
+    position: fixed;
+    right: -20px;
+    bottom: -20px;
+    min-width: 110%;
+    min-height: 110%;
+    filter: blur(20px);
+  }
+
+  /* Dialog */
+  dialog {
+    padding-top: 5px;
+    width: 20em;
+    border-radius: 1em;
+    border: 1px solid black;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.42);
+  }
+
+  .dialog-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+
+  .dialog-container h2 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .full-length-in-form {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .dialog-container hr {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 100%;
+  }
+
+  .dialog-container input {
+    background: white;
+    border: 1px solid black;
+    border-radius: 2px;
+  }
+
+  #close-create-btn:hover, #submit-member-btn:hover, #close-update-btn:hover {
+      color: white;
+      background:rgb(94, 94, 94)
+  }
+
+  /* signatur */
+  #signature {
+    text-align: center;
+    color: gray;
+  }

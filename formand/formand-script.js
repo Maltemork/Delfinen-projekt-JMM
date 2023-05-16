@@ -18,6 +18,10 @@ async function start() {
     .querySelector("#create-member-btn")
     .addEventListener("click", createClicked);
   document.querySelector("#sort-dropdown").addEventListener("change", sortFormandTable);
+  document.querySelector("#go-to-login").addEventListener("click", () => 
+  {
+    window.location.href = "../login/login.html"
+  });
 
 }
 
