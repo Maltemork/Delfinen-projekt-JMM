@@ -42,7 +42,7 @@ function deleteClicked(member) {
   console.log("Delete clicked");
   const dialog = document.querySelector("#delete-dialog");
   dialog.showModal();
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -82,7 +82,7 @@ function createClicked() {
   console.log("New Member Clicked");
   const dialog = document.querySelector("#create-dialog");
   dialog.showModal();
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -151,16 +151,16 @@ function createClicked() {
         for (const discipline of selected) {
           switch (discipline) {
             case "backcrawl":
-              disciplines.backcrawl = { date: [""], time: [0] };
+              disciplines.backcrawl = {};
               break;
             case "butterfly":
-              disciplines.butterfly = { date: [""], time: [0] };
+              disciplines.butterfly = {};
               break;
             case "chest":
-              disciplines.chest = { date: [""], time: [0] };
+              disciplines.chest = {};
               break;
             case "crawl":
-              disciplines.crawl = { date: [""], time: [0] };
+              disciplines.crawl = {};
               break;
           }
         }
@@ -209,7 +209,7 @@ function editMemberClicked(member) {
   const dialog = document.querySelector("#update-dialog");
   dialog.showModal();
 
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
