@@ -28,8 +28,6 @@ function showKassererMembersTable(member) {
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
-          <td>${member.subscription} kr.</td>
-          <td>${hasPayedSymbol(member.arrears)}</td>
         </tr>
       `
   );
@@ -65,8 +63,6 @@ function arrearsBtnClicked() {
         <td>Alder</td>
         <td>E-mail</td>
         <td>Telefon</td>
-        <td>Kontigent</td>
-        <td>Betalt</td>
       </tr>
     </table>
   `
@@ -82,8 +78,6 @@ function arrearsBtnClicked() {
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
-          <td>${member.subscription} kr.</td>
-          <td>${hasPayedSymbol(member.arrears)}</td>
         </tr>
       `
       );
@@ -102,10 +96,6 @@ function sortKassererTable () {
       <td>Alder</td>
       <td>E-mail</td>
       <td>Telefon</td>
-      <td>Kontingent</td>
-      <td>
-        Betalt
-      </td>
   </tr>`;
 
   const sortOption = document.querySelector("#sort-dropdown").value;
@@ -153,22 +143,6 @@ function sortKassererTable () {
     age_HIGH.forEach(showKassererMembersTable);
     
   }
-  if (sortOption == "subscription-HIGH") {
-    const subscription_HIGH = members.sort((a,b) => {
-      if (a.subscription > b.subscription) return -1;
-      return 1;
-    });
-    subscription_HIGH.forEach(showKassererMembersTable);
-    
-  }
-  if (sortOption == "subscription-LOW") {
-    const subscription_LOW = members.sort((a,b) => {
-      if (a.subscription < b.subscription) return -1;
-      return 1;
-    });
-    subscription_LOW.forEach(showKassererMembersTable);
-    
-  }
 
   if (sortOption == "active-YES") {
     const active_YES = members.sort((a,b) => {
@@ -184,14 +158,6 @@ function sortKassererTable () {
       return 1;
     });
     active_NO.forEach(showKassererMembersTable);
-    
-  }
-  if (sortOption == "paid-NO") {
-    const paid_YES = members.sort((a,b) => {
-      if (a.arrears > b.arrears) return -1;
-      return 1;
-    });
-    paid_YES.forEach(showKassererMembersTable);
     
   }
 
@@ -210,10 +176,6 @@ function searchMembers() {
   <td>Alder</td>
   <td>E-mail</td>
   <td>Telefon</td>
-  <td>Kontigent</td>
-  <td>
-    Betalt
-  </td>
 </tr>
   `;
   const searchInput = document.querySelector("#search-members").value.toLowerCase();

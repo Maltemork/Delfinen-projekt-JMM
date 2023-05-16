@@ -22,6 +22,7 @@ async function start() {
   {
     window.location.href = "../login/login.html"
   });
+  document.querySelector("#search-members").addEventListener("input", searchMembers);
 
 }
 
@@ -163,5 +164,31 @@ function sortFormandTable () {
       return 1;
     });
     member_TYPE.forEach(formandMembersTable);
+  }
+}
+
+/* ----- Seach - Member -----*/
+function searchMembers() {
+  document.querySelector("#formand-members-table").innerHTML = `
+      <tr class="table-item">
+        <td>Aktiv</td>
+        <td>Navn</td>
+        <td>E-mail</td>
+        <td>Telefon</td>
+        <td>Alder</td>
+        <td>Type</td>
+        <td>Rediger</td>
+        <td>Slet</td>
+      </tr>
+  `;
+  const searchInput = document.querySelector("#search-members").value.toLowerCase();
+  //filter members based on search input, without being case sensitive.
+  const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(searchInput)
+  );
+  if (searchInput.length !== 0) {
+    filteredMembers.forEach(formandMembersTable);
+  } else {
+    members.forEach(formandMembersTable)
   }
 }

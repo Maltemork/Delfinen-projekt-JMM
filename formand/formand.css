@@ -103,7 +103,7 @@ body {
     color: white;
   }
   
-  .header-container button, select {
+  .header-container button, select  {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 3em;
     border: 1px solid gray;
@@ -125,11 +125,23 @@ body {
     align-self: right;
     margin-left: 500px;
   }
+
+  /* Søgefunktion */
+  #search-members {
+    height: 2.7em;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-align: left;
+  }
+
+  #search-members::placeholder {
+    text-align: center;
+  }
   
   /* SORT SECTION */
   
   .selected-sort {
-    font-weight:bold;
+    font-weight: bold;
   }
   
    /* background video section */
