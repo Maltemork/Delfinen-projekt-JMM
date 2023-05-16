@@ -109,7 +109,6 @@ function createClicked() {
       activity: createForm.activity.value,
       age: createForm.age.value,
       arrears: 0,
-      competition: checkCompetition(),
       disciplines: chosenDisciplines(),
       email: createForm.email.value,
       group: correctGroup(createForm.age.value, createForm.type.value),
@@ -125,14 +124,6 @@ function createClicked() {
     createdMemberSend(newMember);
     document.querySelector("#create-dialog").close(); //Close the dialog
 
-    //Gives the competition object if the member is a competitor
-    function checkCompetition() {
-      let comp = {};
-      if (createForm.type.value == "comp") {
-        comp = { lokation: "", meet: "", time: "" };
-      }
-      return comp;
-    }
     //Returns an object with the chosen disciplines checked from the checkboxes
     function chosenDisciplines() {
       console.log("Chosen Disciplines");
