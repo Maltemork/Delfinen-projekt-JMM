@@ -28,11 +28,21 @@
           <option value="active-NO">Aktiv (✖)</option>
         </select>
         <input type="text" name="Search" id="search-members" placeholder="Søg i medlemmer">
+        <label for="hold">Hold:</label>
+        <select name="hold" id="hold-selector">
+          <option value="hold-junior">Junior</option>
+          <option value="hold-senior">Senior</option>
+        </select>
+        <button id="competition-btn">Stævner</button>
+        
       </div>
       <button id="go-to-login">Gå til login</button>
+      <div id="header-double-holder">
+        
+      </div>
     </section>
     <section id="table-section">
-    <table id="kasserer-members-table">
+    <table id="members-table">
       <tr class="table-item">
         <td>Aktiv</td>
         <td>Navn</td>

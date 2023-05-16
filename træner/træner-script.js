@@ -6,10 +6,10 @@ window.addEventListener("load", start);
 
 async function start() {
   await getData();
-  members.forEach(showKassererMembersTable);
+  members.forEach(showMembersTable);
   
-  sortKassererTable();
-  document.querySelector("#sort-dropdown").addEventListener("change", sortKassererTable);
+  sortTable();
+  document.querySelector("#sort-dropdown").addEventListener("change", sortTable);
   document.querySelector("#go-to-login").addEventListener("click", () => 
   {
     window.location.href = "../login/login.html"
@@ -17,9 +17,9 @@ async function start() {
   document.querySelector("#search-members").addEventListener("input", searchMembers);
 }
 
-function showKassererMembersTable(member) {
+function showMembersTable(member) {
   
-  document.querySelector("#kasserer-members-table").insertAdjacentHTML(
+  document.querySelector("#members-table").insertAdjacentHTML(
     "beforeend",
     /* html */ `
         <tr class="table-item">
@@ -41,54 +41,9 @@ function isActiveSymbol(activity) {
   }
 }
 
-function hasPayedSymbol(arrears) {
-  if (arrears == 0) {
-    return "✔";
-  } else {
-    return "✖";
-  }
-}
+function sortTable() {
 
-function arrearsBtnClicked() {
-  const dialog = document.querySelector("#arrears-dialog");
-  dialog.innerHTML = "";
-  dialog.insertAdjacentHTML(
-    "beforeend",
-    /* html */ `
-    <h3>Medlemmer i restance</h3>
-    <table id="arrears-table">
-      <tr class="table-item">
-        <td>Aktiv</td>
-        <td>Navn</td>
-        <td>Alder</td>
-        <td>E-mail</td>
-        <td>Telefon</td>
-      </tr>
-    </table>
-  `
-  );
-  members.forEach(member => {
-    if (member.arrears == 1) {
-      document.querySelector("#arrears-table").insertAdjacentHTML(
-        "beforeend",
-        /* html */ `
-        <tr class="table-item">
-          <td>${isActiveSymbol(member.activity)}</td>
-          <td>${member.name}</td>
-          <td>${member.age}</td>
-          <td>${member.email}</td>
-          <td>${member.phone}</td>
-        </tr>
-      `
-      );
-    }
-  });
-  dialog.showModal();
-}
-
-function sortKassererTable () {
-
-  document.querySelector("#kasserer-members-table").innerHTML = /*HTML*/
+  document.querySelector("#members-table").innerHTML = /*HTML*/
   `
   <tr class="table-item">
       <td>Aktiv</td>
@@ -111,7 +66,7 @@ function sortKassererTable () {
       return 1;
     });
     console.log("HVAD")
-    name_AZ.forEach(showKassererMembersTable);
+    name_AZ.forEach(showMembersTable);
     console.log(name_AZ)
   }
   if (sortOption == "name-ZA") {
@@ -123,7 +78,7 @@ function sortKassererTable () {
       if (nameA < nameB) return 1;
       return -1;
     });
-    name_ZA.forEach(showKassererMembersTable);
+    name_ZA.forEach(showMembersTable);
     console.log(name_ZA);
   
   }
@@ -132,7 +87,7 @@ function sortKassererTable () {
       if (a.age < b.age) return -1;
       return 1;
     });
-    age_LOW.forEach(showKassererMembersTable);
+    age_LOW.forEach(showMembersTable);
 
   }
   if (sortOption == "age-HIGH") {
@@ -140,7 +95,7 @@ function sortKassererTable () {
       if (a.age > b.age) return -1;
       return 1;
     });
-    age_HIGH.forEach(showKassererMembersTable);
+    age_HIGH.forEach(showMembersTable);
     
   }
 
@@ -149,7 +104,7 @@ function sortKassererTable () {
       if (a.activity < b.activity) return -1;
       return 1;
     });
-    active_YES.forEach(showKassererMembersTable);
+    active_YES.forEach(showMembersTable);
     
   }
   if (sortOption == "active-NO") {
@@ -157,19 +112,14 @@ function sortKassererTable () {
       if (a.activity > b.activity) return -1;
       return 1;
     });
-    active_NO.forEach(showKassererMembersTable);
+    active_NO.forEach(showMembersTable);
     
   }
-
-
-  document
-    .querySelector("#arrears-members-btn")
-    .addEventListener("click", arrearsBtnClicked);
 }
 
 /* ----- Seach - Member -----*/
 function searchMembers() {
-  document.querySelector("#kasserer-members-table").innerHTML = `
+  document.querySelector("#members-table").innerHTML = `
   <tr class="table-item">
   <td>Aktiv</td>
   <td>Navn</td>
@@ -184,8 +134,8 @@ function searchMembers() {
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
-    filteredMembers.forEach(showKassererMembersTable);
+    filteredMembers.forEach(showMembersTable);
   } else {
-    members.forEach(showKassererMembersTable)
+    members.forEach(showMembersTable)
   }
 }
