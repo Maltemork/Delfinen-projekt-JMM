@@ -30,8 +30,8 @@
         <input type="text" name="Search" id="search-members" placeholder="Søg i medlemmer">
         <label for="hold">Hold:</label>
         <select name="hold" id="hold-selector">
+          <option value="hold-senior" selected>Senior</option>
           <option value="hold-junior">Junior</option>
-          <option value="hold-senior">Senior</option>
         </select>
         <button id="competition-btn">Stævner</button>
         
@@ -44,6 +44,7 @@
     <section id="table-section">
     <table id="members-table">
       <tr class="table-item">
+        <td>Hold</td>
         <td>Aktiv</td>
         <td>Navn</td>
         <td>Alder</td>
