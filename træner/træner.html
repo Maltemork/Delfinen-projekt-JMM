@@ -14,43 +14,55 @@
     </video>
     <!--  -->
     <div id="page-container">
-    <section class="header-container" id="main-header">
-      <h1 id="header-title">Delfinen | Træner</h1>
-      <hr id="header-hr">
-      <div id="header-double-holder">
-        <label for="sort">Sorter Efter:</label>
-        <select name="sort" id="sort-dropdown">
-          <option value="name-AZ">Navn (A-Z)</option>
-          <option value="name-ZA">Navn (Z-A)</option>
-          <option value="age-HIGH">Alder (høj til lav)</option>
-          <option value="age-LOW">Alder (lav til høj)</option>
-          <option value="active-YES">Aktiv (✔)</option>
-          <option value="active-NO">Aktiv (✖)</option>
-        </select>
-        <input type="text" name="Search" id="search-members" placeholder="Søg i medlemmer">
-        <label for="hold">Hold:</label>
-        <select name="hold" id="hold-selector">
-          <option value="hold-senior" selected>Senior</option>
-          <option value="hold-junior">Junior</option>
-        </select>
-        <button id="competition-btn">Stævner</button>
-        
-      </div>
-      <button id="go-to-login">Gå til login</button>
-      <div id="header-double-holder">
-        
-      </div>
-    </section>
-    <section id="table-section">
-    <table id="members-table">
-    </table>
-    </section>
-    <p id="signature">Projekt af J M & M</p>
+      <section class="header-container" id="main-header">
+        <h1 id="header-title">Delfinen | Træner</h1>
+        <hr id="header-hr" />
+        <div id="header-double-holder">
+          <label for="sort">Sorter Efter:</label>
+          <select name="sort" id="sort-dropdown">
+            <option value="name-AZ">Navn (A-Z)</option>
+            <option value="name-ZA">Navn (Z-A)</option>
+            <option value="age-HIGH">Alder (høj til lav)</option>
+            <option value="age-LOW">Alder (lav til høj)</option>
+            <option value="active-YES">Aktiv (✔)</option>
+            <option value="active-NO">Aktiv (✖)</option>
+          </select>
+          <input
+            type="text"
+            name="Search"
+            id="search-members"
+            placeholder="Søg i medlemmer"
+          />
+          <label for="hold">Hold:</label>
+          <select name="hold" id="hold-selector">
+            <option value="hold-senior" selected>Senior</option>
+            <option value="hold-junior">Junior</option>
+          </select>
+          <button id="descipline-times-btn">Discipliner og Tider</button>
+          <button id="competition-btn">Stævner</button>
+        </div>
 
-    <dialog id="arrears-dialog"></dialog>
+        <button id="go-to-login">Gå til login</button>
+        <div id="header-double-holder"></div>
+      </section>
+      <section id="table-section">
+        <table id="members-table"></table>
+      </section>
+      <p id="signature">Projekt af J M & M</p>
 
-    <script src="træner-script.js" type="module"></script>
-    <script src="/crud.js" type="module"></script>
+      <dialog id="discipline-times-dialog">
+        <h2>Back Crawl</h2>
+        <table id="backcrawl-table"></table>
+        <h2>Butterfly</h2>
+        <table id="butterfly-table"></table>
+        <h2>Chest</h2>
+        <table id="chest-table"></table>
+        <h2>Crawl</h2>
+        <table id="crawl-table"></table>
+      </dialog>
+
+      <script src="træner-script.js" type="module"></script>
+      <script src="/crud.js" type="module"></script>
     </div>
   </body>
 </html>

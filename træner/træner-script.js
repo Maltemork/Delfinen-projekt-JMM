@@ -9,37 +9,44 @@ let filteredTeamsArray = [];
 async function start() {
   await getData();
   changeTeamTable();
-  document.querySelector("#sort-dropdown").addEventListener("change", sortTable);
-  document.querySelector("#go-to-login").addEventListener("click", () => 
-  {
-    window.location.href = "../login/login.html"
+  document
+    .querySelector("#sort-dropdown")
+    .addEventListener("change", sortTable);
+  document.querySelector("#go-to-login").addEventListener("click", () => {
+    window.location.href = "../login/login.html";
   });
-  document.querySelector("#search-members").addEventListener("input", searchMembers);
-  document.querySelector("#hold-selector").addEventListener("change", changeTeamTable);
+  document
+    .querySelector("#search-members")
+    .addEventListener("input", searchMembers);
+  document
+    .querySelector("#hold-selector")
+    .addEventListener("change", changeTeamTable);
+  document
+    .querySelector("#descipline-times-btn")
+    .addEventListener("click", discplineTimesClicked);
 }
 
 function changeTeamTable() {
   filteredTeamsArray = [];
-  if (document.querySelector("#hold-selector").value == "hold-junior"){
+  if (document.querySelector("#hold-selector").value == "hold-junior") {
     console.log("JUNIOR GROUP SELECTED");
     clearTable();
-    for (let i = 0; i < members.length; i++){
-        if (members[i].group == 1) {
+    for (let i = 0; i < members.length; i++) {
+      if (members[i].group == 1) {
         filteredTeamsArray.push(members[i]);
-        }
       }
-  } else if (document.querySelector("#hold-selector").value == "hold-senior"){
+    }
+  } else if (document.querySelector("#hold-selector").value == "hold-senior") {
     console.log("SENIOR GROUP SELECTED");
     clearTable();
-    for (let i = 0; i < members.length; i++){
-        if (members[i].group == 2) {
+    for (let i = 0; i < members.length; i++) {
+      if (members[i].group == 2) {
         filteredTeamsArray.push(members[i]);
-        }
       }
+    }
   }
   filteredTeamsArray.forEach(showMembersTable);
 }
-
 
 function showMembersTable(member) {
   document.querySelector("#members-table").insertAdjacentHTML(
@@ -72,77 +79,77 @@ function sortTable() {
   // læser værdien i dropdown menuen og sorterer efter valgt.
   if (sortOption == "name-AZ") {
     // Sorter efter navn A-Z.
-    const name_AZ = filteredTeamsArray.sort((a,b) => {
+    const name_AZ = filteredTeamsArray.sort((a, b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
-  
+
       if (nameA < nameB) return -1;
       return 1;
     });
     name_AZ.forEach(showMembersTable);
-    console.log(name_AZ)
+    console.log(name_AZ);
   }
   if (sortOption == "name-ZA") {
     //Sorter efter navn Z-A
-    const name_ZA = filteredTeamsArray.sort((a,b) => {
+    const name_ZA = filteredTeamsArray.sort((a, b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
-  
+
       if (nameA < nameB) return 1;
       return -1;
     });
     name_ZA.forEach(showMembersTable);
     console.log(name_ZA);
-  
   }
   if (sortOption == "age-LOW") {
-    const age_LOW = filteredTeamsArray.sort((a,b) => a.age - b.age);
+    const age_LOW = filteredTeamsArray.sort((a, b) => a.age - b.age);
     age_LOW.forEach(showMembersTable);
     console.log(age_LOW);
   }
 
   if (sortOption == "age-HIGH") {
-    const age_HIGH = filteredTeamsArray.sort((a,b) => b.age - a.age);
+    const age_HIGH = filteredTeamsArray.sort((a, b) => b.age - a.age);
     age_HIGH.forEach(showMembersTable);
     console.log(age_HIGH);
   }
 
   if (sortOption == "active-YES") {
-    const active_YES = filteredTeamsArray.sort((a,b) => {
+    const active_YES = filteredTeamsArray.sort((a, b) => {
       if (a.activity < b.activity) return -1;
       return 1;
     });
     active_YES.forEach(showMembersTable);
-    
   }
   if (sortOption == "active-NO") {
-    const active_NO = filteredTeamsArray.sort((a,b) => {
+    const active_NO = filteredTeamsArray.sort((a, b) => {
       if (a.activity > b.activity) return -1;
       return 1;
     });
     active_NO.forEach(showMembersTable);
-    
   }
 }
 
 /* ----- Seach - Member -----*/
 function searchMembers() {
   clearTable();
-  const searchInput = document.querySelector("#search-members").value.toLowerCase();
+  const searchInput = document
+    .querySelector("#search-members")
+    .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = filteredTeamsArray.filter((member) =>
+  const filteredMembers = filteredTeamsArray.filter(member =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
     filteredMembers.forEach(showMembersTable);
   } else {
-    filteredTeamsArray.forEach(showMembersTable)
+    filteredTeamsArray.forEach(showMembersTable);
   }
 }
 
 function clearTable() {
-  document.querySelector("#members-table").innerHTML = /*HTML*/
-  `
+  document.querySelector("#members-table").innerHTML =
+    /*HTML*/
+    `
   <tr class="table-item">
         <td>Hold</td>
         <td>Aktiv</td>
@@ -151,5 +158,130 @@ function clearTable() {
         <td>E-mail</td>
         <td>Telefon</td>
       </tr>`;
+}
 
+/* ------ Discipline and Time Dialog ------ */
+
+function discplineTimesClicked() {
+  clearTables();
+  document.querySelector("#discipline-times-dialog").showModal();
+
+  const backCrawlArray = [];
+  const butterFlyArray = [];
+  const chestArray = [];
+  const crawlArray = [];
+
+  members.forEach(fillDisciplineArrays);
+
+  function fillDisciplineArrays(member) {
+    if (member.disciplines) {
+      const disciplinesKeysArray = Object.keys(member.disciplines);
+      for (let i = 0; i < disciplinesKeysArray.length; i++) {
+        switch (disciplinesKeysArray[i]) {
+          case "backcrawl":
+            backCrawlArray.push(member);
+            break;
+          case "butterfly":
+            butterFlyArray.push(member);
+            break;
+          case "chest":
+            chestArray.push(member);
+            break;
+          case "crawl":
+            crawlArray.push(member);
+            break;
+        }
+      }
+    }
+
+    showDisciplineTables();
+  }
+  console.log(backCrawlArray);
+  console.log(butterFlyArray);
+  console.log(chestArray);
+  console.log(crawlArray);
+
+  function showDisciplineTables() {
+    for (const member of backCrawlArray) {
+      document.querySelector("#backcrawl-table").insertAdjacentHTML(
+        "beforeend",
+        /* html */ `
+          <tr>
+            <td>${member.group}</td>
+            <td>${member.name}</td>
+            <td>${member.age}</td>
+            <td>${member.email}</td>
+            <td>---</td>
+            <td>---</td>
+          </tr>
+      `
+      );
+    }
+    for (const member of butterFlyArray) {
+      document.querySelector("#butterfly-table").insertAdjacentHTML(
+        "beforeend",
+        /* html */ `
+          <tr>
+            <td>${member.group}</td>
+            <td>${member.name}</td>
+            <td>${member.age}</td>
+            <td>${member.email}</td>
+            <td>---</td>
+            <td>---</td>
+          </tr>
+      `
+      );
+    }
+    for (const member of chestArray) {
+      document.querySelector("#chest-table").insertAdjacentHTML(
+        "beforeend",
+        /* html */ `
+          <tr>
+            <td>${member.group}</td>
+            <td>${member.name}</td>
+            <td>${member.age}</td>
+            <td>${member.email}</td>
+            <td>---</td>
+            <td>---</td>
+          </tr>
+      `
+      );
+    }
+    for (const member of crawlArray) {
+      document.querySelector("#crawl-table").insertAdjacentHTML(
+        "beforeend",
+        /* html */ `
+          <tr>
+            <td>${member.group}</td>
+            <td>${member.name}</td>
+            <td>${member.age}</td>
+            <td>${member.email}</td>
+            <td>---</td>
+            <td>---</td>
+          </tr>
+      `
+      );
+    }
+  }
+
+  function clearTables() {
+    const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
+    for (const discipline of disciplines) {
+      const table = document.querySelector(`#${discipline}-table`);
+      table.innerHTML = "";
+      table.insertAdjacentHTML(
+        "beforeend",
+        /* html */ `
+        <tr>
+          <td>Hold</td>
+          <td>Navn</td>
+          <td>Alder</td>
+          <td>E-mail</td>
+          <td>Tid</td>
+          <td>Dato</td>
+        </tr>
+      `
+      );
+    }
+  }
 }
