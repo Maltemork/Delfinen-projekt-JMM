@@ -123,9 +123,7 @@ function sortKassererTable() {
       if (nameA < nameB) return -1;
       return 1;
     });
-    console.log("HVAD");
     name_AZ.forEach(showKassererMembersTable);
-    console.log(name_AZ);
   }
   if (sortOption == "name-ZA") {
     //Sorter efter navn Z-A
@@ -137,21 +135,17 @@ function sortKassererTable() {
       return -1;
     });
     name_ZA.forEach(showKassererMembersTable);
-    console.log(name_ZA);
   }
   if (sortOption == "age-LOW") {
-    const age_LOW = members.sort((a, b) => {
-      if (a.age < b.age) return -1;
-      return 1;
-    });
+    const age_LOW = members.sort((a,b) => a.age - b.age);
     age_LOW.forEach(showKassererMembersTable);
+    console.log(age_LOW);
   }
+
   if (sortOption == "age-HIGH") {
-    const age_HIGH = members.sort((a, b) => {
-      if (a.age > b.age) return -1;
-      return 1;
-    });
+    const age_HIGH = members.sort((a,b) => b.age - a.age);
     age_HIGH.forEach(showKassererMembersTable);
+    console.log(age_HIGH);
   }
   if (sortOption == "subscription-HIGH") {
     const subscription_HIGH = members.sort((a, b) => {
@@ -223,7 +217,6 @@ function searchMembers() {
     members.forEach(showKassererMembersTable);
   }
 }
-
 function calculateAndDisplayTotal() {
   // Beregn det samlede kontingent ved hjælp af reduce()-metoden
   const totalSubscription = members.reduce(
@@ -241,43 +234,10 @@ function calculateAndDisplayTotal() {
   totalContainer.classList.add("total-container");
 
   // Opret elementer til at vise det samlede kontingentbeløb og det ubetalte beløb
-  const totalSubscriptionElement = document.createElement("span");
+  const totalSubscriptionElement = document.createElement("div");
   totalSubscriptionElement.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
 
-  const totalArrearsElement = document.createElement("span");
-  totalArrearsElement.textContent = `Ubetalte beløb: ${totalArrears} kr.`;
-
-  // Tilføj elementerne til totalContainer
-  totalContainer.appendChild(totalSubscriptionElement);
-  totalContainer.appendChild(totalArrearsElement);
-
-  // Indsæt totalContainer før kasserer-members-table
-  document
-    .querySelector("#kasserer-members-table")
-    .insertAdjacentElement("beforebegin", totalContainer);
-}
-
-function calculateAndDisplayTotal() {
-  // Beregn det samlede kontingent ved hjælp af reduce()-metoden
-  const totalSubscription = members.reduce(
-    (total, member) => total + member.subscription,
-    0
-  );
-
-  // Beregn det samlede ubetalte beløb ved at filtrere medlemmerne baseret på deres restance og summere beløbene
-  const totalArrears = members
-    .filter(member => member.arrears > 0)
-    .reduce((total, member) => total + member.subscription, 0);
-
-  // Opret et nyt div-element til at vise kontingentoplysningerne
-  const totalContainer = document.createElement("div");
-  totalContainer.classList.add("total-container");
-
-  // Opret elementer til at vise det samlede kontingentbeløb og det ubetalte beløb
-  const totalSubscriptionElement = document.createElement("span");
-  totalSubscriptionElement.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
-
-  const totalArrearsElement = document.createElement("span");
+  const totalArrearsElement = document.createElement("div");
   totalArrearsElement.textContent = `Ubetalte beløb: ${totalArrears} kr.`;
 
   // Tilføj elementerne til totalContainer

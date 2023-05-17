@@ -13,7 +13,7 @@ window.addEventListener("load", start);
 async function start() {
   await getData();
   console.log("Formand is running! 😊");
-  members.forEach(formandMembersTable);
+  sortFormandTable();
   document
     .querySelector("#create-member-btn")
     .addEventListener("click", createClicked);
@@ -80,7 +80,8 @@ function formandMembersTable(member) {
   }
 }
 
-function sortFormandTable () {
+function sortFormandTable() {
+  
 
   document.querySelector("#formand-members-table").innerHTML = /*HTML*/
   `
@@ -96,10 +97,10 @@ function sortFormandTable () {
         </tr>`;
 
   const sortOption = document.querySelector("#sort-dropdown").value;
+  
 
   // læser værdien i dropdown menuen og sorterer efter valgt.
   if (sortOption == "name-AZ") {
-    // Sorter efter navn A-Z.
     const name_AZ = members.sort((a,b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
@@ -107,10 +108,9 @@ function sortFormandTable () {
       if (nameA < nameB) return -1;
       return 1;
     });
-    console.log("HVAD")
     name_AZ.forEach(formandMembersTable);
-    console.log(name_AZ)
   }
+
   if (sortOption == "name-ZA") {
     //Sorter efter navn Z-A
     const name_ZA = members.sort((a,b) => {
@@ -122,23 +122,18 @@ function sortFormandTable () {
     });
     name_ZA.forEach(formandMembersTable);
     console.log(name_ZA);
-  
   }
-  if (sortOption == "age-LOW") {
-    const age_LOW = members.sort((a,b) => {
-      if (a.age < b.age) return -1;
-      return 1;
-    });
-    age_LOW.forEach(formandMembersTable);
 
+  if (sortOption == "age-LOW") {
+    const age_LOW = members.sort((a,b) => a.age - b.age);
+    age_LOW.forEach(formandMembersTable);
+    console.log(age_LOW);
   }
+
   if (sortOption == "age-HIGH") {
-    const age_HIGH = members.sort((a,b) => {
-      if (a.age > b.age) return -1;
-      return 1;
-    });
+    const age_HIGH = members.sort((a,b) => b.age - a.age);
     age_HIGH.forEach(formandMembersTable);
-    
+    console.log(age_HIGH);
   }
 
 

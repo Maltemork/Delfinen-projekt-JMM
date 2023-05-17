@@ -155,5 +155,9 @@ body {
     color: gray;
   }
 
+  #total-container span {
+    margin-left: 10px;
+    padding-left: 50px;
+  }
 
   

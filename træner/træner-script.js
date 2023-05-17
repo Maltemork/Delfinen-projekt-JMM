@@ -79,7 +79,6 @@ function sortTable() {
       if (nameA < nameB) return -1;
       return 1;
     });
-    console.log("HVAD")
     name_AZ.forEach(showMembersTable);
     console.log(name_AZ)
   }
@@ -97,20 +96,15 @@ function sortTable() {
   
   }
   if (sortOption == "age-LOW") {
-    const age_LOW = filteredTeamsArray.sort((a,b) => {
-      if (a.age < b.age) return -1;
-      return 1;
-    });
+    const age_LOW = filteredTeamsArray.sort((a,b) => a.age - b.age);
     age_LOW.forEach(showMembersTable);
-
+    console.log(age_LOW);
   }
+
   if (sortOption == "age-HIGH") {
-    const age_HIGH = filteredTeamsArray.sort((a,b) => {
-      if (a.age > b.age) return -1;
-      return 1;
-    });
+    const age_HIGH = filteredTeamsArray.sort((a,b) => b.age - a.age);
     age_HIGH.forEach(showMembersTable);
-    
+    console.log(age_HIGH);
   }
 
   if (sortOption == "active-YES") {
@@ -150,12 +144,12 @@ function clearTable() {
   document.querySelector("#members-table").innerHTML = /*HTML*/
   `
   <tr class="table-item">
-      <td>Hold</td>
-      <td>Aktiv</td>
-      <td>Navn</td>
-      <td>Alder</td>
-      <td>E-mail</td>
-      <td>Telefon</td>
-  </tr>`;
+        <td>Hold</td>
+        <td>Aktiv</td>
+        <td>Navn</td>
+        <td>Alder</td>
+        <td>E-mail</td>
+        <td>Telefon</td>
+      </tr>`;
 
 }
