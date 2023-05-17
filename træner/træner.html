@@ -20,7 +20,7 @@
       <div id="header-double-holder">
         <label for="sort">Sorter Efter:</label>
         <select name="sort" id="sort-dropdown">
-          <option value="name-AZ" selected>Navn (A-Z)</option>
+          <option value="name-AZ">Navn (A-Z)</option>
           <option value="name-ZA">Navn (Z-A)</option>
           <option value="age-HIGH">Alder (høj til lav)</option>
           <option value="age-LOW">Alder (lav til høj)</option>
@@ -30,8 +30,8 @@
         <input type="text" name="Search" id="search-members" placeholder="Søg i medlemmer">
         <label for="hold">Hold:</label>
         <select name="hold" id="hold-selector">
+          <option value="hold-senior" selected>Senior</option>
           <option value="hold-junior">Junior</option>
-          <option value="hold-senior">Senior</option>
         </select>
         <button id="competition-btn">Stævner</button>
         
@@ -43,13 +43,6 @@
     </section>
     <section id="table-section">
     <table id="members-table">
-      <tr class="table-item">
-        <td>Aktiv</td>
-        <td>Navn</td>
-        <td>Alder</td>
-        <td>E-mail</td>
-        <td>Telefon</td>
-      </tr>
     </table>
     </section>
     <p id="signature">Projekt af J M & M</p>
