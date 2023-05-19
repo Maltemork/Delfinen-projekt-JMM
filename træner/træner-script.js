@@ -136,7 +136,7 @@ function searchMembers() {
     .querySelector("#search-members")
     .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = filteredTeamsArray.filter(member =>
+  const filteredMembers = filteredTeamsArray.filter((member) =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
@@ -193,16 +193,24 @@ function discplineTimesClicked() {
         }
       }
     }
-
-    showDisciplineTables();
   }
+  showDisciplineTables();
+
   console.log(backCrawlArray);
   console.log(butterFlyArray);
   console.log(chestArray);
   console.log(crawlArray);
 
   function showDisciplineTables() {
-    for (const member of backCrawlArray) {
+    const MAX_SHOWN = 2;
+    //---------- Backcrawl -----------
+    for (let i = 0; i < MAX_SHOWN; i++) {
+      const sortedArray = backCrawlArray.sort(
+        (a, b) =>
+          b.disciplines.backcrawl.time1.time -
+          a.disciplines.backcrawl.time1.time
+      );
+      const member = sortedArray[i];
       document.querySelector("#backcrawl-table").insertAdjacentHTML(
         "beforeend",
         /* html */ `
@@ -211,13 +219,20 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>---</td>
-            <td>---</td>
+            <td>${member.disciplines.backcrawl.time1.time}</td>
+            <td>${member.disciplines.backcrawl.time1.date}</td>
           </tr>
       `
       );
     }
-    for (const member of butterFlyArray) {
+    //---------- Butterfly ----------
+    for (let i = 0; i < MAX_SHOWN; i++) {
+      const sortedArray = butterFlyArray.sort(
+        (a, b) =>
+          b.disciplines.butterfly.time1.time -
+          a.disciplines.butterfly.time1.time
+      );
+      const member = sortedArray[i];
       document.querySelector("#butterfly-table").insertAdjacentHTML(
         "beforeend",
         /* html */ `
@@ -226,13 +241,19 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>---</td>
-            <td>---</td>
+            <td>${member.disciplines.butterfly.time1.time}</td>
+            <td>${member.disciplines.butterfly.time1.date}</td>
           </tr>
       `
       );
     }
-    for (const member of chestArray) {
+    //---------- Chest ----------
+    for (let i = 0; i < MAX_SHOWN; i++) {
+      const sortedArray = chestArray.sort(
+        (a, b) =>
+          b.disciplines.chest.time1.time - a.disciplines.chest.time1.time
+      );
+      const member = sortedArray[i];
       document.querySelector("#chest-table").insertAdjacentHTML(
         "beforeend",
         /* html */ `
@@ -241,13 +262,19 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>---</td>
-            <td>---</td>
+            <td>${member.disciplines.chest.time1.time}</td>
+            <td>${member.disciplines.chest.time1.date}</td>
           </tr>
       `
       );
     }
-    for (const member of crawlArray) {
+    //---------- Crawl ----------
+    for (let i = 0; i < MAX_SHOWN; i++) {
+      const sortedArray = crawlArray.sort(
+        (a, b) =>
+          b.disciplines.crawl.time1.time - a.disciplines.crawl.time1.time
+      );
+      const member = sortedArray[i];
       document.querySelector("#crawl-table").insertAdjacentHTML(
         "beforeend",
         /* html */ `
@@ -256,8 +283,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>---</td>
-            <td>---</td>
+            <td>${member.disciplines.crawl.time1.time}</td>
+            <td>${member.disciplines.crawl.time1.date}</td>
           </tr>
       `
       );
