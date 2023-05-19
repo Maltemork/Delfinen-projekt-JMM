@@ -196,11 +196,6 @@ function discplineTimesClicked() {
   }
   showDisciplineTables();
 
-  console.log(backCrawlArray);
-  console.log(butterFlyArray);
-  console.log(chestArray);
-  console.log(crawlArray);
-
   function showDisciplineTables() {
     const MAX_SHOWN = 2;
     //---------- Backcrawl -----------
@@ -290,7 +285,7 @@ function discplineTimesClicked() {
       );
     }
   }
-
+  //Clear all tables before opening dialog to prevent duplication
   function clearTables() {
     const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
     for (const discipline of disciplines) {
