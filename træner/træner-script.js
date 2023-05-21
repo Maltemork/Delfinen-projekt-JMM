@@ -136,7 +136,7 @@ function searchMembers() {
     .querySelector("#search-members")
     .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = filteredTeamsArray.filter((member) =>
+  const filteredMembers = filteredTeamsArray.filter(member =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
@@ -161,17 +161,37 @@ function clearTable() {
 }
 
 /* ------ Discipline and Time Dialog ------ */
-
 function discplineTimesClicked() {
-  clearTables();
-  document.querySelector("#discipline-times-dialog").showModal();
+  clearTables(); //Clear all tables before opening dialog to prevent duplication
+  const dialog = document.querySelector("#discipline-times-dialog");
+  dialog.showModal();
+  document
+    .querySelector("#close-discipline-times-dialog")
+    .addEventListener("click", () => {
+      dialog.close();
+    });
 
+  //Discipline arrays with members of each discipline
   const backCrawlArray = [];
   const butterFlyArray = [];
   const chestArray = [];
   const crawlArray = [];
 
-  members.forEach(fillDisciplineArrays);
+  const groupSelector = document.querySelector("#hold-selector");
+
+  if (groupSelector.value == "hold-junior") {
+    members.forEach(member => {
+      if (member.group == 1) {
+        fillDisciplineArrays(member);
+      }
+    });
+  } else if (groupSelector.value == "hold-senior") {
+    members.forEach(member => {
+      if (member.group == 2) {
+        fillDisciplineArrays(member);
+      }
+    });
+  }
 
   function fillDisciplineArrays(member) {
     if (member.disciplines) {
@@ -197,8 +217,8 @@ function discplineTimesClicked() {
   showDisciplineTables();
 
   function showDisciplineTables() {
-    const MAX_SHOWN = 2;
-    //---------- Backcrawl -----------
+    const MAX_SHOWN = 1;
+    //---------- Backcrawl Table -----------
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = backCrawlArray.sort(
         (a, b) =>
@@ -220,7 +240,7 @@ function discplineTimesClicked() {
       `
       );
     }
-    //---------- Butterfly ----------
+    //---------- Butterfly Table ----------
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = butterFlyArray.sort(
         (a, b) =>
@@ -242,7 +262,7 @@ function discplineTimesClicked() {
       `
       );
     }
-    //---------- Chest ----------
+    //---------- Chest Table ----------
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = chestArray.sort(
         (a, b) =>
@@ -263,7 +283,7 @@ function discplineTimesClicked() {
       `
       );
     }
-    //---------- Crawl ----------
+    //---------- Crawl Table ----------
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = crawlArray.sort(
         (a, b) =>
@@ -285,7 +305,7 @@ function discplineTimesClicked() {
       );
     }
   }
-  //Clear all tables before opening dialog to prevent duplication
+  //Clear all tables
   function clearTables() {
     const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
     for (const discipline of disciplines) {
