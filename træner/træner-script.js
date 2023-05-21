@@ -216,8 +216,17 @@ function discplineTimesClicked() {
   }
   showDisciplineTables();
 
+  console.log("Back Crawl Members:");
+  console.log(backCrawlArray);
+  console.log("Butterfly Members:");
+  console.log(butterFlyArray);
+  console.log("Chest Members:");
+  console.log(chestArray);
+  console.log("Crawl Members:");
+  console.log(crawlArray);
+
   function showDisciplineTables() {
-    const MAX_SHOWN = 1;
+    const MAX_SHOWN = 5;
     //---------- Backcrawl Table -----------
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = backCrawlArray.sort(
