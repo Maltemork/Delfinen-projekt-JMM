@@ -156,4 +156,21 @@ body {
   }
 
 
+  /* DIALOG SECTION */
+  #discipline-times-dialog {
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 20px;
+  }
+
+  #close-discipline-times-dialog {
+    border: 0px none white;
+    background: none;
+    position:absolute;
+    right: 2em;
+  }
+  #close-discipline-times-dialog:hover {
+    background: rgba(128, 128, 128, 0.31);
+    border-radius: 10px;
+  }
   
