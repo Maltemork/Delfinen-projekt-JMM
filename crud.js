@@ -261,6 +261,7 @@ function editMemberClicked(member) {
     }
   }
 }
+
 //Makes sure the member get the correct subscription based on age or activity
 function correctSubscription(age, activity) {
   let subscription = 0;
@@ -288,6 +289,26 @@ function correctGroup(age, type) {
   return 0;
 }
 
+//POST the new added time to the correct discipline for the correct member using member id
+async function sendNewTime(memberId, newTime, discipline) {
+  const jsonString = JSON.stringify(newTime);
+
+  const response = await fetch(
+    `${endpoint}/members/${memberId}/disciplines/${discipline}.json`,
+    {
+      method: "POST",
+      body: jsonString,
+    }
+  );
+
+  if (response.ok) {
+    console.log("New time added");
+    location.reload();
+  } else {
+    console.log("Error during posting");
+  }
+}
+
 export {
   members,
   users,
@@ -295,4 +316,5 @@ export {
   createClicked,
   deleteClicked,
   editMemberClicked,
+  sendNewTime,
 };

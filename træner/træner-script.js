@@ -1,6 +1,6 @@
 "use strict";
 
-import { getData, members } from "../crud.js";
+import { getData, members, sendNewTime } from "../crud.js";
 
 window.addEventListener("load", start);
 
@@ -66,7 +66,7 @@ function showMembersTable(member) {
   document
     .querySelector(`#add-time-btn-${member.id}`)
     .addEventListener("click", () => {
-      addTimesBtnClicked(member);
+      addTimeBtnClicked(member);
     });
 }
 
@@ -348,25 +348,40 @@ function discplineTimesClicked() {
   }
 }
 
-function addTimesBtnClicked(member) {
+function addTimeBtnClicked(member) {
   console.log("Edit Times");
   console.log("Editing: " + member.name + " times");
+
   const dialog = document.querySelector("#add-time-dialog");
   dialog.showModal();
 
-  document
-    .querySelector("#submit-time-btn")
-    .addEventListener("submit", submitTimeClicked);
+  const form = document.querySelector("#add-time-form");
+  form.reset();
+  form.addEventListener("submit", submitNewTimeClicked);
+
   document
     .querySelector("#close-add-time-dialog-btn")
     .addEventListener("click", () => {
       dialog.close();
     });
 
-  function submitTimeClicked() {
-    document
-      .querySelector("#submit-time-btn")
-      .removeEventListener("submit", submitTimeClicked);
-    const form = document.querySelector("#add-time-form");
+  function submitNewTimeClicked(event) {
+    event.preventDefault();
+    form.removeEventListener("submit", submitNewTimeClicked);
+
+    const newTime = {
+      time: form.addTimeInput.value,
+      date: form.addDateInput.value,
+    };
+    //Makes sure that the member has the chosen discipline
+    if (
+      Object.keys(member.disciplines).includes(form.addTimeDiscipline.value)
+    ) {
+      sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
+    } else {
+      console.log(
+        `${member.name} isn't active in ${form.addTimeDiscipline.value}`
+      );
+    }
   }
 }
