@@ -357,6 +357,11 @@ function addTimesBtnClicked(member) {
   document
     .querySelector("#submit-time-btn")
     .addEventListener("submit", submitTimeClicked);
+  document
+    .querySelector("#close-add-time-dialog-btn")
+    .addEventListener("click", () => {
+      dialog.close();
+    });
 
   function submitTimeClicked() {
     document
