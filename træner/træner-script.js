@@ -59,9 +59,15 @@ function showMembersTable(member) {
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
+          <td><button id="add-time-btn-${member.id}">🖍</button><td>
         </tr>
       `
   );
+  document
+    .querySelector(`#add-time-btn-${member.id}`)
+    .addEventListener("click", () => {
+      addTimesBtnClicked(member);
+    });
 }
 
 function isActiveSymbol(activity) {
@@ -157,6 +163,7 @@ function clearTable() {
         <td>Alder</td>
         <td>E-mail</td>
         <td>Telefon</td>
+        <td>Tilføj Tid</td>
       </tr>`;
 }
 
@@ -179,6 +186,7 @@ function discplineTimesClicked() {
 
   const groupSelector = document.querySelector("#hold-selector");
 
+  //To make sure it's only the chosen group that is shown in the dialog
   if (groupSelector.value == "hold-junior") {
     members.forEach(member => {
       if (member.group == 1) {
@@ -192,9 +200,12 @@ function discplineTimesClicked() {
       }
     });
   }
+  showDisciplineTables();
 
+  //Fills the arrays with members that is to be sorted and shown for each discipline
   function fillDisciplineArrays(member) {
     if (member.disciplines) {
+      //If the member has any disciplines that member will be pushed to the arrays with that those disciplines
       const disciplinesKeysArray = Object.keys(member.disciplines);
       for (let i = 0; i < disciplinesKeysArray.length; i++) {
         switch (disciplinesKeysArray[i]) {
@@ -214,7 +225,6 @@ function discplineTimesClicked() {
       }
     }
   }
-  showDisciplineTables();
 
   console.log("Back Crawl Members:");
   console.log(backCrawlArray);
@@ -225,6 +235,7 @@ function discplineTimesClicked() {
   console.log("Crawl Members:");
   console.log(crawlArray);
 
+  //Sorts and shows all the disicipline arrays with members in tables
   function showDisciplineTables() {
     const MAX_SHOWN = 5;
     //---------- Backcrawl Table -----------
@@ -334,5 +345,23 @@ function discplineTimesClicked() {
       `
       );
     }
+  }
+}
+
+function addTimesBtnClicked(member) {
+  console.log("Edit Times");
+  console.log("Editing: " + member.name + " times");
+  const dialog = document.querySelector("#add-time-dialog");
+  dialog.showModal();
+
+  document
+    .querySelector("#submit-time-btn")
+    .addEventListener("submit", submitTimeClicked);
+
+  function submitTimeClicked() {
+    document
+      .querySelector("#submit-time-btn")
+      .removeEventListener("submit", submitTimeClicked);
+    const form = document.querySelector("#add-time-form");
   }
 }

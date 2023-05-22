@@ -42,7 +42,7 @@ function deleteClicked(member) {
   console.log("Delete clicked");
   const dialog = document.querySelector("#delete-dialog");
   dialog.showModal();
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -82,7 +82,7 @@ function createClicked() {
   console.log("New Member Clicked");
   const dialog = document.querySelector("#create-dialog");
   dialog.showModal();
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -200,7 +200,7 @@ function editMemberClicked(member) {
   const dialog = document.querySelector("#update-dialog");
   dialog.showModal();
 
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -248,7 +248,7 @@ function editMemberClicked(member) {
       console.log(jsonString);
 
       const response = await fetch(`${endpoint}/members/${member.id}.json`, {
-        method: "PATCH",
+        method: "PUT",
         body: jsonString,
       });
 

@@ -62,6 +62,31 @@
         <table id="crawl-table"></table>
       </dialog>
 
+      <dialog id="add-time-dialog">
+        <form id="add-time-form">
+          <label for="backcrawl-add-time">Disciplin:</label><br />
+          <input type="radio" id="backcrawl-add-time" name="add-time-radio" />
+          <label for="backcrawl-add-time">Back Crawl</label><br />
+          <input type="radio" id="butterfly-add-time" name="add-time-radio" />
+          <label for="butterfly-add-time">Butterfly</label><br />
+          <input type="radio" id="chest-add-time" name="add-time-radio" />
+          <label for="chest-add-time">Chest</label><br />
+          <input type="radio" id="crawl-add-time" name="add-time-radio" />
+          <label for="crawl-add-time">Crawl</label><br />
+          <br />
+          <label for="add-time-input">Tid:</label>
+          <input type="text" id="add-time-input" />
+          <label for="add-date-input">Dato:</label>
+          <input type="text" id="add-date-input" /><br /><br />
+          <input type="submit" id="submit-time-btn" value="Bekræft" />
+          <input
+            type="button"
+            id="close-add-time-dialog-btn"
+            value="Annuller"
+          />
+        </form>
+      </dialog>
+
       <script src="træner-script.js" type="module"></script>
       <script src="/crud.js" type="module"></script>
     </div>
