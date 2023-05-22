@@ -61,57 +61,11 @@
         <h2>Crawl</h2>
         <table id="crawl-table"></table>
       </dialog>
+
       <!-- Add new time dialog -->
       <dialog id="add-time-dialog">
-        <form id="add-time-form">
-          <!-- Chosen discipline -->
-          <label for="backcrawl-add-time">Disciplin:</label><br />
-          <input
-            type="radio"
-            id="backcrawl-add-time"
-            name="addTimeDiscipline"
-            value="backcrawl"
-          />
-          <label for="backcrawl-add-time">Back Crawl</label><br />
-          <input
-            type="radio"
-            id="butterfly-add-time"
-            name="addTimeDiscipline"
-            value="butterfly"
-          />
-          <label for="butterfly-add-time">Butterfly</label><br />
-          <input
-            type="radio"
-            id="chest-add-time"
-            name="addTimeDiscipline"
-            value="chest"
-          />
-          <label for="chest-add-time">Chest</label><br />
-          <input
-            type="radio"
-            id="crawl-add-time"
-            name="addTimeDiscipline"
-            value="crawl"
-          />
-          <label for="crawl-add-time">Crawl</label><br />
-          <br />
-          <!-- Add time and date -->
-          <label for="add-time-input">Tid:</label>
-          <input type="text" id="add-time-input" name="addTimeInput" />
-          <label for="add-date-input">Dato:</label>
-          <input
-            type="text"
-            id="add-date-input"
-            name="addDateInput"
-          /><br /><br />
-          <!-- Buttons -->
-          <input type="submit" id="submit-time-btn" value="Bekræft" />
-          <input
-            type="button"
-            id="close-add-time-dialog-btn"
-            value="Annuller"
-          />
-        </form>
+        <label for="backcrawl-add-time">Disciplin:</label><br />
+        <form id="add-time-form"></form>
       </dialog>
 
       <script src="træner-script.js" type="module"></script>

@@ -242,8 +242,8 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = backCrawlArray.sort(
         (a, b) =>
-          b.disciplines.backcrawl.time1.time -
-          a.disciplines.backcrawl.time1.time
+          maxTime(b.disciplines.backcrawl).time -
+          maxTime(a.disciplines.backcrawl).time
       );
       const member = sortedArray[i];
       document.querySelector("#backcrawl-table").insertAdjacentHTML(
@@ -254,8 +254,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.backcrawl.time1.time}</td>
-            <td>${member.disciplines.backcrawl.time1.date}</td>
+            <td>${maxTime(member.disciplines.backcrawl).time}</td>
+            <td>${maxTime(member.disciplines.backcrawl).date}</td>
           </tr>
       `
       );
@@ -264,8 +264,8 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = butterFlyArray.sort(
         (a, b) =>
-          b.disciplines.butterfly.time1.time -
-          a.disciplines.butterfly.time1.time
+          maxTime(b.disciplines.butterfly).time -
+          maxTime(a.disciplines.butterfly).time
       );
       const member = sortedArray[i];
       document.querySelector("#butterfly-table").insertAdjacentHTML(
@@ -276,8 +276,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.butterfly.time1.time}</td>
-            <td>${member.disciplines.butterfly.time1.date}</td>
+            <td>${maxTime(member.disciplines.butterfly).time}</td>
+            <td>${maxTime(member.disciplines.butterfly).date}</td>
           </tr>
       `
       );
@@ -286,7 +286,7 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = chestArray.sort(
         (a, b) =>
-          b.disciplines.chest.time1.time - a.disciplines.chest.time1.time
+          maxTime(b.disciplines.chest).time - maxTime(a.disciplines.chest).time
       );
       const member = sortedArray[i];
       document.querySelector("#chest-table").insertAdjacentHTML(
@@ -297,8 +297,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.chest.time1.time}</td>
-            <td>${member.disciplines.chest.time1.date}</td>
+            <td>${maxTime(member.disciplines.chest).time}</td>
+            <td>${maxTime(member.disciplines.chest).date}</td>
           </tr>
       `
       );
@@ -307,7 +307,7 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = crawlArray.sort(
         (a, b) =>
-          b.disciplines.crawl.time1.time - a.disciplines.crawl.time1.time
+          maxTime(b.disciplines.crawl).time - maxTime(a.disciplines.crawl).time
       );
       const member = sortedArray[i];
       document.querySelector("#crawl-table").insertAdjacentHTML(
@@ -318,13 +318,24 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.crawl.time1.time}</td>
-            <td>${member.disciplines.crawl.time1.date}</td>
+            <td>${maxTime(member.disciplines.crawl).time}</td>
+            <td>${maxTime(member.disciplines.crawl).date}</td>
           </tr>
       `
       );
     }
   }
+
+  function maxTime(disciplineTimesArray) {
+    const times = [];
+    for (const key in disciplineTimesArray) {
+      const data = disciplineTimesArray[key];
+      data.id = key;
+      times.push(data);
+    }
+    return times.sort((a, b) => b.time - a.time)[0];
+  }
+
   //Clear all tables
   function clearTables() {
     const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
@@ -353,9 +364,60 @@ function addTimeBtnClicked(member) {
   console.log("Editing: " + member.name + " times");
 
   const dialog = document.querySelector("#add-time-dialog");
+  const form = document.querySelector("#add-time-form");
+
+  const memberDisciplines = Object.keys(member.disciplines);
+
+  form.innerHTML = "";
+
+  for (const discipline of memberDisciplines) {
+    // Have the form only show the disciplines the member has.
+    form.insertAdjacentHTML(
+      "beforeend",
+      /* html */ `
+      <input
+            type="radio"
+            id="${discipline}-add-time"
+            name="addTimeDiscipline"
+            value="${discipline}"
+          />
+        <label for="${discipline}-add-time">${capitalize(discipline)}
+        </label><br />
+    `
+    );
+  }
+  form.insertAdjacentHTML(
+    "beforeend",
+    /* html */ `
+    <!-- Add time and date -->
+        <br>
+          <label for="add-time-input">Tid:</label>
+          <input type="text" id="add-time-input" name="addTimeInput" />
+          <label for="add-date-input">Dato:</label>
+          <input
+            type="text"
+            id="add-date-input"
+            name="addDateInput"
+          /><br /><br />
+          <!-- Buttons -->
+          <input type="submit" id="submit-time-btn" value="Bekræft" />
+          <input
+            type="button"
+            id="close-add-time-dialog-btn"
+            value="Annuller"
+          />
+  `
+  );
+  //Capitalize the first letter of a string
+  function capitalize(string) {
+    return (
+      string.charAt(0).toUpperCase() +
+      string.substring(1, string.length).toLowerCase()
+    );
+  }
+
   dialog.showModal();
 
-  const form = document.querySelector("#add-time-form");
   form.reset();
   form.addEventListener("submit", submitNewTimeClicked);
 
