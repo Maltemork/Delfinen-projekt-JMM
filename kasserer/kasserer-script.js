@@ -19,6 +19,11 @@ async function start() {
   document
     .querySelector("#search-members")
     .addEventListener("input", searchMembers);
+    document
+    .querySelector("#close-arrears-dialog")
+    .addEventListener("click", () => {
+      document.querySelector("#arrears-dialog").close();
+    });
 }
 
 function showMembersTable(member) {
@@ -56,27 +61,10 @@ function hasPayedSymbol(arrears) {
 
 function arrearsBtnClicked() {
   const dialog = document.querySelector("#arrears-dialog");
-  dialog.innerHTML = "";
-  dialog.insertAdjacentHTML(
-    "beforeend",
-    /* html */ `
-    <h3>Medlemmer i restance</h3>
-    <table id="arrears-table">
-      <tr class="table-item">
-        <td>Aktiv</td>
-        <td>Navn</td>
-        <td>Alder</td>
-        <td>E-mail</td>
-        <td>Telefon</td>
-        <td>Kontigent</td>
-        <td>Betalt</td>
-      </tr>
-    </table>
-  `
-  );
+  document.querySelector("#arrears-table-body").innerHTML = "";
   members.forEach(member => {
     if (member.arrears == 1) {
-      document.querySelector("#arrears-table").insertAdjacentHTML(
+      document.querySelector("#arrears-table-body").insertAdjacentHTML(
         "beforeend",
         /* html */ `
         <tr class="table-item">

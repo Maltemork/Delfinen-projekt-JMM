@@ -64,7 +64,26 @@
       </section>
       <p id="signature">Projekt af J M & M</p>
 
-      <dialog id="arrears-dialog"></dialog>
+      <dialog id="arrears-dialog">
+        <button id="close-arrears-dialog">✖</button>
+        <h3>Medlemmer i restance:</h3>
+        <table id="arrears-table">
+          <thead>
+            <tr class="table-item">
+              <td>Aktiv</td>
+              <td>Navn</td>
+              <td>Alder</td>
+              <td>E-mail</td>
+              <td>Telefon</td>
+              <td>Kontigent</td>
+              <td>Betalt</td>
+            </tr>
+          </thead>
+          <tbody id="arrears-table-body">
+
+          </tbody>
+        </table>
+      </dialog>
 
       <script src="kasserer-script.js" type="module"></script>
       <script src="/crud.js" type="module"></script>
