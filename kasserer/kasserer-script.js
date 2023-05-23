@@ -7,23 +7,33 @@ window.addEventListener("load", start);
 async function start() {
   await getData();
 <<<<<<< HEAD
+<<<<<<< HEAD
   members.forEach(kassererMembersTable);
   calculateAndDisplayTotal();
 =======
+=======
+>>>>>>> e24a672be032f174ca533624cf15357440ed7de8
   members.forEach(showKassererMembersTable);
-  
+  calculateAndDisplayTotal();
+
   sortKassererTable();
-  document.querySelector("#sort-dropdown").addEventListener("change", sortKassererTable);
-  document.querySelector("#go-to-login").addEventListener("click", () => 
-  {
-    window.location.href = "../login/login.html"
+  document
+    .querySelector("#sort-dropdown")
+    .addEventListener("change", sortKassererTable);
+  document.querySelector("#go-to-login").addEventListener("click", () => {
+    window.location.href = "../login/login.html";
   });
+<<<<<<< HEAD
   document.querySelector("#search-members").addEventListener("input", searchMembers);
 >>>>>>> main
+=======
+  document
+    .querySelector("#search-members")
+    .addEventListener("input", searchMembers);
+>>>>>>> e24a672be032f174ca533624cf15357440ed7de8
 }
 
 function showKassererMembersTable(member) {
-  
   document.querySelector("#kasserer-members-table").insertAdjacentHTML(
     "beforeend",
     /* html */ `
@@ -97,10 +107,10 @@ function arrearsBtnClicked() {
   dialog.showModal();
 }
 
-function sortKassererTable () {
-
-  document.querySelector("#kasserer-members-table").innerHTML = /*HTML*/
-  `
+function sortKassererTable() {
+  document.querySelector("#kasserer-members-table").innerHTML =
+    /*HTML*/
+    `
   <tr class="table-item">
       <td>Aktiv</td>
       <td>Navn</td>
@@ -118,88 +128,79 @@ function sortKassererTable () {
   // læser værdien i dropdown menuen og sorterer efter valgt.
   if (sortOption == "name-AZ") {
     // Sorter efter navn A-Z.
-    const name_AZ = members.sort((a,b) => {
+    const name_AZ = members.sort((a, b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
-  
+
       if (nameA < nameB) return -1;
       return 1;
     });
-    console.log("HVAD")
+    console.log("HVAD");
     name_AZ.forEach(showKassererMembersTable);
-    console.log(name_AZ)
+    console.log(name_AZ);
   }
   if (sortOption == "name-ZA") {
     //Sorter efter navn Z-A
-    const name_ZA = members.sort((a,b) => {
+    const name_ZA = members.sort((a, b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
-  
+
       if (nameA < nameB) return 1;
       return -1;
     });
     name_ZA.forEach(showKassererMembersTable);
     console.log(name_ZA);
-  
   }
   if (sortOption == "age-LOW") {
-    const age_LOW = members.sort((a,b) => {
+    const age_LOW = members.sort((a, b) => {
       if (a.age < b.age) return -1;
       return 1;
     });
     age_LOW.forEach(showKassererMembersTable);
-
   }
   if (sortOption == "age-HIGH") {
-    const age_HIGH = members.sort((a,b) => {
+    const age_HIGH = members.sort((a, b) => {
       if (a.age > b.age) return -1;
       return 1;
     });
     age_HIGH.forEach(showKassererMembersTable);
-    
   }
   if (sortOption == "subscription-HIGH") {
-    const subscription_HIGH = members.sort((a,b) => {
+    const subscription_HIGH = members.sort((a, b) => {
       if (a.subscription > b.subscription) return -1;
       return 1;
     });
     subscription_HIGH.forEach(showKassererMembersTable);
-    
   }
   if (sortOption == "subscription-LOW") {
-    const subscription_LOW = members.sort((a,b) => {
+    const subscription_LOW = members.sort((a, b) => {
       if (a.subscription < b.subscription) return -1;
       return 1;
     });
     subscription_LOW.forEach(showKassererMembersTable);
-    
   }
 
   if (sortOption == "active-YES") {
-    const active_YES = members.sort((a,b) => {
+    const active_YES = members.sort((a, b) => {
       if (a.activity < b.activity) return -1;
       return 1;
     });
     active_YES.forEach(showKassererMembersTable);
-    
   }
   if (sortOption == "active-NO") {
-    const active_NO = members.sort((a,b) => {
+    const active_NO = members.sort((a, b) => {
       if (a.activity > b.activity) return -1;
       return 1;
     });
     active_NO.forEach(showKassererMembersTable);
-    
   }
   if (sortOption == "paid-NO") {
-    const paid_YES = members.sort((a,b) => {
+    const paid_YES = members.sort((a, b) => {
       if (a.arrears > b.arrears) return -1;
       return 1;
     });
     paid_YES.forEach(showKassererMembersTable);
-    
   }
-
 
   document
     .querySelector("#arrears-members-btn")
@@ -221,15 +222,17 @@ function searchMembers() {
   </td>
 </tr>
   `;
-  const searchInput = document.querySelector("#search-members").value.toLowerCase();
+  const searchInput = document
+    .querySelector("#search-members")
+    .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = members.filter((member) =>
+  const filteredMembers = members.filter(member =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
     filteredMembers.forEach(showKassererMembersTable);
   } else {
-    members.forEach(showKassererMembersTable)
+    members.forEach(showKassererMembersTable);
   }
 }
 
@@ -242,7 +245,40 @@ function calculateAndDisplayTotal() {
 
   // Beregn det samlede ubetalte beløb ved at filtrere medlemmerne baseret på deres restance og summere beløbene
   const totalArrears = members
-    .filter((member) => member.arrears > 0)
+    .filter(member => member.arrears > 0)
+    .reduce((total, member) => total + member.subscription, 0);
+
+  // Opret et nyt div-element til at vise kontingentoplysningerne
+  const totalContainer = document.createElement("div");
+  totalContainer.classList.add("total-container");
+
+  // Opret elementer til at vise det samlede kontingentbeløb og det ubetalte beløb
+  const totalSubscriptionElement = document.createElement("span");
+  totalSubscriptionElement.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
+
+  const totalArrearsElement = document.createElement("span");
+  totalArrearsElement.textContent = `Ubetalte beløb: ${totalArrears} kr.`;
+
+  // Tilføj elementerne til totalContainer
+  totalContainer.appendChild(totalSubscriptionElement);
+  totalContainer.appendChild(totalArrearsElement);
+
+  // Indsæt totalContainer før kasserer-members-table
+  document
+    .querySelector("#kasserer-members-table")
+    .insertAdjacentElement("beforebegin", totalContainer);
+}
+
+function calculateAndDisplayTotal() {
+  // Beregn det samlede kontingent ved hjælp af reduce()-metoden
+  const totalSubscription = members.reduce(
+    (total, member) => total + member.subscription,
+    0
+  );
+
+  // Beregn det samlede ubetalte beløb ved at filtrere medlemmerne baseret på deres restance og summere beløbene
+  const totalArrears = members
+    .filter(member => member.arrears > 0)
     .reduce((total, member) => total + member.subscription, 0);
 
   // Opret et nyt div-element til at vise kontingentoplysningerne

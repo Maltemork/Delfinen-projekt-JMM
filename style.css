@@ -14,11 +14,14 @@ table {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .header-container {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 =======
+=======
+>>>>>>> e24a672be032f174ca533624cf15357440ed7de8
 .table-item button {
   margin-right: 0;
   align-self: left;
@@ -48,9 +51,12 @@ table {
   padding: 10px;
   border-radius: 1em;
   border: 2px solid gray;
+<<<<<<< HEAD
 >>>>>>> main
   position: relative;
   overflow: hidden;
+=======
+>>>>>>> e24a672be032f174ca533624cf15357440ed7de8
 }
 
 /* HEADER SECTION */
@@ -89,9 +95,7 @@ table {
   padding-left: 0;
   grid-column-start: 1;
   grid-column-end: 3;
-  position:relative;
-  
-
+  position: relative;
 }
 
 #sort-dropdown {
@@ -103,8 +107,9 @@ table {
   color: white;
 }
 
-.header-container button, select {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.header-container button,
+select {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   height: 3em;
   border: 1px solid gray;
   border-radius: 5px;
@@ -116,15 +121,14 @@ table {
   width: 10em;
 }
 
-
 /* SORT SECTION */
 
 .selected-sort {
-  font-weight:bold;
+  font-weight: bold;
 }
 
- /* background video section */
- #backgroundVideo {
+/* background video section */
+#backgroundVideo {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -132,6 +136,9 @@ table {
   min-height: 100%;
   filter: blur(4px);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e24a672be032f174ca533624cf15357440ed7de8
 }
 
 /* Wrong password animation */
@@ -184,6 +191,9 @@ table {
 .total-container:hover {
   transform: scale(1.05);
 }
+<<<<<<< HEAD
 =======
 }
 >>>>>>> main
+=======
+>>>>>>> e24a672be032f174ca533624cf15357440ed7de8
