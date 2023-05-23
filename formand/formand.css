@@ -1,9 +1,10 @@
 body {
-    color: rgb(0, 0, 0);
-  }
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(0, 0, 0);
+  overflow-x: hidden;
+}
   /* Table styling */
   table {
-    border-radius: 5px;
     margin: 0 auto 0;
     width: 100%;
   }
@@ -22,15 +23,23 @@ body {
   
   .table-item button:hover {
     color: white;
-    background: rgb(68, 68, 68);
+    background: rgb(69, 98, 159);
   }
   
   #table-section {
-    margin: 20px 20px 20px;
     border: 1px solid black;
     padding: 10px;
-    border-radius: 1em;
+    border-radius: 0.3em;
   }
+
+  tbody tr:nth-child(even) {
+    background-color: rgb(242, 242, 242);
+  }
+
+  tbody tr:hover {
+    background: rgba(69, 98, 159, 0.315);
+  }
+
   /* Page container styling */
   
   #page-container {
@@ -51,21 +60,24 @@ body {
   /* HEADER SECTION */
   
   .header-container {
-    text-align: left;
+    text-align: center;
+    align-items: left;
+    justify-content: left;
+    justify-items: left;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     position: relative;
-    margin: 0 0 0 0;
-    top: 0;
-    left: 0;
-    right: 0;
     padding: 10px 10px 10px 10px;
     gap: 10px;
+  }
+
+  .header-container * {
+    text-align: center;
   }
   
   #header-title {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     text-align: left;
     font-size: 3em;
     color: rgb(69, 98, 159);
@@ -76,30 +88,12 @@ body {
   
   #header-hr {
     grid-column-start: 1;
-    grid-column-end: 4;
-    width: 100%;
-  }
-  
-  #header-double-holder {
-    padding-left: 0;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    position:relative;
-    
-  }
-  
-  .header-item {
-    display: inline-block;
-    text-align: center;
-    height: 2em;
-    border: 2px solid rgb(0, 32, 159);
-    background-color: rgb(57, 57, 186);
-    color: white;
+    grid-column-end: 5;
     width: 100%;
   }
   
   .header-container button:hover {
-    background: rgb(81, 81, 81);
+    background: rgb(69, 98, 159);
     color: white;
   }
   
@@ -123,8 +117,9 @@ body {
   #go-to-login {
     text-align: center;
     align-self: right;
-    margin-left: 500px;
+    justify-self: right;
   }
+
 
   /* Søgefunktion */
   #search-members {
@@ -132,19 +127,16 @@ body {
     border-radius: 5px;
     border: 1px solid gray;
     text-align: left;
+    transform:translateY(-1px);
+    padding-left: 5px;
+    width: 30em;
+    justify-self: left;
   }
 
   #search-members::placeholder {
     text-align: center;
     padding-left: 0px;
   }
-  
-  /* SORT SECTION */
-  
-  .selected-sort {
-    font-weight: bold;
-  }
-  
    /* background video section */
    #backgroundVideo {
     position: fixed;
@@ -159,7 +151,7 @@ body {
   dialog {
     padding-top: 5px;
     width: 20em;
-    border-radius: 1em;
+    border-radius: 0.5em;
     border: 1px solid black;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.42);
   }
@@ -171,6 +163,8 @@ body {
   }
 
   .dialog-container h2 {
+    text-align: center;
+    color: rgb(69, 98, 159);
     grid-column-start: 1;
     grid-column-end: 3;
   }
@@ -194,7 +188,7 @@ body {
 
   #close-create-btn:hover, #submit-member-btn:hover, #close-update-btn:hover {
       color: white;
-      background:rgb(94, 94, 94)
+      background:rgb(69, 98, 159);
   }
 
   /* signatur */

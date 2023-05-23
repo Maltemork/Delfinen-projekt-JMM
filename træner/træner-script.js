@@ -49,7 +49,7 @@ function changeTeamTable() {
 }
 
 function showMembersTable(member) {
-  document.querySelector("#members-table").insertAdjacentHTML(
+  document.querySelector("#members-table-body").insertAdjacentHTML(
     "beforeend",
     /* html */ `
         <tr class="table-item">
@@ -153,18 +153,7 @@ function searchMembers() {
 }
 
 function clearTable() {
-  document.querySelector("#members-table").innerHTML =
-    /*HTML*/
-    `
-  <tr class="table-item">
-        <td>Hold</td>
-        <td>Aktiv</td>
-        <td>Navn</td>
-        <td>Alder</td>
-        <td>E-mail</td>
-        <td>Telefon</td>
-        <td>Tilføj Tid</td>
-      </tr>`;
+  document.querySelector("#members-table-body").innerHTML = "";
 }
 
 /* ------ Discipline and Time Dialog ------ */
@@ -395,7 +384,7 @@ function addTimeBtnClicked(member) {
           <input type="text" id="add-time-input" name="addTimeInput" />
           <label for="add-date-input">Dato:</label>
           <input
-            type="text"
+            type="date"
             id="add-date-input"
             name="addDateInput"
           /><br /><br />
@@ -435,7 +424,15 @@ function addTimeBtnClicked(member) {
       time: form.addTimeInput.value,
       date: form.addDateInput.value,
     };
-
-    sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
+    //Makes sure that the member has the chosen discipline
+    if (
+      Object.keys(member.disciplines).includes(form.addTimeDiscipline.value)
+    ) {
+      sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
+    } else {
+      console.log(
+        `${member.name} isn't active in ${form.addTimeDiscipline.value}`
+      );
+    }
   }
 }
