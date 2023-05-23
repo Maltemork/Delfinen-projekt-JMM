@@ -6,10 +6,6 @@ window.addEventListener("load", start);
 
 async function start() {
   await getData();
-<<<<<<< HEAD
-  members.forEach(kassererMembersTable);
-  calculateAndDisplayTotal();
-=======
   members.forEach(showKassererMembersTable);
   
   sortKassererTable();
@@ -19,7 +15,6 @@ async function start() {
     window.location.href = "../login/login.html"
   });
   document.querySelector("#search-members").addEventListener("input", searchMembers);
->>>>>>> main
 }
 
 function showKassererMembersTable(member) {
@@ -33,8 +28,6 @@ function showKassererMembersTable(member) {
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
-          <td>${member.subscription} kr.</td>
-          <td>${hasPayedSymbol(member.arrears)}</td>
         </tr>
       `
   );
@@ -70,8 +63,6 @@ function arrearsBtnClicked() {
         <td>Alder</td>
         <td>E-mail</td>
         <td>Telefon</td>
-        <td>Kontigent</td>
-        <td>Betalt</td>
       </tr>
     </table>
   `
@@ -87,8 +78,6 @@ function arrearsBtnClicked() {
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
-          <td>${member.subscription} kr.</td>
-          <td>${hasPayedSymbol(member.arrears)}</td>
         </tr>
       `
       );
@@ -107,10 +96,6 @@ function sortKassererTable () {
       <td>Alder</td>
       <td>E-mail</td>
       <td>Telefon</td>
-      <td>Kontingent</td>
-      <td>
-        Betalt
-      </td>
   </tr>`;
 
   const sortOption = document.querySelector("#sort-dropdown").value;
@@ -158,22 +143,6 @@ function sortKassererTable () {
     age_HIGH.forEach(showKassererMembersTable);
     
   }
-  if (sortOption == "subscription-HIGH") {
-    const subscription_HIGH = members.sort((a,b) => {
-      if (a.subscription > b.subscription) return -1;
-      return 1;
-    });
-    subscription_HIGH.forEach(showKassererMembersTable);
-    
-  }
-  if (sortOption == "subscription-LOW") {
-    const subscription_LOW = members.sort((a,b) => {
-      if (a.subscription < b.subscription) return -1;
-      return 1;
-    });
-    subscription_LOW.forEach(showKassererMembersTable);
-    
-  }
 
   if (sortOption == "active-YES") {
     const active_YES = members.sort((a,b) => {
@@ -189,14 +158,6 @@ function sortKassererTable () {
       return 1;
     });
     active_NO.forEach(showKassererMembersTable);
-    
-  }
-  if (sortOption == "paid-NO") {
-    const paid_YES = members.sort((a,b) => {
-      if (a.arrears > b.arrears) return -1;
-      return 1;
-    });
-    paid_YES.forEach(showKassererMembersTable);
     
   }
 
@@ -215,10 +176,6 @@ function searchMembers() {
   <td>Alder</td>
   <td>E-mail</td>
   <td>Telefon</td>
-  <td>Kontigent</td>
-  <td>
-    Betalt
-  </td>
 </tr>
   `;
   const searchInput = document.querySelector("#search-members").value.toLowerCase();
@@ -231,37 +188,4 @@ function searchMembers() {
   } else {
     members.forEach(showKassererMembersTable)
   }
-}
-
-function calculateAndDisplayTotal() {
-  // Beregn det samlede kontingent ved hjælp af reduce()-metoden
-  const totalSubscription = members.reduce(
-    (total, member) => total + member.subscription,
-    0
-  );
-
-  // Beregn det samlede ubetalte beløb ved at filtrere medlemmerne baseret på deres restance og summere beløbene
-  const totalArrears = members
-    .filter((member) => member.arrears > 0)
-    .reduce((total, member) => total + member.subscription, 0);
-
-  // Opret et nyt div-element til at vise kontingentoplysningerne
-  const totalContainer = document.createElement("div");
-  totalContainer.classList.add("total-container");
-
-  // Opret elementer til at vise det samlede kontingentbeløb og det ubetalte beløb
-  const totalSubscriptionElement = document.createElement("span");
-  totalSubscriptionElement.textContent = `Forventet kontingent: ${totalSubscription} kr.`;
-
-  const totalArrearsElement = document.createElement("span");
-  totalArrearsElement.textContent = `Ubetalte beløb: ${totalArrears} kr.`;
-
-  // Tilføj elementerne til totalContainer
-  totalContainer.appendChild(totalSubscriptionElement);
-  totalContainer.appendChild(totalArrearsElement);
-
-  // Indsæt totalContainer før kasserer-members-table
-  document
-    .querySelector("#kasserer-members-table")
-    .insertAdjacentElement("beforebegin", totalContainer);
 }
