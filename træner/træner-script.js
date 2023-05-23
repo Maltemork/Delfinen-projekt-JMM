@@ -24,6 +24,7 @@ async function start() {
   document
     .querySelector("#descipline-times-btn")
     .addEventListener("click", discplineTimesClicked);
+  
 }
 
 function changeTeamTable() {
@@ -447,3 +448,4 @@ function addTimeBtnClicked(member) {
     }
   }
 }
+
