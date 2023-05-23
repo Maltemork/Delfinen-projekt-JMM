@@ -384,7 +384,7 @@ function addTimeBtnClicked(member) {
           <input type="text" id="add-time-input" name="addTimeInput" />
           <label for="add-date-input">Dato:</label>
           <input
-            type="text"
+            type="date"
             id="add-date-input"
             name="addDateInput"
           /><br /><br />
