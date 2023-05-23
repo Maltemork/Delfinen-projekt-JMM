@@ -32,7 +32,7 @@ function checkDetailsOnLogin(event) {
         .querySelector(".login-container")
         .classList.add("wrong-password");
       document.querySelector("#wrong-password-text").textContent =
-        "Wrong password. Please try again.";
+        "Forkert brugernavn eller kodeord. Prøv igen.";
       document
         .querySelector(".login-container")
         .addEventListener("animationend", () => {

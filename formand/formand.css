@@ -36,6 +36,10 @@ body {
     background-color: rgb(242, 242, 242);
   }
 
+  tbody tr:hover {
+    background: rgb(204, 204, 204);
+  }
+
   /* Page container styling */
   
   #page-container {
@@ -88,16 +92,6 @@ body {
     width: 100%;
   }
   
-  .header-item {
-    display: inline-block;
-    text-align: center;
-    height: 2em;
-    border: 2px solid rgb(0, 32, 159);
-    background-color: rgb(57, 57, 186);
-    color: white;
-    width: 100%;
-  }
-  
   .header-container button:hover {
     background: rgb(89, 122, 188);
     color: white;
@@ -143,13 +137,6 @@ body {
     text-align: center;
     padding-left: 0px;
   }
-  
-  /* SORT SECTION */
-  
-  .selected-sort {
-    font-weight: bold;
-  }
-  
    /* background video section */
    #backgroundVideo {
     position: fixed;

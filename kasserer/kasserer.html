@@ -18,32 +18,35 @@
       <section class="header-container" id="main-header">
         <h1 id="header-title">Delfinen | Kasserer</h1>
         <hr id="header-hr" />
-        <div id="header-double-holder">
-          <label for="sort">Sorter Efter:</label>
-          <select name="sort" id="sort-dropdown">
-            <option value="name-AZ" selected>Navn (A-Z)</option>
-            <option value="name-ZA">Navn (Z-A)</option>
-            <option value="age-HIGH">Alder (høj til lav)</option>
-            <option value="age-LOW">Alder (lav til høj)</option>
-            <option value="subscription-HIGH">Kontingent (høj til lav)</option>
-            <option value="subscription-LOW">Kontingent (lav til høj)</option>
-            <option value="active-YES">Aktiv (✔)</option>
-            <option value="active-NO">Aktiv (✖)</option>
-            <option value="paid-NO">Mangler Betaling</option>
-          </select>
+        <!-- Søg i members -->
+        <input
+        type="text"
+        name="Search"
+        id="search-members"
+        placeholder="Søg i medlemmer"
+        />
+        <!-- Sorter funktion -->
+        <select name="sort" id="sort-dropdown">
+          <option value="name-AZ" selected>Navn (A-Z)</option>
+          <option value="name-ZA">Navn (Z-A)</option>
+          <option value="age-HIGH">Alder (høj til lav)</option>
+          <option value="age-LOW">Alder (lav til høj)</option>
+          <option value="subscription-HIGH">Kontingent (høj til lav)</option>
+          <option value="subscription-LOW">Kontingent (lav til høj)</option>
+          <option value="active-YES">Aktiv (✔)</option>
+          <option value="active-NO">Aktiv (✖)</option>
+          <option value="paid-NO">Mangler Betaling</option>
+        </select>
+          <!-- Restance button -->
           <button id="arrears-members-btn">Restance</button>
-          <input
-            type="text"
-            name="Search"
-            id="search-members"
-            placeholder="Søg i medlemmer"
-          />
-        </div>
-        <button id="go-to-login">Gå til login</button>
+          
+          <!-- Gå til login skærm -->
+        <button id="go-to-login">Log ud</button>
       </section>
       <div id="total-box" class="total-box"></div>
       <section id="table-section">
-        <table id="kasserer-members-table">
+        <table id="members-table" cellspacing="0">
+          <thead>
           <tr class="table-item">
             <td>Aktiv</td>
             <td>Navn</td>
@@ -53,6 +56,10 @@
             <td>Kontigent</td>
             <td>Betalt</td>
           </tr>
+          </thead>
+          <tbody id="members-table-body">
+
+          </tbody>
         </table>
       </section>
       <p id="signature">Projekt af J M & M</p>

@@ -1,4 +1,10 @@
- /* background video section */
+body {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(0, 0, 0);
+  overflow-x: hidden;
+}
+
+/* background video section */
  #backgroundVideo {
     position: fixed;
     right: -10px;
@@ -130,6 +136,8 @@
   }
   
   #wrong-password-text {
+    grid-column-start: 1;
+    grid-column-end: 3;
     color: rgb(255, 21, 21);
   }
   
