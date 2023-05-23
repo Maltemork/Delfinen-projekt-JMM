@@ -24,7 +24,12 @@ async function start() {
   document
     .querySelector("#descipline-times-btn")
     .addEventListener("click", discplineTimesClicked);
-  
+
+  document
+    .querySelector("#view-competitions-btn")
+    .addEventListener("click", () => {
+      viewCompetitionsClicked();
+    });
 }
 
 function changeTeamTable() {
@@ -61,6 +66,7 @@ function showMembersTable(member) {
           <td>${member.email}</td>
           <td>${member.phone}</td>
           <td><button id="add-time-btn-${member.id}">🖍</button><td>
+          <button id="view-competitions-btn">Se konkurrencer</button>
         </tr>
       `
   );
@@ -68,6 +74,12 @@ function showMembersTable(member) {
     .querySelector(`#add-time-btn-${member.id}`)
     .addEventListener("click", () => {
       addTimeBtnClicked(member);
+    });
+
+  document
+    .querySelector("#view-competitions-btn")
+    .addEventListener("click", () => {
+      viewCompetitionsClicked(member.id);
     });
 }
 
@@ -143,7 +155,7 @@ function searchMembers() {
     .querySelector("#search-members")
     .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = filteredTeamsArray.filter(member =>
+  const filteredMembers = filteredTeamsArray.filter((member) =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
@@ -189,13 +201,13 @@ function discplineTimesClicked() {
 
   //To make sure it's only the chosen group that is shown in the dialog
   if (groupSelector.value == "hold-junior") {
-    members.forEach(member => {
+    members.forEach((member) => {
       if (member.group == 1) {
         fillDisciplineArrays(member);
       }
     });
   } else if (groupSelector.value == "hold-senior") {
-    members.forEach(member => {
+    members.forEach((member) => {
       if (member.group == 2) {
         fillDisciplineArrays(member);
       }
@@ -436,16 +448,34 @@ function addTimeBtnClicked(member) {
       time: form.addTimeInput.value,
       date: form.addDateInput.value,
     };
-    //Makes sure that the member has the chosen discipline
-    if (
-      Object.keys(member.disciplines).includes(form.addTimeDiscipline.value)
-    ) {
-      sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
-    } else {
-      console.log(
-        `${member.name} isn't active in ${form.addTimeDiscipline.value}`
-      );
-    }
+
+    sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
   }
 }
+function viewCompetitionsClicked() {
+  const memberId = member.id;
 
+  const competitions = getCompetitionsForMember(memberId);
+
+  console.log("Viewing competitions for member: " + memberId);
+  console.log("Competitions:", competitions);
+
+  openCompetitionModal(competitions);
+}
+
+async function getCompetitionsForMember(memberId) {
+  const response = await fetch(
+    `https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app//competitions/${memberId}`
+  );
+  const competitions = await response.json();
+  return competitions;
+}
+
+function openCompetitionModal(competitions) {
+  const modal = document.querySelector("#competition-modal");
+  modal.innerHTML = ""; // Clear previous content
+  competitions.forEach((competition) => {
+    modal.insertAdjacentHTML("beforeend", `<p>${competition.name}</p>`);
+  });
+  modal.show();
+}
