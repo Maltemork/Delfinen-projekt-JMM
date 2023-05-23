@@ -39,7 +39,6 @@
             <option value="hold-junior">Junior</option>
           </select>
           <button id="descipline-times-btn">Discipliner og Tider</button>
-          <button id="competition-btn">Stævner</button>
         </div>
 
         <button id="go-to-login">Gå til login</button>
@@ -68,6 +67,22 @@
         <form id="add-time-form"></form>
       </dialog>
 
+      <dialog id="competition-modal">
+        <h2>Konkurrencer</h2>
+        <table id="competition-table"></table>
+        <h2>Tilføj</h2>
+        <form id="competition-form">
+          <label for="location">Lokation:</label><br />
+          <input type="text" name="location" id="location" /> <br />
+          <label for="meet">Stævne:</label><br />
+          <input type="text" name="meet" id="meet" /> <br />
+          <label for="competitionTime">Tid:</label><br />
+          <input type="text" name="competitionTime" id="competitionTime" />
+          <br />
+          <br />
+          <input type="submit" id="submit-competition-btn" value="Bekræft" />
+        </form>
+      </dialog>
 
       <script src="træner-script.js" type="module"></script>
       <script src="/crud.js" type="module"></script>

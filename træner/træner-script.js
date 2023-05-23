@@ -1,6 +1,6 @@
 "use strict";
 
-import { getData, members, sendNewTime } from "../crud.js";
+import { getData, members, sendNewTime, sendNewCompetition } from "../crud.js";
 
 window.addEventListener("load", start);
 
@@ -24,12 +24,6 @@ async function start() {
   document
     .querySelector("#descipline-times-btn")
     .addEventListener("click", discplineTimesClicked);
-
-  document
-    .querySelector("#view-competitions-btn")
-    .addEventListener("click", () => {
-      viewCompetitionsClicked();
-    });
 }
 
 function changeTeamTable() {
@@ -66,7 +60,7 @@ function showMembersTable(member) {
           <td>${member.email}</td>
           <td>${member.phone}</td>
           <td><button id="add-time-btn-${member.id}">🖍</button><td>
-          <button id="view-competitions-btn">Se konkurrencer</button>
+          <button id="view-competitions-${member.id}">Se konkurrencer</button>
         </tr>
       `
   );
@@ -77,9 +71,9 @@ function showMembersTable(member) {
     });
 
   document
-    .querySelector("#view-competitions-btn")
+    .querySelector(`#view-competitions-${member.id}`)
     .addEventListener("click", () => {
-      viewCompetitionsClicked(member.id);
+      viewCompetitionsClicked(member);
     });
 }
 
@@ -155,7 +149,7 @@ function searchMembers() {
     .querySelector("#search-members")
     .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = filteredTeamsArray.filter((member) =>
+  const filteredMembers = filteredTeamsArray.filter(member =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
@@ -201,13 +195,13 @@ function discplineTimesClicked() {
 
   //To make sure it's only the chosen group that is shown in the dialog
   if (groupSelector.value == "hold-junior") {
-    members.forEach((member) => {
+    members.forEach(member => {
       if (member.group == 1) {
         fillDisciplineArrays(member);
       }
     });
   } else if (groupSelector.value == "hold-senior") {
-    members.forEach((member) => {
+    members.forEach(member => {
       if (member.group == 2) {
         fillDisciplineArrays(member);
       }
@@ -452,30 +446,65 @@ function addTimeBtnClicked(member) {
     sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
   }
 }
-function viewCompetitionsClicked() {
-  const memberId = member.id;
 
-  const competitions = getCompetitionsForMember(memberId);
+function viewCompetitionsClicked(member) {
+  console.log("Viewing competitions for member: " + member.id);
+  console.log(member.competition);
+  const form = document.querySelector("#competition-form");
+  form.reset();
 
-  console.log("Viewing competitions for member: " + memberId);
-  console.log("Competitions:", competitions);
+  const competitionArray = prepareCompetition(member.competition);
 
-  openCompetitionModal(competitions);
-}
+  const table = document.querySelector("#competition-table");
+  table.innerHTML = "";
 
-async function getCompetitionsForMember(memberId) {
-  const response = await fetch(
-    `https://delfinen-4077b-default-rtdb.europe-west1.firebasedatabase.app//competitions/${memberId}`
+  table.insertAdjacentHTML(
+    "beforeend",
+    /* html */ `
+      <tr>
+        <td>Stævne</td>
+        <td>Lokation</td>
+        <td>Tid</td>
+      </tr>
+  `
   );
-  const competitions = await response.json();
-  return competitions;
+
+  for (let i = 0; i < competitionArray.length; i++) {
+    table.insertAdjacentHTML(
+      "beforeend",
+      /* html */ `
+      <tr>
+        <td>${competitionArray[i].meet}</td>
+        <td>${competitionArray[i].location}</td>
+        <td>${competitionArray[i].time}</td>
+      </tr>
+  `
+    );
+  }
+
+  form.addEventListener("submit", submitCompetitionClicked);
+
+  document.querySelector("#competition-modal").showModal();
+
+  function submitCompetitionClicked(event) {
+    event.preventDefault();
+    form.removeEventListener("submit", submitCompetitionClicked);
+
+    const newCompetition = {
+      location: form.location.value,
+      meet: form.meet.value,
+      time: form.competitionTime.value,
+    };
+
+    sendNewCompetition(member.id, newCompetition);
+  }
 }
 
-function openCompetitionModal(competitions) {
-  const modal = document.querySelector("#competition-modal");
-  modal.innerHTML = ""; // Clear previous content
-  competitions.forEach((competition) => {
-    modal.insertAdjacentHTML("beforeend", `<p>${competition.name}</p>`);
-  });
-  modal.show();
+function prepareCompetition(competitions) {
+  const competitionsArray = [];
+  for (const key in competitions) {
+    const data = competitions[key];
+    competitionsArray.push(data);
+  }
+  return competitionsArray;
 }

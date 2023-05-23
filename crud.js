@@ -109,6 +109,7 @@ function createClicked() {
       activity: createForm.activity.value,
       age: createForm.age.value,
       arrears: 0,
+      competition: hasCompetitions(),
       disciplines: chosenDisciplines(),
       email: createForm.email.value,
       group: correctGroup(createForm.age.value, createForm.type.value),
@@ -123,6 +124,14 @@ function createClicked() {
 
     createdMemberSend(newMember);
     document.querySelector("#create-dialog").close(); //Close the dialog
+
+    function hasCompetitions() {
+      if (createForm.type.value == "comp") {
+        return { competition1: { location: "", meet: "", time: "" } };
+      } else {
+        return {};
+      }
+    }
 
     //Returns an object with the chosen disciplines checked from the checkboxes
     function chosenDisciplines() {
@@ -309,6 +318,25 @@ async function sendNewTime(memberId, newTime, discipline) {
   }
 }
 
+async function sendNewCompetition(memberId, newCompetition) {
+  const jsonString = JSON.stringify(newCompetition);
+
+  const response = await fetch(
+    `${endpoint}/members/${memberId}/competition.json`,
+    {
+      method: "POST",
+      body: jsonString,
+    }
+  );
+
+  if (response.ok) {
+    console.log("New competition added");
+    location.reload();
+  } else {
+    console.log("Error during posting");
+  }
+}
+
 export {
   members,
   users,
@@ -317,4 +345,5 @@ export {
   deleteClicked,
   editMemberClicked,
   sendNewTime,
+  sendNewCompetition,
 };
