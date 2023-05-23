@@ -53,14 +53,14 @@ function showMembersTable(member) {
     "beforeend",
     /* html */ `
         <tr class="table-item">
+          <td>${isActiveSymbol(member.activity)}</td> 
           <td>${member.group}</td>
-          <td>${isActiveSymbol(member.activity)}</td>
           <td>${member.name}</td>
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
           <td><button id="add-time-btn-${member.id}">🖍</button><td>
-          <button id="view-competitions-${member.id}">Se konkurrencer</button>
+          <button id="view-competitions-${member.id}">🖍</button>
         </tr>
       `
   );
@@ -439,6 +439,7 @@ function addTimeBtnClicked(member) {
 function viewCompetitionsClicked(member) {
   console.log("Viewing competitions for member: " + member.id);
   console.log(member.competition);
+  const dialog = document.querySelector("#competition-modal");
   const form = document.querySelector("#competition-form");
   form.reset();
 
@@ -472,8 +473,13 @@ function viewCompetitionsClicked(member) {
   }
 
   form.addEventListener("submit", submitCompetitionClicked);
+  document
+    .querySelector("#competitions-cancel-btn")
+    .addEventListener("click", () => {
+      dialog.close();
+    });
 
-  document.querySelector("#competition-modal").showModal();
+  dialog.showModal();
 
   function submitCompetitionClicked(event) {
     event.preventDefault();
