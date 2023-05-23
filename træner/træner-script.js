@@ -1,6 +1,6 @@
 "use strict";
 
-import { getData, members } from "../crud.js";
+import { getData, members, sendNewTime } from "../crud.js";
 
 window.addEventListener("load", start);
 
@@ -59,9 +59,15 @@ function showMembersTable(member) {
           <td>${member.age}</td>
           <td>${member.email}</td>
           <td>${member.phone}</td>
+          <td><button id="add-time-btn-${member.id}">🖍</button><td>
         </tr>
       `
   );
+  document
+    .querySelector(`#add-time-btn-${member.id}`)
+    .addEventListener("click", () => {
+      addTimeBtnClicked(member);
+    });
 }
 
 function isActiveSymbol(activity) {
@@ -169,6 +175,7 @@ function discplineTimesClicked() {
 
   const groupSelector = document.querySelector("#hold-selector");
 
+  //To make sure it's only the chosen group that is shown in the dialog
   if (groupSelector.value == "hold-junior") {
     members.forEach(member => {
       if (member.group == 1) {
@@ -182,9 +189,12 @@ function discplineTimesClicked() {
       }
     });
   }
+  showDisciplineTables();
 
+  //Fills the arrays with members that is to be sorted and shown for each discipline
   function fillDisciplineArrays(member) {
     if (member.disciplines) {
+      //If the member has any disciplines that member will be pushed to the arrays with that those disciplines
       const disciplinesKeysArray = Object.keys(member.disciplines);
       for (let i = 0; i < disciplinesKeysArray.length; i++) {
         switch (disciplinesKeysArray[i]) {
@@ -204,7 +214,6 @@ function discplineTimesClicked() {
       }
     }
   }
-  showDisciplineTables();
 
   console.log("Back Crawl Members:");
   console.log(backCrawlArray);
@@ -215,14 +224,15 @@ function discplineTimesClicked() {
   console.log("Crawl Members:");
   console.log(crawlArray);
 
+  //Sorts and shows all the disicipline arrays with members in tables
   function showDisciplineTables() {
     const MAX_SHOWN = 5;
     //---------- Backcrawl Table -----------
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = backCrawlArray.sort(
         (a, b) =>
-          b.disciplines.backcrawl.time1.time -
-          a.disciplines.backcrawl.time1.time
+          maxTime(b.disciplines.backcrawl).time -
+          maxTime(a.disciplines.backcrawl).time
       );
       const member = sortedArray[i];
       document.querySelector("#backcrawl-table").insertAdjacentHTML(
@@ -233,8 +243,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.backcrawl.time1.time}</td>
-            <td>${member.disciplines.backcrawl.time1.date}</td>
+            <td>${maxTime(member.disciplines.backcrawl).time}</td>
+            <td>${maxTime(member.disciplines.backcrawl).date}</td>
           </tr>
       `
       );
@@ -243,8 +253,8 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = butterFlyArray.sort(
         (a, b) =>
-          b.disciplines.butterfly.time1.time -
-          a.disciplines.butterfly.time1.time
+          maxTime(b.disciplines.butterfly).time -
+          maxTime(a.disciplines.butterfly).time
       );
       const member = sortedArray[i];
       document.querySelector("#butterfly-table").insertAdjacentHTML(
@@ -255,8 +265,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.butterfly.time1.time}</td>
-            <td>${member.disciplines.butterfly.time1.date}</td>
+            <td>${maxTime(member.disciplines.butterfly).time}</td>
+            <td>${maxTime(member.disciplines.butterfly).date}</td>
           </tr>
       `
       );
@@ -265,7 +275,7 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = chestArray.sort(
         (a, b) =>
-          b.disciplines.chest.time1.time - a.disciplines.chest.time1.time
+          maxTime(b.disciplines.chest).time - maxTime(a.disciplines.chest).time
       );
       const member = sortedArray[i];
       document.querySelector("#chest-table").insertAdjacentHTML(
@@ -276,8 +286,8 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.chest.time1.time}</td>
-            <td>${member.disciplines.chest.time1.date}</td>
+            <td>${maxTime(member.disciplines.chest).time}</td>
+            <td>${maxTime(member.disciplines.chest).date}</td>
           </tr>
       `
       );
@@ -286,7 +296,7 @@ function discplineTimesClicked() {
     for (let i = 0; i < MAX_SHOWN; i++) {
       const sortedArray = crawlArray.sort(
         (a, b) =>
-          b.disciplines.crawl.time1.time - a.disciplines.crawl.time1.time
+          maxTime(b.disciplines.crawl).time - maxTime(a.disciplines.crawl).time
       );
       const member = sortedArray[i];
       document.querySelector("#crawl-table").insertAdjacentHTML(
@@ -297,13 +307,24 @@ function discplineTimesClicked() {
             <td>${member.name}</td>
             <td>${member.age}</td>
             <td>${member.email}</td>
-            <td>${member.disciplines.crawl.time1.time}</td>
-            <td>${member.disciplines.crawl.time1.date}</td>
+            <td>${maxTime(member.disciplines.crawl).time}</td>
+            <td>${maxTime(member.disciplines.crawl).date}</td>
           </tr>
       `
       );
     }
   }
+
+  function maxTime(disciplineTimesArray) {
+    const times = [];
+    for (const key in disciplineTimesArray) {
+      const data = disciplineTimesArray[key];
+      data.id = key;
+      times.push(data);
+    }
+    return times.sort((a, b) => b.time - a.time)[0];
+  }
+
   //Clear all tables
   function clearTables() {
     const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
@@ -322,6 +343,95 @@ function discplineTimesClicked() {
           <td>Dato</td>
         </tr>
       `
+      );
+    }
+  }
+}
+
+function addTimeBtnClicked(member) {
+  console.log("Edit Times");
+  console.log("Editing: " + member.name + " times");
+
+  const dialog = document.querySelector("#add-time-dialog");
+  const form = document.querySelector("#add-time-form");
+
+  const memberDisciplines = Object.keys(member.disciplines);
+
+  form.innerHTML = "";
+
+  for (const discipline of memberDisciplines) {
+    // Have the form only show the disciplines the member has.
+    form.insertAdjacentHTML(
+      "beforeend",
+      /* html */ `
+      <input
+            type="radio"
+            id="${discipline}-add-time"
+            name="addTimeDiscipline"
+            value="${discipline}"
+          />
+        <label for="${discipline}-add-time">${capitalize(discipline)}
+        </label><br />
+    `
+    );
+  }
+  form.insertAdjacentHTML(
+    "beforeend",
+    /* html */ `
+    <!-- Add time and date -->
+        <br>
+          <label for="add-time-input">Tid:</label>
+          <input type="text" id="add-time-input" name="addTimeInput" />
+          <label for="add-date-input">Dato:</label>
+          <input
+            type="text"
+            id="add-date-input"
+            name="addDateInput"
+          /><br /><br />
+          <!-- Buttons -->
+          <input type="submit" id="submit-time-btn" value="Bekræft" />
+          <input
+            type="button"
+            id="close-add-time-dialog-btn"
+            value="Annuller"
+          />
+  `
+  );
+  //Capitalize the first letter of a string
+  function capitalize(string) {
+    return (
+      string.charAt(0).toUpperCase() +
+      string.substring(1, string.length).toLowerCase()
+    );
+  }
+
+  dialog.showModal();
+
+  form.reset();
+  form.addEventListener("submit", submitNewTimeClicked);
+
+  document
+    .querySelector("#close-add-time-dialog-btn")
+    .addEventListener("click", () => {
+      dialog.close();
+    });
+
+  function submitNewTimeClicked(event) {
+    event.preventDefault();
+    form.removeEventListener("submit", submitNewTimeClicked);
+
+    const newTime = {
+      time: form.addTimeInput.value,
+      date: form.addDateInput.value,
+    };
+    //Makes sure that the member has the chosen discipline
+    if (
+      Object.keys(member.disciplines).includes(form.addTimeDiscipline.value)
+    ) {
+      sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
+    } else {
+      console.log(
+        `${member.name} isn't active in ${form.addTimeDiscipline.value}`
       );
     }
   }

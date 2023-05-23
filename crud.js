@@ -42,7 +42,7 @@ function deleteClicked(member) {
   console.log("Delete clicked");
   const dialog = document.querySelector("#delete-dialog");
   dialog.showModal();
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -82,7 +82,7 @@ function createClicked() {
   console.log("New Member Clicked");
   const dialog = document.querySelector("#create-dialog");
   dialog.showModal();
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -200,7 +200,7 @@ function editMemberClicked(member) {
   const dialog = document.querySelector("#update-dialog");
   dialog.showModal();
 
-  dialog.addEventListener("cancel", (event) => {
+  dialog.addEventListener("cancel", event => {
     /*Prevents the dialog closing when pressing escape 
    to make sure it doesn't send multiple requests at the same time  */
     event.preventDefault();
@@ -248,7 +248,7 @@ function editMemberClicked(member) {
       console.log(jsonString);
 
       const response = await fetch(`${endpoint}/members/${member.id}.json`, {
-        method: "PATCH",
+        method: "PUT",
         body: jsonString,
       });
 
@@ -261,6 +261,7 @@ function editMemberClicked(member) {
     }
   }
 }
+
 //Makes sure the member get the correct subscription based on age or activity
 function correctSubscription(age, activity) {
   let subscription = 0;
@@ -288,6 +289,26 @@ function correctGroup(age, type) {
   return 0;
 }
 
+//POST the new added time to the correct discipline for the correct member using member id
+async function sendNewTime(memberId, newTime, discipline) {
+  const jsonString = JSON.stringify(newTime);
+
+  const response = await fetch(
+    `${endpoint}/members/${memberId}/disciplines/${discipline}.json`,
+    {
+      method: "POST",
+      body: jsonString,
+    }
+  );
+
+  if (response.ok) {
+    console.log("New time added");
+    location.reload();
+  } else {
+    console.log("Error during posting");
+  }
+}
+
 export {
   members,
   users,
@@ -295,4 +316,5 @@ export {
   createClicked,
   deleteClicked,
   editMemberClicked,
+  sendNewTime,
 };
