@@ -31,7 +31,7 @@ function formandMembersTable(member) {
 
   // Insert member function
   function insertMember(member) {
-    const table = document.querySelector("#formand-members-table");
+    const table = document.querySelector("#members-table-body");
     if (member.activity === "active") {
       table.insertAdjacentHTML(
         "beforeend",
@@ -83,18 +83,7 @@ function formandMembersTable(member) {
 function sortFormandTable() {
   
 
-  document.querySelector("#formand-members-table").innerHTML = /*HTML*/
-  `
-  <tr class="table-item">
-          <td id="sort-ACTIVE">Aktiv</td>
-          <td id="sort-NAME">Navn</td>
-          <td id="sort-EMAIL">E-mail</td>
-          <td id="sort-PHONE">Telefon</td>
-          <td id="sort-AGE">Alder</td>
-          <td id="sort-TYPE">Type</td>
-          <td>Rediger</td>
-          <td>Slet</td>
-        </tr>`;
+  clearTable();
 
   const sortOption = document.querySelector("#sort-dropdown").value;
   
@@ -164,18 +153,7 @@ function sortFormandTable() {
 
 /* ----- Seach - Member -----*/
 function searchMembers() {
-  document.querySelector("#formand-members-table").innerHTML = `
-      <tr class="table-item">
-        <td>Aktiv</td>
-        <td>Navn</td>
-        <td>E-mail</td>
-        <td>Telefon</td>
-        <td>Alder</td>
-        <td>Type</td>
-        <td>Rediger</td>
-        <td>Slet</td>
-      </tr>
-  `;
+  clearTable();
   const searchInput = document.querySelector("#search-members").value.toLowerCase();
   //filter members based on search input, without being case sensitive.
   const filteredMembers = members.filter((member) =>
@@ -186,4 +164,8 @@ function searchMembers() {
   } else {
     members.forEach(formandMembersTable)
   }
+}
+
+function clearTable() {
+  document.querySelector("#members-table-body").innerHTML = "";
 }

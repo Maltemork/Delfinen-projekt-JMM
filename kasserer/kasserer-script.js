@@ -6,7 +6,7 @@ window.addEventListener("load", start);
 
 async function start() {
   await getData();
-  members.forEach(showKassererMembersTable);
+  members.forEach(showMembersTable);
   calculateAndDisplayTotal();
 
   sortKassererTable();
@@ -19,10 +19,15 @@ async function start() {
   document
     .querySelector("#search-members")
     .addEventListener("input", searchMembers);
+    document
+    .querySelector("#close-arrears-dialog")
+    .addEventListener("click", () => {
+      document.querySelector("#arrears-dialog").close();
+    });
 }
 
-function showKassererMembersTable(member) {
-  document.querySelector("#kasserer-members-table").insertAdjacentHTML(
+function showMembersTable(member) {
+  document.querySelector("#members-table-body").insertAdjacentHTML(
     "beforeend",
     /* html */ `
         <tr class="table-item">
@@ -56,27 +61,10 @@ function hasPayedSymbol(arrears) {
 
 function arrearsBtnClicked() {
   const dialog = document.querySelector("#arrears-dialog");
-  dialog.innerHTML = "";
-  dialog.insertAdjacentHTML(
-    "beforeend",
-    /* html */ `
-    <h3>Medlemmer i restance</h3>
-    <table id="arrears-table">
-      <tr class="table-item">
-        <td>Aktiv</td>
-        <td>Navn</td>
-        <td>Alder</td>
-        <td>E-mail</td>
-        <td>Telefon</td>
-        <td>Kontigent</td>
-        <td>Betalt</td>
-      </tr>
-    </table>
-  `
-  );
+  document.querySelector("#arrears-table-body").innerHTML = "";
   members.forEach(member => {
     if (member.arrears == 1) {
-      document.querySelector("#arrears-table").insertAdjacentHTML(
+      document.querySelector("#arrears-table-body").insertAdjacentHTML(
         "beforeend",
         /* html */ `
         <tr class="table-item">
@@ -96,20 +84,7 @@ function arrearsBtnClicked() {
 }
 
 function sortKassererTable() {
-  document.querySelector("#kasserer-members-table").innerHTML =
-    /*HTML*/
-    `
-  <tr class="table-item">
-      <td>Aktiv</td>
-      <td>Navn</td>
-      <td>Alder</td>
-      <td>E-mail</td>
-      <td>Telefon</td>
-      <td>Kontingent</td>
-      <td>
-        Betalt
-      </td>
-  </tr>`;
+  clearTable();
 
   const sortOption = document.querySelector("#sort-dropdown").value;
 
@@ -123,7 +98,7 @@ function sortKassererTable() {
       if (nameA < nameB) return -1;
       return 1;
     });
-    name_AZ.forEach(showKassererMembersTable);
+    name_AZ.forEach(showMembersTable);
   }
   if (sortOption == "name-ZA") {
     //Sorter efter navn Z-A
@@ -134,17 +109,17 @@ function sortKassererTable() {
       if (nameA < nameB) return 1;
       return -1;
     });
-    name_ZA.forEach(showKassererMembersTable);
+    name_ZA.forEach(showMembersTable);
   }
   if (sortOption == "age-LOW") {
     const age_LOW = members.sort((a,b) => a.age - b.age);
-    age_LOW.forEach(showKassererMembersTable);
+    age_LOW.forEach(showMembersTable);
     console.log(age_LOW);
   }
 
   if (sortOption == "age-HIGH") {
     const age_HIGH = members.sort((a,b) => b.age - a.age);
-    age_HIGH.forEach(showKassererMembersTable);
+    age_HIGH.forEach(showMembersTable);
     console.log(age_HIGH);
   }
   if (sortOption == "subscription-HIGH") {
@@ -152,14 +127,14 @@ function sortKassererTable() {
       if (a.subscription > b.subscription) return -1;
       return 1;
     });
-    subscription_HIGH.forEach(showKassererMembersTable);
+    subscription_HIGH.forEach(showMembersTable);
   }
   if (sortOption == "subscription-LOW") {
     const subscription_LOW = members.sort((a, b) => {
       if (a.subscription < b.subscription) return -1;
       return 1;
     });
-    subscription_LOW.forEach(showKassererMembersTable);
+    subscription_LOW.forEach(showMembersTable);
   }
 
   if (sortOption == "active-YES") {
@@ -167,21 +142,21 @@ function sortKassererTable() {
       if (a.activity < b.activity) return -1;
       return 1;
     });
-    active_YES.forEach(showKassererMembersTable);
+    active_YES.forEach(showMembersTable);
   }
   if (sortOption == "active-NO") {
     const active_NO = members.sort((a, b) => {
       if (a.activity > b.activity) return -1;
       return 1;
     });
-    active_NO.forEach(showKassererMembersTable);
+    active_NO.forEach(showMembersTable);
   }
   if (sortOption == "paid-NO") {
     const paid_YES = members.sort((a, b) => {
       if (a.arrears > b.arrears) return -1;
       return 1;
     });
-    paid_YES.forEach(showKassererMembersTable);
+    paid_YES.forEach(showMembersTable);
   }
 
   document
@@ -191,19 +166,7 @@ function sortKassererTable() {
 
 /* ----- Seach - Member -----*/
 function searchMembers() {
-  document.querySelector("#kasserer-members-table").innerHTML = `
-  <tr class="table-item">
-  <td>Aktiv</td>
-  <td>Navn</td>
-  <td>Alder</td>
-  <td>E-mail</td>
-  <td>Telefon</td>
-  <td>Kontigent</td>
-  <td>
-    Betalt
-  </td>
-</tr>
-  `;
+  clearTable();
   const searchInput = document
     .querySelector("#search-members")
     .value.toLowerCase();
@@ -212,9 +175,9 @@ function searchMembers() {
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
-    filteredMembers.forEach(showKassererMembersTable);
+    filteredMembers.forEach(showMembersTable);
   } else {
-    members.forEach(showKassererMembersTable);
+    members.forEach(showMembersTable);
   }
 }
 function calculateAndDisplayTotal() {
@@ -246,6 +209,11 @@ function calculateAndDisplayTotal() {
 
   // Indsæt totalContainer før kasserer-members-table
   document
-    .querySelector("#kasserer-members-table")
+    .querySelector("#members-table")
     .insertAdjacentElement("beforebegin", totalContainer);
+}
+
+// Fjerner alt i table.
+function clearTable() {
+  document.querySelector("#members-table-body").innerHTML = "";
 }
