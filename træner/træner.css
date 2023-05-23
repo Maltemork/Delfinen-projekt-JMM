@@ -28,7 +28,7 @@ body {
   }
 
   tbody tr:hover {
-    background: rgb(204, 204, 204);
+    background: rgba(69, 98, 159, 0.315);
   }
 
   
@@ -111,7 +111,7 @@ body {
   }
   
   .header-container button:hover {
-    background: rgb(89, 122, 188);
+    background: rgb(69, 98, 159);
     color: white;
   }
   

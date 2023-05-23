@@ -152,7 +152,7 @@ body {
   /* Dialog */
   dialog {
     padding-top: 5px;
-    border-radius: 1em;
+    border-radius: 0.5em;
     border: 1px solid black;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.42);
   }

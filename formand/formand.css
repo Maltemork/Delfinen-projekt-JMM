@@ -23,7 +23,7 @@ body {
   
   .table-item button:hover {
     color: white;
-    background: rgb(68, 68, 68);
+    background: rgb(69, 98, 159);
   }
   
   #table-section {
@@ -37,7 +37,7 @@ body {
   }
 
   tbody tr:hover {
-    background: rgb(204, 204, 204);
+    background: rgba(69, 98, 159, 0.315);
   }
 
   /* Page container styling */
@@ -93,7 +93,7 @@ body {
   }
   
   .header-container button:hover {
-    background: rgb(89, 122, 188);
+    background: rgb(69, 98, 159);
     color: white;
   }
   
@@ -151,7 +151,7 @@ body {
   dialog {
     padding-top: 5px;
     width: 20em;
-    border-radius: 1em;
+    border-radius: 0.5em;
     border: 1px solid black;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.42);
   }
@@ -163,6 +163,8 @@ body {
   }
 
   .dialog-container h2 {
+    text-align: center;
+    color: rgb(69, 98, 159);
     grid-column-start: 1;
     grid-column-end: 3;
   }
@@ -186,7 +188,7 @@ body {
 
   #close-create-btn:hover, #submit-member-btn:hover, #close-update-btn:hover {
       color: white;
-      background:rgb(94, 94, 94)
+      background:rgb(69, 98, 159);
   }
 
   /* signatur */
