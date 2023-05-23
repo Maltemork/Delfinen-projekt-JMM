@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="træner.css" />
+    <link rel="icon" href="/favicon.svg" size="any" type="image/svg+xml" />
     <title>Delfinen | Træner</title>
   </head>
   <body>
@@ -12,56 +13,88 @@
     <video autoplay muted loop id="backgroundVideo">
       <source src="/background-video/background-video.mp4" type="video/mp4" />
     </video>
-    <!--  -->
+    <!-- Main page container -->
     <div id="page-container">
-      <section class="header-container" id="main-header">
+      <!-- Header container -->
+      <div class="header-container" id="main-header">
+        <!-- Top header -->
         <h1 id="header-title">Delfinen | Træner</h1>
-        <hr id="header-hr" />
-        <div id="header-double-holder">
-          <label for="sort">Sorter Efter:</label>
-          <select name="sort" id="sort-dropdown">
-            <option value="name-AZ">Navn (A-Z)</option>
-            <option value="name-ZA">Navn (Z-A)</option>
-            <option value="age-HIGH">Alder (høj til lav)</option>
-            <option value="age-LOW">Alder (lav til høj)</option>
-            <option value="active-YES">Aktiv (✔)</option>
-            <option value="active-NO">Aktiv (✖)</option>
-          </select>
-          <input
-            type="text"
-            name="Search"
-            id="search-members"
-            placeholder="Søg i medlemmer"
-          />
-          <label for="hold">Hold:</label>
-          <select name="hold" id="hold-selector">
-            <option value="hold-senior" selected>Senior</option>
-            <option value="hold-junior">Junior</option>
-          </select>
-          <button id="descipline-times-btn">Discipliner og Tider</button>
-          <button id="competition-btn">Stævner</button>
+        <hr />
+        <!-- Venstre side knapper -->
+          
+        <div id="header-left-container">
+            <!-- Hold selector -->
+            <select name="hold" id="hold-selector">
+              <option value="hold-senior" selected>Senior hold</option>
+              <option value="hold-junior">Junior hold</option>
+            </select>
+            <!-- Dialog vinduer (tider og stævner) -->
+              <button id="descipline-times-btn">Discipliner og Tider</button>
+              <button button id="competition-btn">Stævner</button>
+            <!-- Søg -->
+            <input
+              type="text"
+              name="Search"
+              id="search-members"
+              placeholder="Søg i medlemmer"
+            />
+            <!-- Sorter efter -->
+            <select name="sort" id="sort-dropdown">
+              <option value="name-AZ">Navn (A-Z)</option>
+              <option value="name-ZA">Navn (Z-A)</option>
+              <option value="age-HIGH">Alder (høj til lav)</option>
+              <option value="age-LOW">Alder (lav til høj)</option>
+              <option value="active-YES">Aktiv (✔)</option>
+              <option value="active-NO">Aktiv (✖)</option>
+            </select>
+            
         </div>
-
-        <button id="go-to-login">Gå til login</button>
-        <div id="header-double-holder"></div>
-      </section>
+        <!-- Venstre side knapper -->
+        <div id="header-right-container">
+          
+          <!-- Gå til login -->
+            <button id="go-to-login">Gå til login</button>
+        </div>
+    </div>  
+    
+    <!-- Table section -->
       <section id="table-section">
-        <table id="members-table"></table>
+        <table id="members-table" cellspacing="0">
+          <thead>
+            <tr>
+              <td>Hold</td>
+              <td>Navn</td>
+              <td>Alder</td>
+              <td>E-mail</td>
+              <td>Tid</td>
+              <td>Dato</td>
+            </tr>
+          </thead>
+          <tbody id="members-table-body">
+
+          </tbody>
+          
+        </table>
       </section>
       <p id="signature">Projekt af J M & M</p>
 
+    <!-- Dialog section (tider) -->
       <dialog id="discipline-times-dialog">
         <button id="close-discipline-times-dialog">✖</button>
         <h2>Back Crawl</h2>
         <table id="backcrawl-table"></table>
+        <hr>
         <h2>Butterfly</h2>
         <table id="butterfly-table"></table>
+        <hr>
         <h2>Chest</h2>
         <table id="chest-table"></table>
+        <hr>
         <h2>Crawl</h2>
         <table id="crawl-table"></table>
       </dialog>
 
+      <!-- Scripts -->
       <script src="træner-script.js" type="module"></script>
       <script src="/crud.js" type="module"></script>
     </div>

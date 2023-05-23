@@ -1,9 +1,10 @@
 body {
-    color: rgb(0, 0, 0);
-  }
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(0, 0, 0);
+  overflow-x: hidden;
+}
   /* Table styling */
   table {
-    border-radius: 5px;
     margin: 0 auto 0;
     width: 100%;
   }
@@ -26,12 +27,14 @@ body {
   }
   
   #table-section {
-    margin: 20px 20px 20px;
     border: 1px solid black;
     padding: 10px;
-    border-radius: 1em;
+    border-radius: 0.3em;
   }
 
+  tbody tr:nth-child(even) {
+    background-color: rgb(242, 242, 242);
+  }
 
   /* Page container styling */
   
@@ -53,21 +56,24 @@ body {
   /* HEADER SECTION */
   
   .header-container {
-    text-align: left;
+    text-align: center;
+    align-items: left;
+    justify-content: left;
+    justify-items: left;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     position: relative;
-    margin: 0 0 0 0;
-    top: 0;
-    left: 0;
-    right: 0;
     padding: 10px 10px 10px 10px;
     gap: 10px;
+  }
+
+  .header-container * {
+    text-align: center;
   }
   
   #header-title {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     text-align: left;
     font-size: 3em;
     color: rgb(69, 98, 159);
@@ -78,16 +84,8 @@ body {
   
   #header-hr {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     width: 100%;
-  }
-  
-  #header-double-holder {
-    padding-left: 0;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    position:relative;
-    
   }
   
   .header-item {
@@ -101,7 +99,7 @@ body {
   }
   
   .header-container button:hover {
-    background: rgb(81, 81, 81);
+    background: rgb(89, 122, 188);
     color: white;
   }
   
@@ -125,8 +123,9 @@ body {
   #go-to-login {
     text-align: center;
     align-self: right;
-    margin-left: 500px;
+    justify-self: right;
   }
+
 
   /* Søgefunktion */
   #search-members {
@@ -134,6 +133,10 @@ body {
     border-radius: 5px;
     border: 1px solid gray;
     text-align: left;
+    transform:translateY(-1px);
+    padding-left: 5px;
+    width: 30em;
+    justify-self: left;
   }
 
   #search-members::placeholder {

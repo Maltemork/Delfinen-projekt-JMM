@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="formand.css" />
+    <link rel="icon" href="/favicon.svg" size="any" type="image/svg+xml" />
     <title>Formand</title>
   </head>
   <body>
@@ -12,14 +13,20 @@
     <video autoplay muted loop id="backgroundVideo">
       <source src="/background-video/background-video.mp4" type="video/mp4" />
     </video>
-    <!--  -->
+    <!-- Page container -->
     <div id="page-container">
     <section class="header-container" id="main-header">
+      <!-- Header section -->
       <h1 id="header-title">Delfinen | Formand</h1>
       <hr id="header-hr">
       
-      <div id="header-double-holder">
-        <label for="sort">Sorter efter:</label>
+      
+        
+
+        
+        <!-- Search members input -->
+        <input type="text" name="Search" id="search-members" placeholder="Søg i medlemmer">
+        <!-- Sort members dropdown -->
         <select name="sort" id="sort-dropdown">
           <option value="name-AZ">Navn (A-Z)</option>
           <option value="name-ZA">Navn (Z-A)</option>
@@ -29,26 +36,38 @@
           <option value="active-NO">Aktiv (nej)</option>
           <option value="memberType">Type</option>
         </select>
+        <!-- Create member button -->
         <button id="create-member-btn">Opret nyt medlem</button>
-        <input type="text" name="Search" id="search-members" placeholder="Søg i medlemmer">
-      </div>
+      
+      <!-- Go to login button -->
       <button id="go-to-login">Gå til login</button>
     </section>
+    <!-- Table section -->
     <section id="table-section">
-      <table id="formand-members-table">
-        <tr class="table-item">
-          <td>Aktiv</td>
-          <td>Navn</td>
-          <td>E-mail</td>
-          <td>Telefon</td>
-          <td>Alder</td>
-          <td>Type</td>
-          <td>Rediger</td>
-          <td>Slet</td>
-        </tr>
+      <table id="members-table" cellspacing="0">
+        <thead>
+          <tr class="table-item">
+            <td>Aktiv</td>
+            <td>Navn</td>
+            <td>E-mail</td>
+            <td>Telefon</td>
+            <td>Alder</td>
+            <td>Type</td>
+            <td>Rediger</td>
+            <td>Slet</td>
+          </tr>
+        </thead>
+        <tbody id="members-table-body">
+
+        </tbody>
       </table>
     </section>
+    <!-- Signature (footer) -->
     <p id="signature">Projekt af J M & M</p>
+
+    <!-- Dialog Section -->
+
+      <!-- Create Dialog -->
     <dialog id="create-dialog">
       <form id="create-form">
         <div class="dialog-container">
@@ -102,7 +121,7 @@
         </div>
       </form>
     </dialog>
-
+          <!-- UPDATE DIALOG -->
     <dialog id="update-dialog">
       <form id="update-form" class="dialog-container">
         <h2>Opdater medlem:</h2>
@@ -134,7 +153,7 @@
       </form>
     </dialog>
 
-    <!-- Delete dialog -->
+    <!-- DELETE DIALOG -->
     <dialog id="delete-dialog">
       <h3></h3>
       <button id="confirm-delete-btn">Bekræft</button>
