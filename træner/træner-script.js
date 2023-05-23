@@ -435,15 +435,7 @@ function addTimeBtnClicked(member) {
       time: form.addTimeInput.value,
       date: form.addDateInput.value,
     };
-    //Makes sure that the member has the chosen discipline
-    if (
-      Object.keys(member.disciplines).includes(form.addTimeDiscipline.value)
-    ) {
-      sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
-    } else {
-      console.log(
-        `${member.name} isn't active in ${form.addTimeDiscipline.value}`
-      );
-    }
+
+    sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
   }
 }
