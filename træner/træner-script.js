@@ -47,7 +47,7 @@ function changeTeamTable() {
   }
   filteredTeamsArray.forEach(showMembersTable);
 }
-
+//Show member on table
 function showMembersTable(member) {
   document.querySelector("#members-table-body").insertAdjacentHTML(
     "beforeend",

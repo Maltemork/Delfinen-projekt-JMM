@@ -19,7 +19,7 @@ async function start() {
   document
     .querySelector("#search-members")
     .addEventListener("input", searchMembers);
-    document
+  document
     .querySelector("#close-arrears-dialog")
     .addEventListener("click", () => {
       document.querySelector("#arrears-dialog").close();
@@ -42,7 +42,7 @@ function showMembersTable(member) {
       `
   );
 }
-
+//Returns correct symbol based on activity
 function isActiveSymbol(activity) {
   if (activity == "active") {
     return "✔";
@@ -50,7 +50,7 @@ function isActiveSymbol(activity) {
     return "✖";
   }
 }
-
+//Returns correct symbol based on arrears
 function hasPayedSymbol(arrears) {
   if (arrears == 0) {
     return "✔";
@@ -112,13 +112,13 @@ function sortKassererTable() {
     name_ZA.forEach(showMembersTable);
   }
   if (sortOption == "age-LOW") {
-    const age_LOW = members.sort((a,b) => a.age - b.age);
+    const age_LOW = members.sort((a, b) => a.age - b.age);
     age_LOW.forEach(showMembersTable);
     console.log(age_LOW);
   }
 
   if (sortOption == "age-HIGH") {
-    const age_HIGH = members.sort((a,b) => b.age - a.age);
+    const age_HIGH = members.sort((a, b) => b.age - a.age);
     age_HIGH.forEach(showMembersTable);
     console.log(age_HIGH);
   }
