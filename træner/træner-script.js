@@ -1,6 +1,21 @@
+/**
+ * This script is for any logic concerning the view for Træner.
+ * The Træner can see all members that are signed as competition svimmer.
+ * The member are split into two groups: senior and junior.
+ * The Træner has option to see and add times to the different member.
+ * In addittion the Træner can also see and add competitions.
+ */
+
 "use strict";
 
-import { getData, members, sendNewTime, sendNewCompetition } from "../crud.js";
+import {
+  getData,
+  members,
+  sendNewTime,
+  sendNewCompetition,
+  maxTime,
+  prepareCompetition,
+} from "../crud.js";
 
 window.addEventListener("load", start);
 
@@ -26,6 +41,7 @@ async function start() {
     .addEventListener("click", discplineTimesClicked);
 }
 
+//
 function changeTeamTable() {
   filteredTeamsArray = [];
   if (document.querySelector("#hold-selector").value == "hold-junior") {
@@ -322,16 +338,6 @@ function discplineTimesClicked() {
     }
   }
 
-  function maxTime(disciplineTimesArray) {
-    const times = [];
-    for (const key in disciplineTimesArray) {
-      const data = disciplineTimesArray[key];
-      data.id = key;
-      times.push(data);
-    }
-    return times.sort((a, b) => b.time - a.time)[0];
-  }
-
   //Clear all tables
   function clearTables() {
     const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
@@ -435,7 +441,7 @@ function addTimeBtnClicked(member) {
     sendNewTime(member.id, newTime, form.addTimeDiscipline.value);
   }
 }
-
+//When show competition button is clicked view all the competitions with an option to add
 function viewCompetitionsClicked(member) {
   console.log("Viewing competitions for member: " + member.id);
   console.log(member.competition);
@@ -445,8 +451,11 @@ function viewCompetitionsClicked(member) {
 
   const competitionArray = prepareCompetition(member.competition);
 
+  //Competition table that show all competition for the chosen member
   const table = document.querySelector("#competition-table");
   table.innerHTML = "";
+
+  document.querySelector("#competition-member").textContent = `${member.name}`;
 
   table.insertAdjacentHTML(
     "beforeend",
@@ -481,6 +490,7 @@ function viewCompetitionsClicked(member) {
 
   dialog.showModal();
 
+  //When the submit button for add competition is clicked
   function submitCompetitionClicked(event) {
     event.preventDefault();
     form.removeEventListener("submit", submitCompetitionClicked);
@@ -490,16 +500,7 @@ function viewCompetitionsClicked(member) {
       meet: form.meet.value,
       time: form.competitionTime.value,
     };
-
+    //Send new competition to database
     sendNewCompetition(member.id, newCompetition);
   }
-}
-
-function prepareCompetition(competitions) {
-  const competitionsArray = [];
-  for (const key in competitions) {
-    const data = competitions[key];
-    competitionsArray.push(data);
-  }
-  return competitionsArray;
 }

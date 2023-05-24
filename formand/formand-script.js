@@ -1,3 +1,12 @@
+/**
+ * This script is for any logic concerning the view for Formand.
+ * The Formand can see all the member with basic infomation
+ * with the option to sort and search.
+ * In addition the Formand has the option to
+ * create, edit or delete a member by importing
+ * the relevant functions from crud.js.
+ */
+
 "use strict";
 
 import {
@@ -17,13 +26,15 @@ async function start() {
   document
     .querySelector("#create-member-btn")
     .addEventListener("click", createClicked);
-  document.querySelector("#sort-dropdown").addEventListener("change", sortFormandTable);
-  document.querySelector("#go-to-login").addEventListener("click", () => 
-  {
-    window.location.href = "../login/login.html"
+  document
+    .querySelector("#sort-dropdown")
+    .addEventListener("change", sortFormandTable);
+  document.querySelector("#go-to-login").addEventListener("click", () => {
+    window.location.href = "../login/login.html";
   });
-  document.querySelector("#search-members").addEventListener("input", searchMembers);
-
+  document
+    .querySelector("#search-members")
+    .addEventListener("input", searchMembers);
 }
 
 function formandMembersTable(member) {
@@ -75,25 +86,20 @@ function formandMembersTable(member) {
       .addEventListener("click", () => {
         deleteClicked(member);
       });
-
-    
   }
 }
 
 function sortFormandTable() {
-  
-
   clearTable();
 
   const sortOption = document.querySelector("#sort-dropdown").value;
-  
 
   // læser værdien i dropdown menuen og sorterer efter valgt.
   if (sortOption == "name-AZ") {
-    const name_AZ = members.sort((a,b) => {
+    const name_AZ = members.sort((a, b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
-  
+
       if (nameA < nameB) return -1;
       return 1;
     });
@@ -102,10 +108,10 @@ function sortFormandTable() {
 
   if (sortOption == "name-ZA") {
     //Sorter efter navn Z-A
-    const name_ZA = members.sort((a,b) => {
+    const name_ZA = members.sort((a, b) => {
       let nameA = a.name.toLowerCase();
       let nameB = b.name.toLowerCase();
-  
+
       if (nameA < nameB) return 1;
       return -1;
     });
@@ -114,36 +120,33 @@ function sortFormandTable() {
   }
 
   if (sortOption == "age-LOW") {
-    const age_LOW = members.sort((a,b) => a.age - b.age);
+    const age_LOW = members.sort((a, b) => a.age - b.age);
     age_LOW.forEach(formandMembersTable);
     console.log(age_LOW);
   }
 
   if (sortOption == "age-HIGH") {
-    const age_HIGH = members.sort((a,b) => b.age - a.age);
+    const age_HIGH = members.sort((a, b) => b.age - a.age);
     age_HIGH.forEach(formandMembersTable);
     console.log(age_HIGH);
   }
 
-
   if (sortOption == "active-YES") {
-    const active_YES = members.sort((a,b) => {
+    const active_YES = members.sort((a, b) => {
       if (a.activity < b.activity) return -1;
       return 1;
     });
     active_YES.forEach(formandMembersTable);
-    
   }
   if (sortOption == "active-NO") {
-    const active_NO = members.sort((a,b) => {
+    const active_NO = members.sort((a, b) => {
       if (a.activity > b.activity) return -1;
       return 1;
     });
     active_NO.forEach(formandMembersTable);
-    
   }
   if (sortOption == "memberType") {
-    const member_TYPE = members.sort((a,b) => {
+    const member_TYPE = members.sort((a, b) => {
       if (a.type > b.type) return -1;
       return 1;
     });
@@ -154,15 +157,17 @@ function sortFormandTable() {
 /* ----- Seach - Member -----*/
 function searchMembers() {
   clearTable();
-  const searchInput = document.querySelector("#search-members").value.toLowerCase();
+  const searchInput = document
+    .querySelector("#search-members")
+    .value.toLowerCase();
   //filter members based on search input, without being case sensitive.
-  const filteredMembers = members.filter((member) =>
+  const filteredMembers = members.filter(member =>
     member.name.toLowerCase().includes(searchInput)
   );
   if (searchInput.length !== 0) {
     filteredMembers.forEach(formandMembersTable);
   } else {
-    members.forEach(formandMembersTable)
+    members.forEach(formandMembersTable);
   }
 }
 

@@ -1,3 +1,10 @@
+/**
+ * This script is for any logic concerning CRUD and Rest API.
+ * This scipt is for create, reading, updating and deleting members and users
+ * from the database. This script also contains the function for preparing
+ * the data from the database.
+ */
+
 "use strict";
 
 const endpoint =
@@ -317,7 +324,17 @@ async function sendNewTime(memberId, newTime, discipline) {
     console.log("Error during posting");
   }
 }
-
+//Returns the max time from a discipline
+function maxTime(disciplineTimesArray) {
+  const times = [];
+  for (const key in disciplineTimesArray) {
+    const data = disciplineTimesArray[key];
+    data.id = key;
+    times.push(data);
+  }
+  return times.sort((a, b) => b.time - a.time)[0];
+}
+//POST a new competition for a member to the database
 async function sendNewCompetition(memberId, newCompetition) {
   const jsonString = JSON.stringify(newCompetition);
 
@@ -336,6 +353,15 @@ async function sendNewCompetition(memberId, newCompetition) {
     console.log("Error during posting");
   }
 }
+//Prepare competitions for a member
+function prepareCompetition(competitions) {
+  const competitionsArray = [];
+  for (const key in competitions) {
+    const data = competitions[key];
+    competitionsArray.push(data);
+  }
+  return competitionsArray;
+}
 
 export {
   members,
@@ -346,4 +372,6 @@ export {
   editMemberClicked,
   sendNewTime,
   sendNewCompetition,
+  maxTime,
+  prepareCompetition,
 };
