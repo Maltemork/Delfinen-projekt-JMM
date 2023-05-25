@@ -5,4 +5,4 @@
 https://drive.google.com/drive/folders/1tlfwAI7N8V1RrfujbH-W2-mMRT2aa8cl?usp=sharing
 
 # Link til GitHub Pages.
-https://maltemork.github.io/Delfinen-projekt-JMM/index.html
+https://maltemork.github.io/Delfinen-projekt-JMM/
