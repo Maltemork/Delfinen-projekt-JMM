@@ -1,5 +1,5 @@
 # Delfinen-projekt-JMM
- Projektopgave til 1. semester
+ Projektopgave til 1. semester. En administrativ side hvor kasserer, træner og formand har hver deres side med specifikke funktioner. Indeholder en login-side, hvor de kan logge ind på deres respektive del af projektet.
 
 # Link til Google Drive folder.
 https://drive.google.com/drive/folders/1tlfwAI7N8V1RrfujbH-W2-mMRT2aa8cl?usp=sharing
