@@ -1,3 +1,9 @@
+/**
+ * This script is for any logic concerning the view for login.
+ * The login page checks if a user exists and if so goes to
+ * the correct view.
+ */
+
 "use strict";
 
 import { users, getData } from "../crud.js";
@@ -6,7 +12,9 @@ window.addEventListener("load", start);
 
 async function start() {
   await getData();
-  document.querySelector("#login-form").addEventListener("submit", checkDetailsOnLogin);
+  document
+    .querySelector("#login-form")
+    .addEventListener("submit", checkDetailsOnLogin);
 }
 
 function checkDetailsOnLogin(event) {
@@ -18,16 +26,14 @@ function checkDetailsOnLogin(event) {
   console.log("Checking login");
 
   for (let i = 0; i < users.length; i++) {
-    
     if (
       users[i].username == usernameValue &&
       users[i].password === passwordValue
-      
-    ) { 
+    ) {
       window.location.href = `/${users[i].type}/${users[i].type}.html`;
       console.log(users[i]);
       break;
-    } else if (users.length -1 === i) {
+    } else if (users.length - 1 === i) {
       document
         .querySelector(".login-container")
         .classList.add("wrong-password");

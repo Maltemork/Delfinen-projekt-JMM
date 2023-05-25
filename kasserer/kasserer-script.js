@@ -1,3 +1,12 @@
+/**
+ * This script is for any logic concerning the view for Kasserer.
+ * The Kasserer can see all the members and their subscription
+ * and arrears with the option to sort and search.
+ * Furthermore the Kasserer can see an overview
+ * of the expected budget for the club and the sum of money
+ * from unpayed subscriptions.
+ */
+
 "use strict";
 
 import { getData, members } from "../crud.js";
@@ -25,7 +34,7 @@ async function start() {
       document.querySelector("#arrears-dialog").close();
     });
 }
-
+//Shows table with all members
 function showMembersTable(member) {
   document.querySelector("#members-table-body").insertAdjacentHTML(
     "beforeend",
