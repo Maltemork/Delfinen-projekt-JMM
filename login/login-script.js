@@ -30,7 +30,7 @@ function checkDetailsOnLogin(event) {
       users[i].username == usernameValue &&
       users[i].password === passwordValue
     ) {
-      window.location.href = `/${users[i].type}/${users[i].type}.html`;
+      window.location.href = `../${users[i].type}/${users[i].type}.html`;
       console.log(users[i]);
       break;
     } else if (users.length - 1 === i) {
