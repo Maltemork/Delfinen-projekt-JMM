@@ -23,14 +23,6 @@
         <!-- Venstre side knapper -->
 
         <div id="header-left-container">
-          <!-- Hold selector -->
-          <select name="hold" id="hold-selector">
-            <option value="hold-senior" selected>Senior hold</option>
-            <option value="hold-junior">Junior hold</option>
-          </select>
-          <!-- Dialog vinduer (tider og stævner) -->
-          <button id="descipline-times-btn">Discipliner og Tider</button>
-          <!-- Søg -->
           <input
             type="text"
             name="Search"
@@ -46,6 +38,15 @@
             <option value="active-YES">Aktiv (✔)</option>
             <option value="active-NO">Aktiv (✖)</option>
           </select>
+          <!-- Hold selector -->
+          <select name="hold" id="hold-selector">
+            <option value="hold-senior" selected>Senior hold</option>
+            <option value="hold-junior">Junior hold</option>
+          </select>
+          <!-- Dialog vinduer (tider og stævner) -->
+          <button id="descipline-times-btn">Discipliner og Tider</button>
+          <!-- Søg -->
+          
         </div>
         <!-- Venstre side knapper -->
         <div id="header-right-container">
@@ -65,8 +66,8 @@
               <td>Alder</td>
               <td>E-mail</td>
               <td>Telefon</td>
-              <td>Tilføj Tid</td>
-              <td>Se/Tilføj Konkurrencer</td>
+              <td>Tilføj Trænings-tid</td>
+              <td>Se eller tilføj konkurrence-tid</td>
             </tr>
           </thead>
           <tbody id="members-table-body"></tbody>
@@ -78,16 +79,64 @@
       <dialog id="discipline-times-dialog">
         <button id="close-discipline-times-dialog">✖</button>
         <h2>Back Crawl</h2>
-        <table id="backcrawl-table"></table>
+        <table id="backcrawl-table" cellspacing="0">
+          <thead>
+            <tr>
+              <td>Hold</td>
+              <td>Navn</td>
+              <td>Alder</td>
+              <td>E-mail</td>
+              <td>Tid</td>
+              <td>Dato</td>
+            </tr>
+          </thead>
+          <tbody id="backcrawl-table-body"></tbody>
+        </table>
         <hr />
         <h2>Butterfly</h2>
-        <table id="butterfly-table"></table>
+        <table id="butterfly-table" cellspacing="0">
+          <thead>
+            <tr>
+              <td>Hold</td>
+              <td>Navn</td>
+              <td>Alder</td>
+              <td>E-mail</td>
+              <td>Tid</td>
+              <td>Dato</td>
+            </tr>
+          </thead>
+          <tbody id="butterfly-table-body"></tbody>
+        </table>
         <hr />
         <h2>Chest</h2>
-        <table id="chest-table"></table>
+        <table id="chest-table" cellspacing="0">
+          <thead>
+            <tr>
+              <td>Hold</td>
+              <td>Navn</td>
+              <td>Alder</td>
+              <td>E-mail</td>
+              <td>Tid</td>
+              <td>Dato</td>
+            </tr>
+          </thead>
+          <tbody id="chest-table-body"></tbody>
+        </table>
         <hr />
         <h2>Crawl</h2>
-        <table id="crawl-table"></table>
+        <table id="crawl-table" cellspacing="0">
+          <thead>
+            <tr>
+              <td>Hold</td>
+              <td>Navn</td>
+              <td>Alder</td>
+              <td>E-mail</td>
+              <td>Tid</td>
+              <td>Dato</td>
+            </tr>
+          </thead>
+          <tbody id="crawl-table-body"></tbody>
+        </table>
       </dialog>
 
       <dialog id="add-time-dialog">
@@ -97,7 +146,18 @@
 
       <dialog id="competition-modal">
         <h2>Konkurrencer</h2>
-        <table id="competition-table"></table>
+        <table id="competition-table" cellspacing="0">
+          <thead>
+            <tr>
+              <td>Stævne</td>
+              <td>Lokation</td>
+              <td>Tid</td>
+            </tr>
+          </thead>
+          <tbody id="competition-table-body">
+
+          </tbody>
+        </table>
         <h2>Tilføj</h2>
         <form id="competition-form">
           <label for="location">Lokation:</label><br />

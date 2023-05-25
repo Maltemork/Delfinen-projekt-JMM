@@ -242,7 +242,7 @@ function discplineTimesClicked() {
           maxTime(a.disciplines.backcrawl).time
       );
       const member = sortedArray[i];
-      document.querySelector("#backcrawl-table").insertAdjacentHTML(
+      document.querySelector("#backcrawl-table-body").insertAdjacentHTML(
         "beforeend",
         /* html */ `
           <tr>
@@ -264,7 +264,7 @@ function discplineTimesClicked() {
           maxTime(a.disciplines.butterfly).time
       );
       const member = sortedArray[i];
-      document.querySelector("#butterfly-table").insertAdjacentHTML(
+      document.querySelector("#butterfly-table-body").insertAdjacentHTML(
         "beforeend",
         /* html */ `
           <tr>
@@ -285,7 +285,7 @@ function discplineTimesClicked() {
           maxTime(b.disciplines.chest).time - maxTime(a.disciplines.chest).time
       );
       const member = sortedArray[i];
-      document.querySelector("#chest-table").insertAdjacentHTML(
+      document.querySelector("#chest-table-body").insertAdjacentHTML(
         "beforeend",
         /* html */ `
           <tr>
@@ -306,7 +306,7 @@ function discplineTimesClicked() {
           maxTime(b.disciplines.crawl).time - maxTime(a.disciplines.crawl).time
       );
       const member = sortedArray[i];
-      document.querySelector("#crawl-table").insertAdjacentHTML(
+      document.querySelector("#crawl-table-body").insertAdjacentHTML(
         "beforeend",
         /* html */ `
           <tr>
@@ -336,21 +336,8 @@ function discplineTimesClicked() {
   function clearTables() {
     const disciplines = ["backcrawl", "butterfly", "chest", "crawl"];
     for (const discipline of disciplines) {
-      const table = document.querySelector(`#${discipline}-table`);
+      const table = document.querySelector(`#${discipline}-table-body`);
       table.innerHTML = "";
-      table.insertAdjacentHTML(
-        "beforeend",
-        /* html */ `
-        <tr>
-          <td>Hold</td>
-          <td>Navn</td>
-          <td>Alder</td>
-          <td>E-mail</td>
-          <td>Tid</td>
-          <td>Dato</td>
-        </tr>
-      `
-      );
     }
   }
 }
@@ -445,19 +432,9 @@ function viewCompetitionsClicked(member) {
 
   const competitionArray = prepareCompetition(member.competition);
 
-  const table = document.querySelector("#competition-table");
+  const table = document.querySelector("#competition-table-body");
   table.innerHTML = "";
-
-  table.insertAdjacentHTML(
-    "beforeend",
-    /* html */ `
-      <tr>
-        <td>Stævne</td>
-        <td>Lokation</td>
-        <td>Tid</td>
-      </tr>
-  `
-  );
+  
 
   for (let i = 0; i < competitionArray.length; i++) {
     table.insertAdjacentHTML(
